@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project SixTools -->
-<!-- Saved: 2014-08-20, 14:37:56 -->
-<!-- Copyright (C) 2014 ,  -->
+<!-- Saved: 2014-08-24, 14:53:12 -->
+<!-- Copyright (C) 2014 loki, nianqinianyi@163.com -->
 <Project version="5.1">
   <Language>en_US</Language>
   <Hash>3a022c327af7da2e56ac1d99e627849e6b5fd861</Hash>
   <ProgLanguage mixed="0">Python3</ProgLanguage>
   <ProjectType>Qt4</ProjectType>
-  <Description></Description>
+  <Description>SixTools
+
+The tools create by loki, who is the one and the only one in sixlab.</Description>
   <Version>0.1</Version>
-  <Author></Author>
-  <Email></Email>
-  <Eol index="-1"/>
+  <Author>loki</Author>
+  <Email>nianqinianyi@163.com</Email>
   <Sources>
     <Source>SixTools.pyw</Source>
     <Source>__init__.py</Source>
-    <Source>Ui_SixToolsUi.py</Source>
-    <Source>tools/copyString/Ui_copyStringUi.pyw</Source>
-    <Source>README.md</Source>
   </Sources>
-  <Forms>
-    <Form>SixToolsUi.ui</Form>
-    <Form>tools/copyString/copyStringUi.ui</Form>
-  </Forms>
+  <Forms/>
   <Translations/>
   <Resources/>
   <Interfaces/>
-  <Others>
-    <Other>README.md</Other>
-  </Others>
+  <Others/>
   <MainScript>SixTools.pyw</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
