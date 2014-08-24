@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project SixTools -->
-<!-- Saved: 2014-08-01, 15:25:39 -->
+<!-- Saved: 2014-08-20, 14:37:56 -->
 <!-- Copyright (C) 2014 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -12,21 +12,24 @@
   <Version>0.1</Version>
   <Author></Author>
   <Email></Email>
+  <Eol index="-1"/>
   <Sources>
     <Source>SixTools.pyw</Source>
     <Source>__init__.py</Source>
     <Source>Ui_SixToolsUi.py</Source>
-    <Source>Ui_copyStringUi.py</Source>
-    <Source>CopyStringTool.pyw</Source>
+    <Source>tools/copyString/Ui_copyStringUi.pyw</Source>
+    <Source>README.md</Source>
   </Sources>
   <Forms>
     <Form>SixToolsUi.ui</Form>
-    <Form>copyStringUi.ui</Form>
+    <Form>tools/copyString/copyStringUi.ui</Form>
   </Forms>
   <Translations/>
   <Resources/>
   <Interfaces/>
-  <Others/>
+  <Others>
+    <Other>README.md</Other>
+  </Others>
   <MainScript>SixTools.pyw</MainScript>
   <Vcs>
     <VcsType>None</VcsType>

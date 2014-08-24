@@ -8,7 +8,7 @@ from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import QMainWindow, QApplication
 
 from Ui_SixToolsUi import Ui_MainWindow
-import CopyStringTool
+import os
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -28,9 +28,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Slot documentation goes here.
         """
-        window = CopyStringTool.Dialog()
-        window.show()
-
+        path = os.getcwd();
+        path += '\\tools\\copyString\\Ui_copyStringUi.pyw';
+        print(path);
+        os.popen('pythonw '+path);
 
 if __name__ == "__main__":
     import sys
