@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project SixTools -->
-<!-- Saved: 2014-08-24, 15:19:45 -->
+<!-- Saved: 2014-08-25, 22:43:20 -->
 <!-- Copyright (C) 2014 loki, nianqinianyi@163.com -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -14,14 +14,19 @@ The tools create by loki, who is the one and the only one in sixlab.</Descriptio
   <Version>0.1</Version>
   <Author>loki</Author>
   <Email>nianqinianyi@163.com</Email>
+  <Eol index="-1"/>
   <Sources>
-    <Source>SixTools.pyw</Source>
     <Source>__init__.py</Source>
     <Source>ui/__init__.py</Source>
     <Source>tools/__init__.py</Source>
     <Source>conf/__init__.py</Source>
+    <Source>language/__init__.py</Source>
+    <Source>ui/Ui_SixToolsUi.py</Source>
+    <Source>SixTools.py</Source>
   </Sources>
-  <Forms/>
+  <Forms>
+    <Form>ui/SixToolsUi.ui</Form>
+  </Forms>
   <Translations/>
   <Resources/>
   <Interfaces/>
