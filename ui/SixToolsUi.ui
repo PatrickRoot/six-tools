@@ -46,12 +46,7 @@
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Tab 2</string>
+      <string>soft</string>
      </attribute>
     </widget>
    </widget>
@@ -85,6 +80,7 @@
     <property name="title">
      <string>工具(&amp;T)</string>
     </property>
+    <addaction name="scan_action"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
@@ -116,6 +112,8 @@
    <addaction name="add_soft_action"/>
    <addaction name="edit_soft_action"/>
    <addaction name="del_soft_action"/>
+   <addaction name="separator"/>
+   <addaction name="scan_action"/>
    <addaction name="separator"/>
    <addaction name="help_action"/>
   </widget>
@@ -157,6 +155,11 @@
   <action name="edit_soft_action">
    <property name="text">
     <string>修改程序</string>
+   </property>
+  </action>
+  <action name="scan_action">
+   <property name="text">
+    <string>扫描</string>
    </property>
   </action>
  </widget>

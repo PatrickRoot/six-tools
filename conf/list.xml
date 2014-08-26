@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+    <tab name="firsttab">
+    
+        <soft name="firstsoft" foldername="firstfolder" filename="firstfile.py" cmd="python">
+        	<param>a</param>
+        	<param>b</param>
+        	<param>C</param>
+        </soft>
+        
+        <soft name="secondsoft" foldername="secondfolder" filename="secondfile.py" cmd="python">
+        </soft>
+        
+        <soft name="thirdsoft" foldername="thirdfolder" filename="thirdfile.py" cmd="python">
+        	<param>a</param>
+        	<param>b</param>
+        </soft>
+        
+        <soft name="foursoft" foldername="fourfolder" filename="fourfile.py" cmd="python">
+        	<param>h</param>
+        </soft>
+        
+    </tab>
+    
+    <tab name="secondtab">
+    </tab>
+</list>

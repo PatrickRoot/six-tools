@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project SixTools -->
-<!-- Saved: 2014-08-25, 22:43:20 -->
+<!-- Saved: 2014-08-26, 23:07:04 -->
 <!-- Copyright (C) 2014 loki, nianqinianyi@163.com -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -23,6 +23,8 @@ The tools create by loki, who is the one and the only one in sixlab.</Descriptio
     <Source>language/__init__.py</Source>
     <Source>ui/Ui_SixToolsUi.py</Source>
     <Source>SixTools.py</Source>
+    <Source>pic/__init__.py</Source>
+    <Source>DealXml.py</Source>
   </Sources>
   <Forms>
     <Form>ui/SixToolsUi.ui</Form>

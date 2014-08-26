@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'E:\project\git\SixTools\ui\SixToolsUi.ui'
 #
-# Created: Tue Aug 26 22:17:18 2014
+# Created: Tue Aug 26 22:15:42 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,9 +39,25 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
+        
         self.tab = QtGui.QWidget()
         self.tab.setObjectName(_fromUtf8("tab"))
+        
+        self.frame = QtGui.QFrame(self.tab)
+        self.frame.setGeometry(QtCore.QRect(60, 50, 131, 131))
+        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setObjectName(_fromUtf8("frame"))
+        self.graphicsView = QtGui.QGraphicsView(self.frame)
+        self.graphicsView.setGeometry(QtCore.QRect(20, 10, 91, 61))
+        self.graphicsView.setObjectName(_fromUtf8("graphicsView"))
+        self.label = QtGui.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(40, 90, 54, 12))
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName(_fromUtf8("label"))
+        
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
+        
         MainWindow.setCentralWidget(self.centralWidget)
         self.menuBar = QtGui.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 600, 23))
@@ -110,6 +126,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        self.label.setText(_translate("MainWindow", "TextLabel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "soft", None))
         self.menu_F.setTitle(_translate("MainWindow", "文件(&F)", None))
         self.menu_E.setTitle(_translate("MainWindow", "编辑(&E)", None))

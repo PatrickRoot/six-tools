@@ -5,8 +5,7 @@ Module implementing MainWindow.
 """
 
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QMainWindow
-from PyQt4 import QtGui
+from PyQt4.QtGui import QMainWindow, QApplication
 
 from ui.Ui_SixToolsUi import Ui_MainWindow
 
@@ -87,13 +86,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         # TODO: not implemented yet
         raise NotImplementedError
+    
+    @pyqtSlot()
+    def on_scan_action_triggered(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError
 
 
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)
-    myWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(myWindow)
-    myWindow.show()
+    app = QApplication(sys.argv)
+    myApp = MainWindow()
+    myApp.show()
     sys.exit(app.exec_())
