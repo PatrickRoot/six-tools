@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-5.1.dtd">
 <!-- eric5 tasks file for project SixTools -->
-<!-- Saved: 2014-08-26, 23:07:04 -->
+<!-- Saved: 2014-08-27, 13:28:06 -->
 <Tasks version="5.1">
   <ProjectScanFilter></ProjectScanFilter>
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>31</Linenumber>
@@ -16,7 +16,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>39</Linenumber>
@@ -25,7 +25,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>47</Linenumber>
@@ -34,7 +34,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>55</Linenumber>
@@ -43,7 +43,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>63</Linenumber>
@@ -52,7 +52,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>71</Linenumber>
@@ -61,7 +61,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>79</Linenumber>
@@ -70,7 +70,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>87</Linenumber>
@@ -79,7 +79,7 @@
   <Task priority="1" completed="False" type="1">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2014-08-26, 22:55:39</Created>
+    <Created>2014-08-27, 13:27:52</Created>
     <Resource>
       <Filename>SixTools.py</Filename>
       <Linenumber>95</Linenumber>
