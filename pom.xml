@@ -7,13 +7,13 @@
     <groupId>org.eu.sixlab</groupId>
     <artifactId>SixTools</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>SixTools-SixTray</module>
-    </modules>
     <packaging>pom</packaging>
     <name>SixTools By Sixlab</name>
     <url>http://maven.apache.org</url>
 
+    <modules>
+        <module>SixTools-SixTray</module>
+    </modules>
 
     <properties>
         <version.commons.collections>3.2.1</version.commons.collections>
@@ -27,7 +27,7 @@
         <version.slf4j.api>1.7.5</version.slf4j.api>
         <version.beanshell>2.0b5</version.beanshell>
         <version.poiooxml>3.10.1</version.poiooxml>
-        <version.fastjson>1.1.41</version.fastjson>
+        <version.fastjson>1.2.3</version.fastjson>
         <version.pinyin4j>2.5.0</version.pinyin4j>
         <version.mybatis>3.2.7</version.mybatis>
         <version.jackson>1.7.1</version.jackson>
@@ -142,25 +142,5 @@
         <!--</resource>-->
         <!--</resources>-->
     </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.xerial</groupId>
-                <artifactId>sqlite-jdbc</artifactId>
-                <version>3.8.7</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.3</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.9</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
