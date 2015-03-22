@@ -19,6 +19,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eu.sixlab</groupId>
+            <artifactId>SixUtil</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

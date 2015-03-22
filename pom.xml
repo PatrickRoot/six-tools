@@ -49,6 +49,11 @@
     <dependencyManagement>
 
         <dependencies>
+            <dependency>
+                <groupId>org.eu.sixlab</groupId>
+                <artifactId>SixUtil</artifactId>
+                <version>${version.sixutil}</version>
+            </dependency>
             <!-- Six -->
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
