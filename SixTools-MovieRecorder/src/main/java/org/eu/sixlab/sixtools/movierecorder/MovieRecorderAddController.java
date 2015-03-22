@@ -26,13 +26,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class MovieRecorderAddController {
 
-    public TextField addName;
-    public TextField addCountry;
-    public TextField addYear;
-    public TextField addDirector;
-    public DatePicker addDate;
-    public TextArea addRemark;
-    public Label tipsLabel;
+    private TextField addName;
+    private TextField addCountry;
+    private TextField addYear;
+    private TextField addDirector;
+    private DatePicker addDate;
+    private TextArea addRemark;
+    private Label tipsLabel;
 
     private boolean canClose = false;
 
