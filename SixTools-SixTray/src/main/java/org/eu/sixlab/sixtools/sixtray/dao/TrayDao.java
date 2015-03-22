@@ -1,7 +1,7 @@
 /* 
- **************************************************************************************
- * Copyright www.ebidding.com.cn 2015/2/17 Authors: 曹林伟 <caolinwei@ebidding.com.cn>*
- **************************************************************************************
+ ********************************************************************************
+ * Copyright sixlab.eu.org 2015/2/17 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
+ ********************************************************************************
  */
 package org.eu.sixlab.sixtools.sixtray.dao;
 
@@ -12,10 +12,10 @@ import org.eu.sixlab.sixtools.common.util.SixDaoUtil;
 import java.util.List;
 
 /**
- * 作者：曹林伟
+ * 作者：六楼的雨/loki
  * 创建时间：2015/2/17
  * 功能描述：
- * 版本：2.0.1
+ * 版本：1.0-SNAPSHOT
  */
 public class TrayDao {
 

@@ -18,5 +18,6 @@
 
 	<mappers>
 		<mapper resource="mapper/SixTrayMapper.xml" />
+		<mapper resource="mapper/MovieRecordMapper.xml" />
 	</mappers>
 </configuration>

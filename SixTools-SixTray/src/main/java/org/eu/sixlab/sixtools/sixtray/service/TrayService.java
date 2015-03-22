@@ -1,7 +1,7 @@
 /* 
- **************************************************************************************
- * Copyright www.ebidding.com.cn 2015/2/17 Authors: 曹林伟 <caolinwei@ebidding.com.cn>*
- **************************************************************************************
+ ********************************************************************************
+ * Copyright sixlab.eu.org 2015/2/17 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
+ ********************************************************************************
  */
 package org.eu.sixlab.sixtools.sixtray.service;
 
@@ -10,12 +10,15 @@ import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
 import org.eu.sixlab.sixtools.sixtray.dao.TrayDao;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 
 /**
- * 作者：曹林伟
+ * 作者：六楼的雨/loki
  * 创建时间：2015/2/17
  * 功能描述：
- * 版本：2.0.1
+ * 版本：1.0-SNAPSHOT
  */
 public class TrayService {
 
@@ -47,6 +50,47 @@ public class TrayService {
         popup = new PopupMenu();
 
         initMenuItem(popup, 0);
+
+        popup.add(new MenuItem("-"));
+        MenuItem trayItem3 = new MenuItem("百度一下");
+        trayItem3.addActionListener(e->{
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            Transferable t = clipboard.getContents(null);
+
+            try {
+                if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                    String text = (String)t.getTransferData(DataFlavor.stringFlavor);
+                    if( null!=text && !"".equals(text) ){
+                        String path = "http://www.baidu.com/s?word="+text;
+
+                        Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+                    }
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+        popup.add(trayItem3);
+
+        MenuItem trayItem2 = new MenuItem("豆瓣电影");
+        trayItem2.addActionListener(e->{
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            Transferable t = clipboard.getContents(null);
+
+            try {
+                if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                    String text = (String)t.getTransferData(DataFlavor.stringFlavor);
+                    if( null!=text && !"".equals(text) ){
+                        String path = "http://movie.douban.com/subject_search?search_text="+text;
+
+                        Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+                    }
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+        popup.add(trayItem2);
 
         popup.add(new MenuItem("-"));
         MenuItem trayItem1 = new MenuItem("退出");
