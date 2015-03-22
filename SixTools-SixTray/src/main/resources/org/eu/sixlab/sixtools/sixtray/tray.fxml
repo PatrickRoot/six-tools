@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="20.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane prefHeight="480.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Untitled Tab" />
+            <Tab fx:id="tabTray" text="SixTray">
+               <content>
+                  <VBox prefHeight="2.0" prefWidth="800.0">
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0">
+                          <items>
+                              <ComboBox fx:id="parentList" prefWidth="150.0" />
+                            <Button fx:id="addTool" mnemonicParsing="false" onAction="#addTool" text="添加" />
+                              <Button fx:id="deleteTool" mnemonicParsing="false" onAction="#deleteTool" text="删除" />
+                          </items>
+                        </ToolBar>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="410.0" prefWidth="800.0">
+                           <content>
+                              <TableView prefHeight="140.0" prefWidth="798.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="ID" />
+                                  <TableColumn prefWidth="75.0" text="名字" />
+                                    <TableColumn prefWidth="75.0" text="路径" />
+                                    <TableColumn prefWidth="75.0" text="命令" />
+                                    <TableColumn prefWidth="75.0" text="参数" />
+                                    <TableColumn prefWidth="75.0" text="类型" />
+                                    <TableColumn prefWidth="75.0" text="顺序" />
+                                    <TableColumn prefWidth="75.0" text="上级目录" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
