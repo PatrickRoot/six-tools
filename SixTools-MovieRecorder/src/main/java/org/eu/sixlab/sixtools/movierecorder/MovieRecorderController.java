@@ -27,7 +27,6 @@ import org.eu.sixlab.sixtools.movierecorder.dao.MovieRecorderDao;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -63,7 +62,7 @@ public class MovieRecorderController implements Initializable{
     private String lastKeyword;
 
     public void close(ActionEvent event) {
-        System.exit(0);
+        tableView.getScene().getWindow().hide();
     }
 
     public void addMovie(ActionEvent event) throws Exception {
@@ -114,7 +113,7 @@ public class MovieRecorderController implements Initializable{
 
     private void loadMovies() {
         lastKeyword = (null==lastKeyword?"":lastKeyword);
-        List<MovieRecord> movieRecordList = new ArrayList<>();
+        List<MovieRecord> movieRecordList;
 
         if(null==lastKeyword || "".equals(lastKeyword)){
             movieRecordList = MovieRecorderDao.getAllMovies();
