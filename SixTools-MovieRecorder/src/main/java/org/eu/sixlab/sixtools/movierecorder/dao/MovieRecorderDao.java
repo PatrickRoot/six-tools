@@ -48,5 +48,10 @@ public class MovieRecorderDao {
         mapper().update(movieRecord);
         close();
     }
-
+    
+    public static List<MovieRecord> getMoviesByMovieName(String name) {
+        List<MovieRecord> movieRecordList = mapper().selectByMovieName(name);
+        close();
+        return movieRecordList;
+    }
 }

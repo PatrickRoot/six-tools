@@ -100,7 +100,7 @@
 		WHERE id = #{id}
 	</update>
 
-	<select id="selectByKeyword" parameterType="org.eu.sixlab.sixtools.common.beans.MovieRecord" resultMap="BaseResultMap">
+	<select id="selectByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
 		SELECT
 		<include refid="BaseSql" />
 		FROM
@@ -113,6 +113,18 @@
 			OR director like '%'||#{keyword,jdbcType=VARCHAR}||'%'
 			OR view_date like '%'||#{keyword,jdbcType=VARCHAR}||'%'
 			OR remark like '%'||#{keyword,jdbcType=VARCHAR}||'%'
+		</where>
+		ORDER BY id
+	</select>
+
+	<select id="selectByMovieName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+		<include refid="BaseSql" />
+		FROM
+		movie_record
+		<where>
+			  movie_name like '%'||#{name,jdbcType=VARCHAR}||'%'
+			OR remark like '%'||#{name,jdbcType=VARCHAR}||'%'
 		</where>
 		ORDER BY id
 	</select>

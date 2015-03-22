@@ -59,7 +59,7 @@ public class MovieRecorderController implements Initializable{
     @FXML
     private Label toolbarTips;
 
-    private final ObservableList<MovieRecord> data = FXCollections.observableArrayList();
+    public static final ObservableList<MovieRecord> data = FXCollections.observableArrayList();
     private String lastKeyword;
 
     public void close(ActionEvent event) {

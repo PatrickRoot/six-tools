@@ -23,4 +23,5 @@ public interface MovieRecordMapper {
     List<MovieRecord> selectByKeyword(String keyword);
     public void update(MovieRecord movieRecord);
 
+    List<MovieRecord> selectByMovieName(String name);
 }

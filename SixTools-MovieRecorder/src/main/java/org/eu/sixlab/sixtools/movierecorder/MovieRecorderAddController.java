@@ -75,6 +75,8 @@ public class MovieRecorderAddController {
                 director,date,remark);
 
         MovieRecorderDao.insertMovie(movieRecord);
+        MovieRecorderController.data.clear();
+        MovieRecorderController.data.addAll(MovieRecorderDao.getMoviesByMovieName(name));
     }
 
     public void addClose(ActionEvent event) {
