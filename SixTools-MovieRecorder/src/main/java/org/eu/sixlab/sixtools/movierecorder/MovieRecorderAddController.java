@@ -34,12 +34,17 @@ public class MovieRecorderAddController {
     public TextArea addRemark;
     public Label tipsLabel;
 
+    private boolean canClose = false;
+
     public void saveAndClose(ActionEvent event) {
         saveAndContinue(event);
-        addClose(event);
+        if(canClose){
+            addClose(event);
+        }
     }
 
     public void saveAndContinue(ActionEvent event) {
+        canClose = false;
         tipsLabel.setText("");
 
         String name = addName.getText();
@@ -77,6 +82,7 @@ public class MovieRecorderAddController {
         MovieRecorderDao.insertMovie(movieRecord);
         MovieRecorderController.data.clear();
         MovieRecorderController.data.addAll(MovieRecorderDao.getMoviesByMovieName(name));
+        canClose = true;
     }
 
     public void addClose(ActionEvent event) {

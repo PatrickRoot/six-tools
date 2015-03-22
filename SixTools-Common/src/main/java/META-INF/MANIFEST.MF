@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: slf4j-api-1.7.5.jar slf4j-log4j12-1.7.5.jar log4j-1.2.17.j
+ ar mybatis-3.2.7.jar sqlite-jdbc-3.8.7.jar
+
