@@ -6,7 +6,11 @@
 package org.eu.sixlab.sixtools.sixtray.service;
 
 import org.eu.sixlab.sixtools.common.beans.SixTray;
+import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,7 +35,7 @@ public class TrayActionListener extends MouseAdapter{
     public void folderToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(" explorer "+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -41,7 +45,7 @@ public class TrayActionListener extends MouseAdapter{
     public void fileToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(" explorer "+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -51,7 +55,7 @@ public class TrayActionListener extends MouseAdapter{
     public void websiteToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -63,9 +67,15 @@ public class TrayActionListener extends MouseAdapter{
         String comm = sixTray.getCommand();
         String exec = comm + " " + path + " " + para;
         try {
-                Runtime.getRuntime().exec(exec, null, new File(path).getParentFile());
+            Runtime.getRuntime().exec(exec, null, new File(path).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public void copyToolAction(SixTray sixTray, ActionEvent e) {
+        String content = sixTray.getPath();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(new StringSelection(content),null);
     }
 }

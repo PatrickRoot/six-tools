@@ -49,7 +49,7 @@ public class TrayService {
     public static void initPopupMenu(){
         popup = new PopupMenu();
 
-        initMenuItem(popup, 0);
+        initMenuItem(popup, SixToolsConstants.ROOT_PARENT_ID);
 
         popup.add(new MenuItem("-"));
         MenuItem trayItem3 = new MenuItem("百度一下");
@@ -61,9 +61,9 @@ public class TrayService {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
                     String text = (String)t.getTransferData(DataFlavor.stringFlavor);
                     if( null!=text && !"".equals(text) ){
-                        String path = "http://www.baidu.com/s?word="+text;
+                        String path = SixToolsConstants.BAIDU_SEARCH_STRING+text;
 
-                        Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+                        Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
                     }
                 }
             } catch (Exception e1) {
@@ -81,9 +81,9 @@ public class TrayService {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
                     String text = (String)t.getTransferData(DataFlavor.stringFlavor);
                     if( null!=text && !"".equals(text) ){
-                        String path = "http://movie.douban.com/subject_search?search_text="+text;
+                        String path = SixToolsConstants.DOUBAN_SEARCH_STRING+text;
 
-                        Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+                        Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
                     }
                 }
             } catch (Exception e1) {
@@ -143,9 +143,9 @@ public class TrayService {
             trayItem.addActionListener(e->{
                 new TrayActionListener().commandToolAction(sixTray, e);
             });
-        }else if(SixToolsConstants.TOOL_TYPE_TRAY_FOLDER.equals(toolType)){
+        }else if(SixToolsConstants.TOOL_TYPE_COPY_TOOL.equals(toolType)){
             trayItem.addActionListener(e->{
-
+                new TrayActionListener().copyToolAction(sixTray, e);
             });
         }
 

@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.eu.sixlab.sixtools.common.beans.MovieRecord;
+import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
 import org.eu.sixlab.sixtools.movierecorder.dao.MovieRecorderDao;
 
 import java.io.IOException;
@@ -84,13 +85,11 @@ public class MovieRecorderController implements Initializable{
     }
 
     public void searchByBaidu(ActionEvent event) {
-        String baidu = "http://www.baidu.com/s?word=";
-        searchByNet(baidu);
+        searchByNet(SixToolsConstants.BAIDU_SEARCH_STRING);
     }
 
     public void searchByDouban(ActionEvent event) {
-        String douban = "http://movie.douban.com/subject_search?search_text=";
-        searchByNet(douban);
+        searchByNet(SixToolsConstants.DOUBAN_SEARCH_STRING);
     }
 
     private void searchByNet(String url) {
@@ -98,7 +97,7 @@ public class MovieRecorderController implements Initializable{
 
         String path = url + text;
         try {
-            Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -122,7 +121,7 @@ public class MovieRecorderController implements Initializable{
 
         data.clear();
         data.addAll(movieRecordList);
-
+        toolbarTips.setText("共" + data.size() + "有部电影。");
     }
 
     private void initTableView(){
@@ -185,7 +184,7 @@ public class MovieRecorderController implements Initializable{
     }
 
     public void about(ActionEvent event) {
-
+        System.out.println("this is about");
     }
 
 }
