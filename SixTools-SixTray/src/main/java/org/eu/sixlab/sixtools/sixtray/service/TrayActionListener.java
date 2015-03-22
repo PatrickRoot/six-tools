@@ -33,7 +33,6 @@ public class TrayActionListener extends MouseAdapter{
         try {
             Runtime.getRuntime().exec(" explorer "+path);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 
@@ -44,7 +43,6 @@ public class TrayActionListener extends MouseAdapter{
         try {
             Runtime.getRuntime().exec(" explorer "+path);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 
@@ -55,7 +53,6 @@ public class TrayActionListener extends MouseAdapter{
         try {
             Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
@@ -68,7 +65,6 @@ public class TrayActionListener extends MouseAdapter{
         try {
                 Runtime.getRuntime().exec(exec, null, new File(path).getParentFile());
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }

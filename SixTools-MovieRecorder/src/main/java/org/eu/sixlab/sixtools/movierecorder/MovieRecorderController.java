@@ -100,7 +100,6 @@ public class MovieRecorderController implements Initializable{
         try {
             Runtime.getRuntime().exec(" rundll32 url.dll,FileProtocolHandler "+path);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
