@@ -13,6 +13,10 @@ package org.eu.sixlab.sixtools.common.util;
  */
 public class SixToolsConstants {
 
+    private SixToolsConstants(){
+        System.out.println("");
+    }
+
     public static final Integer ROOT_PARENT_ID =0;
 
     public static final String TOOL_TYPE_FOLDER = "D";

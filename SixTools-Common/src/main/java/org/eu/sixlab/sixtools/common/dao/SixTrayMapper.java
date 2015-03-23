@@ -20,4 +20,8 @@ public interface SixTrayMapper {
     public void insert(SixTray sixTray);
     public List<SixTray> selectAll();
     public List<SixTray> selectByOne(SixTray sixTray);
+
+    List<SixTray> selectToolFolders();
+
+    void delete(Integer id);
 }

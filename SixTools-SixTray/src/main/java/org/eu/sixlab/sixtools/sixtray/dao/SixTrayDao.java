@@ -17,7 +17,7 @@ import java.util.List;
  * 功能描述：
  * 版本：1.0-SNAPSHOT
  */
-public class TrayDao {
+public class SixTrayDao {
 
     public static List<SixTray> getSubTrays(Integer parentId){
         SixTray sixTray = new SixTray();
@@ -27,5 +27,24 @@ public class TrayDao {
         SixDaoUtil.close();
         return sixTrayList;
     }
+
+    public static List<SixTray> getToolFolders(){
+        SixTrayMapper sixTrayMapper = SixDaoUtil.getMapper(SixTrayMapper.class);
+        List<SixTray> sixTrayList = sixTrayMapper.selectToolFolders();
+        SixDaoUtil.close();
+        return sixTrayList;
+    }
     
+    public static List<SixTray> getAll() {
+        SixTrayMapper sixTrayMapper = SixDaoUtil.getMapper(SixTrayMapper.class);
+        List<SixTray> sixTrayList = sixTrayMapper.selectAll();
+        SixDaoUtil.close();
+        return sixTrayList;
+    }
+
+    public static void delete(Integer id) {
+        SixTrayMapper sixTrayMapper = SixDaoUtil.getMapper(SixTrayMapper.class);
+        sixTrayMapper.delete(id);
+        SixDaoUtil.close();
+    }
 }

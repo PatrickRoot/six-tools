@@ -110,7 +110,7 @@
 			<include refid="BaseSql" />
 		FROM
 		six_tray
-		ORDER BY tool_order,id
+		ORDER BY id
 	</select>
 
 	<update id="update" parameterType="org.eu.sixlab.sixtools.common.beans.SixTray">
@@ -186,6 +186,21 @@
 		</where>
 		ORDER BY tool_order,id
 	</select>
+
+	<select id="selectToolFolders" resultMap="BaseResultMap">
+		SELECT
+		<include refid="BaseSql" />
+		FROM
+		six_tray
+		<where>
+			tool_type = 'TF'
+		</where>
+		ORDER BY tool_order,id
+	</select>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM six_tray WHERE id = #{id,jdbcType=INTEGER}
+	</delete>
 
 	<!--insert id="insertMovie" parameterType="record" flushCache="true"
 		statementType="PREPARED" keyProperty="id"

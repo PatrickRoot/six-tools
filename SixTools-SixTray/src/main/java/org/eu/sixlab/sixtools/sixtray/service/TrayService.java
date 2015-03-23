@@ -7,7 +7,7 @@ package org.eu.sixlab.sixtools.sixtray.service;
 
 import org.eu.sixlab.sixtools.common.beans.SixTray;
 import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
-import org.eu.sixlab.sixtools.sixtray.dao.TrayDao;
+import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -103,7 +103,7 @@ public class TrayService {
 
     private static void initMenuItem(Menu popup, Integer parentId){
 
-        java.util.List<SixTray> sixTrayList = TrayDao.getSubTrays(parentId);
+        java.util.List<SixTray> sixTrayList = SixTrayDao.getSubTrays(parentId);
 
         for (SixTray sixTray : sixTrayList) {
             String trayName = sixTray.getTrayName();

@@ -15,8 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.eu.sixlab.sixtools.common.beans.SixTray;
 import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
 import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
@@ -61,9 +61,9 @@ public class SixTrayMainController implements Initializable {
                 @Override
                 protected void updateItem(SixTray sixTray, boolean bln) {
                     super.updateItem(sixTray, bln);
-                    if(sixTray!=null){
+                    if (sixTray != null) {
                         setText(sixTray.getTrayName());
-                    }else{
+                    } else {
                         setText(null);
                     }
                 }
@@ -80,7 +80,12 @@ public class SixTrayMainController implements Initializable {
         tcOrder.setCellValueFactory(new PropertyValueFactory("toolOrder"));
         tcParent.setCellValueFactory(new PropertyValueFactory("parentName"));
 
-        tableView.setRowFactory(rowDoubleClick());
+        tableView.addEventFilter(MouseEvent.MOUSE_CLICKED,e->{
+            if( e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() ==  2  ){
+                SixTray sixTray = (SixTray) tableView.getSelectionModel().getSelectedItem();
+                editTray(sixTray);
+            }
+        });
 
         tableView.setItems(tableData);
         loadTableData();
@@ -103,26 +108,6 @@ public class SixTrayMainController implements Initializable {
         comboData.addAll(sixTrayList);
     }
 
-    private Callback<TableView<SixTray>, TableRow<SixTray>> rowDoubleClick() {
-        return new Callback<TableView<SixTray>, TableRow<SixTray>>() {
-            @Override
-            public TableRow<SixTray> call(TableView<SixTray> param) {
-                return new NewTableRow();
-            }
-        };
-    }
-
-    class NewTableRow extends TableRow<SixTray>{
-        public NewTableRow(){
-            super ();
-            this.setOnMouseClicked(e->{
-                if  (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() ==  2  && NewTableRow. this .getIndex() < tableView.getItems().size() ){
-                    editTray(null, null);
-                }
-            });
-        }
-    }
-
     private void loadTableData() {
         List<SixTray> sixTrayList = SixTrayDao.getAll();
         tableData.clear();
@@ -130,11 +115,11 @@ public class SixTrayMainController implements Initializable {
     }
 
     public void addTool(ActionEvent event) {
-        editTray(event, null);
+        editTray(null);
     }
 
-    private void editTray(ActionEvent event, SixTray sixTray){
-
+    private void editTray(SixTray sixTray){
+        SixTrayAddController.sixTray = sixTray;
         Stage stage = new Stage();
         Parent parent = null;
         try {
@@ -144,7 +129,7 @@ public class SixTrayMainController implements Initializable {
         }
         Scene scene = new Scene(parent, 400, 300);
         stage.setScene(scene);
-        stage.setTitle("Add Tray");
+        stage.setTitle(null == sixTray ? "Add Tray" : "修改：" + sixTray.getTrayName());
         stage.show();
     }
 

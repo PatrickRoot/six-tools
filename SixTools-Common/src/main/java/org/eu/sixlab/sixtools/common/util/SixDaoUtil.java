@@ -26,6 +26,10 @@ public class SixDaoUtil {
                 "mybatis-six-config.xml");
         factory = new SqlSessionFactoryBuilder().build(in);
     }
+
+    private SixDaoUtil(){
+        System.out.println("");
+    }
 //
 //    private static SqlSessionFactory getSessionFactory(){
 //        return factory;

@@ -62,6 +62,44 @@ public class MovieRecorderController implements Initializable{
     public static final ObservableList<MovieRecord> data = FXCollections.observableArrayList();
     private String lastKeyword;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initTableView();
+        loadMovies();
+    }
+
+    private void initTableView(){
+        tableView.setEditable(true);
+
+        tcNo.setCellValueFactory(new PropertyValueFactory("id"));
+        tcName.setCellValueFactory(new PropertyValueFactory("movieName"));
+        tcCountry.setCellValueFactory(new PropertyValueFactory("country"));
+        tcYear.setCellValueFactory(new PropertyValueFactory("produceYear"));
+        tcDirector.setCellValueFactory(new PropertyValueFactory("director"));
+        tcDate.setCellValueFactory(new PropertyValueFactory("viewDate"));
+        tcRemark.setCellValueFactory(new PropertyValueFactory("remark"));
+
+        tcName.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcName.setOnEditCommit(handleCellEdit());
+
+        tcCountry.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcCountry.setOnEditCommit(handleCellEdit());
+
+        tcYear.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcYear.setOnEditCommit(handleCellEdit());
+
+        tcDirector.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcDirector.setOnEditCommit(handleCellEdit());
+
+        tcRemark.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcRemark.setOnEditCommit(handleCellEdit());
+
+        tcDate.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcDate.setOnEditCommit(handleCellEdit());
+
+        tableView.setItems(data);
+    }
+
     public void close(ActionEvent event) {
         tableView.getScene().getWindow().hide();
     }
@@ -103,12 +141,6 @@ public class MovieRecorderController implements Initializable{
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initTableView();
-        loadMovies();
-    }
-
     private void loadMovies() {
         lastKeyword = (null==lastKeyword?"":lastKeyword);
         List<MovieRecord> movieRecordList;
@@ -122,38 +154,6 @@ public class MovieRecorderController implements Initializable{
         data.clear();
         data.addAll(movieRecordList);
         toolbarTips.setText("共" + data.size() + "有部电影。");
-    }
-
-    private void initTableView(){
-        tableView.setEditable(true);
-
-        tcNo.setCellValueFactory(new PropertyValueFactory("id"));
-        tcName.setCellValueFactory(new PropertyValueFactory("movieName"));
-        tcCountry.setCellValueFactory(new PropertyValueFactory("country"));
-        tcYear.setCellValueFactory(new PropertyValueFactory("produceYear"));
-        tcDirector.setCellValueFactory(new PropertyValueFactory("director"));
-        tcDate.setCellValueFactory(new PropertyValueFactory("viewDate"));
-        tcRemark.setCellValueFactory(new PropertyValueFactory("remark"));
-
-        tcName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcName.setOnEditCommit(handleCellEdit());
-
-        tcCountry.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcCountry.setOnEditCommit(handleCellEdit());
-
-        tcYear.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcYear.setOnEditCommit(handleCellEdit());
-
-        tcDirector.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcDirector.setOnEditCommit(handleCellEdit());
-
-        tcRemark.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcRemark.setOnEditCommit(handleCellEdit());
-
-        tcDate.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcDate.setOnEditCommit(handleCellEdit());
-
-        tableView.setItems(data);
     }
 
     private EventHandler<TableColumn.CellEditEvent> handleCellEdit() {
