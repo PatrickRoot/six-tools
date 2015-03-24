@@ -58,6 +58,9 @@
                                     <TableColumn fx:id="tcOrder" prefWidth="75.0" text="顺序" />
                                     <TableColumn fx:id="tcParent" prefWidth="75.0" text="上级目录" />
                                 </columns>
+							   <columnResizePolicy>
+								  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+							   </columnResizePolicy>
                               </TableView>
                            </content>
                         </ScrollPane>

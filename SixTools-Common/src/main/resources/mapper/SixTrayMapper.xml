@@ -38,7 +38,7 @@
 				id,
 			</if>
 			<if test="trayName != null" >
-				trayName,
+				tray_name,
 			</if>
 			<if test="path != null" >
 				path,
@@ -50,16 +50,16 @@
 				params,
 			</if>
 			<if test="toolType != null" >
-				toolType,
+				tool_type,
 			</if>
 			<if test="trayType != null" >
-				trayType,
+				tray_type,
 			</if>
 			<if test="toolOrder != null" >
-				toolOrder,
+				tool_order,
 			</if>
 			<if test="parentId != null" >
-				parentId,
+				parent_id,
 			</if>
 			<if test="createTime != null" >
 				create_time,
@@ -202,104 +202,4 @@
 		DELETE FROM six_tray WHERE id = #{id,jdbcType=INTEGER}
 	</delete>
 
-	<!--insert id="insertMovie" parameterType="record" flushCache="true"
-		statementType="PREPARED" keyProperty="id"
-		useGeneratedKeys="true" >
-		INSERT INTO
-		saw(name
-		<if test="country!=null and country!=''">
-			,country
-		</if>
-		<if test="year!=null and year!=''">
-			,year
-		</if>
-		<if test="director!=null and director!=''">
-			,director
-		</if>
-		<if test="actor!=null and actor!=''">
-			,actor
-		</if>
-		<if test="remark!=null and remark!=''">
-			,remark
-		</if>
-		, inDate)
-		VALUES(#{name}
-		<if test="country!=null and country!=''">
-			,#{country}
-		</if>
-		<if test="year!=null and year!=''">
-			,#{year}
-		</if>
-		<if test="director!=null and director!=''">
-			,#{director}
-		</if>
-		<if test="actor!=null and actor!=''">
-			,#{actor}
-		</if>
-		<if test="remark!=null and remark!=''">
-			,#{remark}
-		</if>
-		,#{inDate})
-	</insert>
-
-	<update id="updateMovie" parameterType="record">
-		UPDATE saw
-		<set>
-			<if test="name!=null and name!=''">
-				name=#{name},
-			</if>
-			<if test="country!=null and country!=''">
-				country=#{country},
-			</if>
-			<if test="year!=null and year!=''">
-				year=#{year},
-			</if>
-			<if test="director!=null and director!=''">
-				director=#{director},
-			</if>
-			<if test="actor!=null and actor!=''">
-				actor=#{actor},
-			</if>
-			<if test="remark!=null and remark!=''">
-				remark=#{remark},
-			</if>
-			<if test="inDate!=null and inDate!=''">
-				inDate=#{inDate}
-			</if>
-		</set>
-		WHERE id = #{id}
-	</update>
-
-	<resultMap type="record" id="Records">
-		<id property="id" column="id"></id>
-		<result property="name" column="name"></result>
-		<result property="country" column="country"></result>
-		<result property="year" column="year"></result>
-		<result property="director" column="director"></result>
-		<result property="actor" column="actor"></result>
-		<result property="remark" column="remark"></result>
-		<result property="inDate" column="inDate"></result>
-	</resultMap>
-
-	<insert id="insertMovieBackup" parameterType="record"
-		flushCache="true" statementType="PREPARED">
-		INSERT INTO
-		saw(name ,country,year
-		,director ,actor ,remark , inDate)
-		VALUES(#{name,jdbcType=VARCHAR}
-		,#{country,jdbcType=VARCHAR} ,#{year,jdbcType=VARCHAR}
-		,#{director,jdbcType=VARCHAR} ,#{actor,jdbcType=VARCHAR}
-		,#{remark,jdbcType=VARCHAR} ,#{inDate})
-	</insert>
-
-
-    <select id="testM" parameterType="record" resultMap="Records">
-        SELECT
-        *
-        FROM
-        saw
-            <if test="id!=null and id!=''">
-                id = #{id}
-            </if>
-    </select-->
 </mapper>

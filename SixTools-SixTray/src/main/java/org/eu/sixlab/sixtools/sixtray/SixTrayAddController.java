@@ -10,12 +10,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import org.eu.sixlab.sixtools.common.beans.SixTray;
 import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
 import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
+import org.eu.sixlab.sixutil.StringUtil;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,7 @@ import java.util.ResourceBundle;
  */
 public class SixTrayAddController implements Initializable{
 
-    public static SixTray sixTray;
+    public static SixTray oldTray;
     public TextField addName;
     public TextField addOrder;
     public ComboBox addParent;
@@ -37,20 +42,23 @@ public class SixTrayAddController implements Initializable{
     public TextField addCommand;
     public TextField addPara;
     public TextField addPath;
+    public Label tipsLabel;
     
     private ObservableList<SixTray> parentData = FXCollections.observableArrayList();
     private ObservableList<ToolType> toolTypeData = FXCollections.observableArrayList();
+    private Integer id;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initAddParent();
         initToolType();
-        if(null!=sixTray){
-            addName.setText(sixTray.getTrayName());
-            addOrder.setText(sixTray.getToolOrder());
-            addCommand.setText(sixTray.getCommand());
-            addPara.setText(sixTray.getParams());
-            addPath.setText(sixTray.getPath());
+        if(null!= oldTray){
+            addName.setText(oldTray.getTrayName());
+            addOrder.setText(oldTray.getToolOrder());
+            addCommand.setText(oldTray.getCommand());
+            addPara.setText(oldTray.getParams());
+            addPath.setText(oldTray.getPath());
+            id = oldTray.getId();
         }
     }
 
@@ -63,10 +71,10 @@ public class SixTrayAddController implements Initializable{
         parentData.clear();
         parentData.addAll(sixTrayList);
         addParent.setItems(parentData);
-        if(null==sixTray){
+        if(null== oldTray){
             addParent.getSelectionModel().selectFirst();
         }else{
-            Integer parentId = sixTray.getParentId();
+            Integer parentId = oldTray.getParentId();
             int i = -1;
             for (SixTray s:sixTrayList){
                 i++;
@@ -98,10 +106,10 @@ public class SixTrayAddController implements Initializable{
         toolTypeData.clear();
         toolTypeData.addAll(toolTypeList);
         addType.setItems(toolTypeData);
-        if(null==sixTray){
+        if(null== oldTray){
             addType.getSelectionModel().selectFirst();
         }else{
-            String toolType = sixTray.getToolType();
+            String toolType = oldTray.getToolType();
             int i = -1;
             for (ToolType s:toolTypeList){
                 i++;
@@ -129,11 +137,74 @@ public class SixTrayAddController implements Initializable{
     }
 
     public void choosePath(ActionEvent event) {
-        //TODO 选择路径
+        DirectoryChooser dc = new DirectoryChooser();
+        dc.setTitle("选择路径");
+        File file = dc.showDialog(addName.getScene().getWindow());
+        addPath.setText(file.getPath());
+    }
+
+    public void chooseFile(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("选择文件");
+        File file = fc.showOpenDialog(addName.getScene().getWindow());
+        addPath.setText(file.getPath());
     }
 
     public void saveAndContinue(ActionEvent event) {
-        //TODO 保存
+        String trayName = addName.getText();
+        if(StringUtil.isEmpty(trayName)){
+            tipsLabel.setText("名字不能为空");
+            addName.requestFocus();
+            return;
+        }
+        SixTray sixTray = new SixTray();
+        sixTray.setId(id);
+        sixTray.setTrayName(trayName);
+        sixTray.setToolOrder(addOrder.getText());
+        sixTray.setPath(addPath.getText());
+        sixTray.setCommand(addCommand.getText());
+        sixTray.setParams(addPara.getText());
+        sixTray.setParentId(((SixTray)addParent.getValue()).getId());
+        sixTray.setToolType(((ToolType)addType.getValue()).getToolType());
+        if(null==id){
+            SixTrayDao.insert(sixTray);
+            tipsLabel.setText("添加工具成功：" + trayName);
+        }else{
+            SixTrayDao.update(sixTray);
+            tipsLabel.setText("编辑工具成功：" + trayName);
+        }
+
+
+
+
+        List<SixTray> sixTrayTableList = SixTrayDao.getAll();
+        SixTrayMainController.tableData.clear();
+        SixTrayMainController.tableData.addAll(sixTrayTableList);
+
+
+
+
+        List<SixTray> sixTrayComboList = SixTrayDao.getToolFolders();
+
+        SixTray notSelect = new SixTray();
+        notSelect.setId(-1);
+        notSelect.setTrayName("--不选择--");
+        sixTrayComboList.add(0, notSelect);
+
+        SixTray noParent = new SixTray();
+        noParent.setId(0);
+        noParent.setTrayName("-无父目录-");
+        sixTrayComboList.add(1, noParent);
+
+        SixTrayMainController.comboData.clear();
+        SixTrayMainController.comboData.addAll(sixTrayComboList);
+
+
+
+
+
+        SixTrayMain.popup.removeAll();
+        new SixTrayController().loadPopupMenu(SixTrayMain.popup, SixToolsConstants.ROOT_PARENT_ID);
     }
 
     public void addClose(ActionEvent event) {

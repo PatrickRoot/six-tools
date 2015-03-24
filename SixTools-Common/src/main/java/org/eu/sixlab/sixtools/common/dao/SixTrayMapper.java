@@ -24,4 +24,6 @@ public interface SixTrayMapper {
     List<SixTray> selectToolFolders();
 
     void delete(Integer id);
+
+    void update(SixTray sixTray);
 }

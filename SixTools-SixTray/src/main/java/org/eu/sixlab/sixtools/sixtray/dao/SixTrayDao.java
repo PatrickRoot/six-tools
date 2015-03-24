@@ -47,4 +47,16 @@ public class SixTrayDao {
         sixTrayMapper.delete(id);
         SixDaoUtil.close();
     }
+
+    public static void insert(SixTray sixTray) {
+        SixTrayMapper sixTrayMapper = SixDaoUtil.getMapper(SixTrayMapper.class);
+        sixTrayMapper.insert(sixTray);
+        SixDaoUtil.close();
+    }
+
+    public static void update(SixTray sixTray) {
+        SixTrayMapper sixTrayMapper = SixDaoUtil.getMapper(SixTrayMapper.class);
+        sixTrayMapper.update(sixTray);
+        SixDaoUtil.close();
+    }
 }

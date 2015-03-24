@@ -78,7 +78,7 @@ public class SixTrayMainController implements Initializable {
         tcPara.setCellValueFactory(new PropertyValueFactory("params"));
         tcType.setCellValueFactory(new PropertyValueFactory("toolType"));
         tcOrder.setCellValueFactory(new PropertyValueFactory("toolOrder"));
-        tcParent.setCellValueFactory(new PropertyValueFactory("parentName"));
+        tcParent.setCellValueFactory(new PropertyValueFactory("parentId"));
 
         tableView.addEventFilter(MouseEvent.MOUSE_CLICKED,e->{
             if( e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() ==  2  ){
@@ -119,7 +119,7 @@ public class SixTrayMainController implements Initializable {
     }
 
     private void editTray(SixTray sixTray){
-        SixTrayAddController.sixTray = sixTray;
+        SixTrayAddController.oldTray = sixTray;
         Stage stage = new Stage();
         Parent parent = null;
         try {
