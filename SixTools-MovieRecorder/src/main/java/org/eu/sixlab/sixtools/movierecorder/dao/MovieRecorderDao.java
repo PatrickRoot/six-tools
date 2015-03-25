@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class MovieRecorderDao {
 
+    private MovieRecorderDao(){
+        super();
+    }
+
     private static MovieRecordMapper mapper(){
         return SixDaoUtil.getMapper(MovieRecordMapper.class);
     }

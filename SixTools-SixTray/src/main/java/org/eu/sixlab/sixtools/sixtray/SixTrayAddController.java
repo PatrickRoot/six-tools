@@ -86,7 +86,7 @@ public class SixTrayAddController implements Initializable{
         }
 
         addParent.setCellFactory(p -> {
-            final ListCell<SixTray> cell = new ListCell<SixTray>() {
+            return new ListCell<SixTray>() {
                 @Override
                 protected void updateItem(SixTray sixTray, boolean bln) {
                     super.updateItem(sixTray, bln);
@@ -97,7 +97,6 @@ public class SixTrayAddController implements Initializable{
                     }
                 }
             };
-            return cell;
         });
     }
 
@@ -121,7 +120,7 @@ public class SixTrayAddController implements Initializable{
         }
 
         addType.setCellFactory(p -> {
-            final ListCell<ToolType> cell = new ListCell<ToolType>() {
+            return new ListCell<ToolType>() {
                 @Override
                 protected void updateItem(ToolType toolType, boolean bln) {
                     super.updateItem(toolType, bln);
@@ -132,7 +131,6 @@ public class SixTrayAddController implements Initializable{
                     }
                 }
             };
-            return cell;
         });
     }
 
@@ -218,16 +216,6 @@ public class SixTrayAddController implements Initializable{
 }
 
 class ToolType{
-    public static List<ToolType> allToolTypes(){
-        List<ToolType> toolTypeList = new ArrayList<>();
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FOLDER,"目录"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FILE,"文件"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_WEBSITE,"网址"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COMMAND, "命令"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_TRAY_FOLDER,"Tray文件夹"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COPY_TOOL,"复制工具"));
-        return toolTypeList;
-    }
 
     private String toolType;
     private String toolTypeName;
@@ -239,6 +227,17 @@ class ToolType{
     public ToolType(String toolType, String toolTypeName) {
         this.toolType = toolType;
         this.toolTypeName = toolTypeName;
+    }
+
+    public static List<ToolType> allToolTypes(){
+        List<ToolType> toolTypeList = new ArrayList<>();
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FOLDER,"目录"));
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FILE,"文件"));
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_WEBSITE,"网址"));
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COMMAND, "命令"));
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_TRAY_FOLDER,"Tray文件夹"));
+        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COPY_TOOL,"复制工具"));
+        return toolTypeList;
     }
 
     @Override

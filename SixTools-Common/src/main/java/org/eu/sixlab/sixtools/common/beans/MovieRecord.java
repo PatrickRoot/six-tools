@@ -21,7 +21,9 @@ public class MovieRecord {
     private String viewDate;
     private String remark;
 
-    public MovieRecord(){};
+    public MovieRecord(){
+        super();
+    }
 
     public MovieRecord(Integer id, String movieName, String country,
                        String produceYear, String director, String viewDate,

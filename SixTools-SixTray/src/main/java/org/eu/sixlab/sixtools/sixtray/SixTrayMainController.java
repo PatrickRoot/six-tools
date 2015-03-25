@@ -57,7 +57,7 @@ public class SixTrayMainController implements Initializable {
         comboBox.getSelectionModel().selectFirst();
 
         comboBox.setCellFactory(p -> {
-            final ListCell<SixTray> cell = new ListCell<SixTray>() {
+            return new ListCell<SixTray>() {
                 @Override
                 protected void updateItem(SixTray sixTray, boolean bln) {
                     super.updateItem(sixTray, bln);
@@ -68,7 +68,6 @@ public class SixTrayMainController implements Initializable {
                     }
                 }
             };
-            return cell;
         });
 
         tcId.setCellValueFactory(new PropertyValueFactory("id"));

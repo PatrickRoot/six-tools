@@ -21,21 +21,6 @@ public class MovieRecorder extends Application {
     
     public static void main(String[] args) {
         launch(args);
-
-//        List<String> newArgs = new ArrayList<>();
-//        boolean isMain = true;
-//        for (String arg:args){
-//            if("-add".equals(arg)){
-//                isMain = false;
-//            }else{
-//                newArgs.add(arg);
-//            }
-//        }
-//        if(isMain){
-//            launch(args);
-//        }else{
-//            new MovieRecorderAdd().launch(newArgs.toArray(new String[]{}));
-//        }
     }
     
     @Override

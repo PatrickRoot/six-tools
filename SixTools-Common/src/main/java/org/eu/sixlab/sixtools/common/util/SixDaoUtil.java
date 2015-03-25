@@ -28,17 +28,8 @@ public class SixDaoUtil {
     }
 
     private SixDaoUtil(){
-        System.out.println("");
+        super();
     }
-//
-//    private static SqlSessionFactory getSessionFactory(){
-//        return factory;
-//    }
-//
-//    private static SqlSession getSession() {
-//        sqlSession = factory.openSession();
-//        return sqlSession;
-//    }
 
     public static<T> T getMapper(Class<T> clz){
         sqlSession = factory.openSession();

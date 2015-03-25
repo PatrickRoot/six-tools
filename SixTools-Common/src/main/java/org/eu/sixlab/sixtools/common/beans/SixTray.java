@@ -13,11 +13,6 @@ package org.eu.sixlab.sixtools.common.beans;
  */
 public class SixTray {
 
-    @Override
-    public String toString() {
-        return this.trayName;
-    }
-
     private Integer id;
     private String trayName;
     private String path;
@@ -32,6 +27,11 @@ public class SixTray {
     private String parentName;
     private String createTime;
     private String updateTime;
+
+    @Override
+    public String toString() {
+        return this.trayName;
+    }
 
     public String getParentName() {
         return parentName;

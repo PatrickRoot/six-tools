@@ -26,6 +26,10 @@ public class SixToolsUtil {
         }
     }
 
+    private SixToolsUtil(){
+        super();
+    }
+
     public static String getString(String key){
         return properties.getProperty(key);
     }
