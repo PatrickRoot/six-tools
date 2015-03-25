@@ -213,7 +213,7 @@ public class SixTrayAddController implements Initializable{
 
     public void saveAndClose(ActionEvent event) {
         saveAndContinue(event);
-        saveAndClose(event);
+        addClose(event);
     }
 }
 
