@@ -38,7 +38,6 @@ public class SixTrayMain extends Application{
             primaryStage.hide();
         });
         initTray(primaryStage);
-        primaryStage.show();
     }
     
     private void initTray(Stage primaryStage) {
