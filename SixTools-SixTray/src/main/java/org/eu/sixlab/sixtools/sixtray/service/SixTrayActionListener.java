@@ -59,12 +59,8 @@ public class SixTrayActionListener {
 
         String exec = comm + " " + path + " " + para;
         try {
-            File runtimeFolder =new File(path).getParentFile();
-            Process p = Runtime.getRuntime().exec(exec, null, runtimeFolder);
-            System.out.println(p.waitFor());
+            Runtime.getRuntime().exec(exec, null, new File(path).getParentFile());
         } catch (IOException e1) {
-            e1.printStackTrace();
-        }catch (InterruptedException e1) {
             e1.printStackTrace();
         }
     }

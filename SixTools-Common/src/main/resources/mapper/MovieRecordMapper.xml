@@ -81,19 +81,19 @@
 			<if test="movieName!=null and movieName!=''">
 				movie_name = #{movieName,jdbcType=VARCHAR},
 			</if>
-			<if test="country!=null and country!=''">
+			<if test="country!=null">
 				country = #{country,jdbcType=VARCHAR},
 			</if>
-			<if test="produceYear!=null and produceYear!=''">
+			<if test="produceYear!=null">
 				produce_year = #{produceYear,jdbcType=VARCHAR},
 			</if>
-			<if test="director!=null and director!=''">
+			<if test="director!=null">
 				director = #{director,jdbcType=VARCHAR},
 			</if>
 			<if test="viewDate!=null and viewDate!=''">
 				view_date = #{viewDate,jdbcType=VARCHAR},
 			</if>
-			<if test="remark !=null and remark!=''">
+			<if test="remark !=null">
 				remark = #{remark,jdbcType=VARCHAR},
 			</if>
 		</set>
