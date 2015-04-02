@@ -26,7 +26,7 @@ public class SixTrayActionListener {
     public void folderToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -36,11 +36,10 @@ public class SixTrayActionListener {
     public void fileToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path);
+            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
     }
 
     public void websiteToolAction(SixTray sixTray, ActionEvent e) {
@@ -56,8 +55,8 @@ public class SixTrayActionListener {
         String path = sixTray.getPath();
         String para = sixTray.getParams();
         String comm = sixTray.getCommand();
-
-        String exec = comm + " " + path + " " + para;
+        String fileName = new File(path).getName();
+        String exec = comm + " " + fileName + " " + para;
         try {
             Runtime.getRuntime().exec(exec, null, new File(path).getParentFile());
         } catch (IOException e1) {

@@ -117,8 +117,7 @@ public class MovieRecorderController implements Initializable{
     }
 
     public void searchByKeyword(ActionEvent event) {
-        String keyword = toolbarKeyword.getText();
-        lastKeyword = keyword;
+        lastKeyword = toolbarKeyword.getText();
         loadMovies();
     }
 
@@ -145,7 +144,7 @@ public class MovieRecorderController implements Initializable{
         lastKeyword = (null==lastKeyword?"":lastKeyword);
         List<MovieRecord> movieRecordList;
 
-        if(null==lastKeyword || "".equals(lastKeyword)){
+        if( "".equals(lastKeyword)){
             movieRecordList = MovieRecorderDao.getAllMovies();
         }else{
             movieRecordList = MovieRecorderDao.getMoviesByKeyword(lastKeyword);
