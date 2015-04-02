@@ -1,7 +1,7 @@
-/* 
- ********************************************************************************
- * Copyright sixlab.eu.org 2015/3/23 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
- ********************************************************************************
+/**
+ * @Copyright © Sixlab 2015
+ * @author 六楼的雨/loki
+ * @Email <nianqinianyi@163.com>
  */
 package org.eu.sixlab.sixtools.sixtray;
 
@@ -16,10 +16,10 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/3/23
- * 功能描述：
- * 版本：1.0-snapshot
+ * SixTray管理页面Controller
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/3/23 19:46
  */
 public class SixTrayController {
 

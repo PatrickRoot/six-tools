@@ -1,7 +1,7 @@
-/* 
- ********************************************************************************
- * Copyright sixlab.eu.org 2015/3/21 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
- ********************************************************************************
+/**
+ * @Copyright © Sixlab 2015
+ * @author 六楼的雨/loki
+ * @Email <nianqinianyi@163.com>
  */
 package org.eu.sixlab.sixtools.movierecorder;
 
@@ -19,10 +19,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/3/21
- * 功能描述：
- * 版本：1.0-SNAPSHOT
+ * MovieRecorder的添加电影记录对应的Controller
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/3/21 19:46
  */
 public class MovieRecorderAddController {
 

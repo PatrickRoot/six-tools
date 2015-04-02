@@ -19,10 +19,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/2/17
- * 功能描述：
- * 版本：1.0-SNAPSHOT
+ * SixTray的Main方法
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/2/17 19:46
  */
 public class SixTrayMain extends Application{
 

@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/3/23
- * 功能描述：
- * 版本：1.0-snapshot
+ * SixTray的管理界面的Controller
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/3/23 19:46
  */
 public class SixTrayMainController implements Initializable {
 

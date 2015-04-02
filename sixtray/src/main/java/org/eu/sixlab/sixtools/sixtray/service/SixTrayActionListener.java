@@ -1,7 +1,7 @@
-/* 
- ********************************************************************************
- * Copyright sixlab.eu.org 2015/2/17 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
- ********************************************************************************
+/**
+ * @Copyright © Sixlab 2015
+ * @author 六楼的雨/loki
+ * @Email <nianqinianyi@163.com>
  */
 package org.eu.sixlab.sixtools.sixtray.service;
 
@@ -16,10 +16,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/2/17
- * 功能描述：
- * 版本：1.0-SNAPSHOT
+ * SixTray的actionListener类
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/3/21 19:46
  */
 public class SixTrayActionListener {
     

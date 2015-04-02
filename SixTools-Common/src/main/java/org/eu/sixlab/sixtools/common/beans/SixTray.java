@@ -1,15 +1,15 @@
-/* 
- ********************************************************************************
- * Copyright sixlab.eu.org 2015/2/16 Authors: 六楼的雨/loki <nianqinianyi@163.com>*
- ********************************************************************************
+/**
+ * @Copyright © Sixlab 2015
+ * @author 六楼的雨/loki
+ * @Email <nianqinianyi@163.com>
  */
 package org.eu.sixlab.sixtools.common.beans;
 
 /**
- * 作者：六楼的雨/loki
- * 创建时间：2015/2/16
- * 功能描述：
- * 版本：1.0-SNAPSHOT
+ * SixTray映射Bean
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/2/17 19:46
  */
 public class SixTray {
 
