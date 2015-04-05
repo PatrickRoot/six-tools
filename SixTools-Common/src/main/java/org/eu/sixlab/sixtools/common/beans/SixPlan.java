@@ -1,5 +1,16 @@
+/**
+ * @Copyright © Sixlab 2015
+ * @author 六楼的雨/loki
+ * @Email <nianqinianyi@163.com>
+ */
 package org.eu.sixlab.sixtools.common.beans;
 
+/**
+ * SixPlan映射Bean
+ *
+ * @author 六楼的雨/loki
+ * @date 2015/4/4 11:41
+ */
 public class SixPlan {
     private Integer id;
 
@@ -10,12 +21,19 @@ public class SixPlan {
     private Integer planPer;
 
     private Integer planStatus;
+    private String planStatusValue;
 
     private String planContent;
 
     private Integer planType;
 
-    private String planDate;
+    private Integer planYear;
+
+    private Integer planSeason;
+
+    private Integer planMonth;
+
+    private Integer planWeek;
 
     private Integer parentId;
 
@@ -77,12 +95,36 @@ public class SixPlan {
         this.planType = planType;
     }
 
-    public String getPlanDate() {
-        return planDate;
+    public Integer getPlanYear() {
+        return planYear;
     }
 
-    public void setPlanDate(String planDate) {
-        this.planDate = planDate;
+    public void setPlanYear(Integer planYear) {
+        this.planYear = planYear;
+    }
+
+    public Integer getPlanSeason() {
+        return planSeason;
+    }
+
+    public void setPlanSeason(Integer planSeason) {
+        this.planSeason = planSeason;
+    }
+
+    public Integer getPlanMonth() {
+        return planMonth;
+    }
+
+    public void setPlanMonth(Integer planMonth) {
+        this.planMonth = planMonth;
+    }
+
+    public Integer getPlanWeek() {
+        return planWeek;
+    }
+
+    public void setPlanWeek(Integer planWeek) {
+        this.planWeek = planWeek;
     }
 
     public Integer getParentId() {
@@ -99,5 +141,13 @@ public class SixPlan {
 
     public void setSourceId(Integer sourceId) {
         this.sourceId = sourceId;
+    }
+
+    public String getPlanStatusValue() {
+        return planStatusValue;
+    }
+
+    public void setPlanStatusValue(String planStatusValue) {
+        this.planStatusValue = planStatusValue;
     }
 }

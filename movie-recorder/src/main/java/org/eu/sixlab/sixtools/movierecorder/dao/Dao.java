@@ -17,9 +17,9 @@ import java.util.List;
  * @author 六楼的雨/loki
  * @date 2015/3/21 19:46
  */
-public class MovieRecorderDao {
+public class Dao {
 
-    private MovieRecorderDao(){
+    private Dao(){
         super();
     }
 

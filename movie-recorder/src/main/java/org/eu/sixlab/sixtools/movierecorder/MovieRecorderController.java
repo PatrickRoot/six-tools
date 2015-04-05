@@ -22,8 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.eu.sixlab.sixtools.common.beans.MovieRecord;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
-import org.eu.sixlab.sixtools.movierecorder.dao.MovieRecorderDao;
+import org.eu.sixlab.sixtools.common.util.Constant;
+import org.eu.sixlab.sixtools.movierecorder.dao.Dao;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -122,11 +122,11 @@ public class MovieRecorderController implements Initializable{
     }
 
     public void searchByBaidu(ActionEvent event) {
-        searchByNet(SixToolsConstants.BAIDU_SEARCH_STRING);
+        searchByNet(Constant.BAIDU_SEARCH_STRING);
     }
 
     public void searchByDouban(ActionEvent event) {
-        searchByNet(SixToolsConstants.DOUBAN_SEARCH_STRING);
+        searchByNet(Constant.DOUBAN_SEARCH_STRING);
     }
 
     private void searchByNet(String url) {
@@ -134,7 +134,7 @@ public class MovieRecorderController implements Initializable{
 
         String path = url + text;
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
+            Runtime.getRuntime().exec(Constant.WINDOWS_DEFAULT_IE_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -145,9 +145,9 @@ public class MovieRecorderController implements Initializable{
         List<MovieRecord> movieRecordList;
 
         if( "".equals(lastKeyword)){
-            movieRecordList = MovieRecorderDao.getAllMovies();
+            movieRecordList = Dao.getAllMovies();
         }else{
-            movieRecordList = MovieRecorderDao.getMoviesByKeyword(lastKeyword);
+            movieRecordList = Dao.getMoviesByKeyword(lastKeyword);
         }
 
         data.clear();
@@ -172,7 +172,7 @@ public class MovieRecorderController implements Initializable{
                     try {
                         field.set(movieRecord, event.getNewValue());
                         movieRecord.setId(((MovieRecord) event.getRowValue()).getId());
-                        MovieRecorderDao.update(movieRecord);
+                        Dao.update(movieRecord);
                         loadMovies();
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();

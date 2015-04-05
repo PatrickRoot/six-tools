@@ -24,15 +24,14 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#close" text="关闭" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+        <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#close" text="关闭" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets />
             </GridPane.margin>
         </Button>
 
-        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addPlan" text="添加并继续" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-
-        <Button fx:id="addCloseBtn" mnemonicParsing="false" onAction="#addCloseBtn" text="添加并关闭" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+        <Button fx:id="addCloseBtn" mnemonicParsing="false"
+                onAction="#addCloseBtn" text="确定" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
 
         <Label fx:id="tipsLabel" prefHeight="20.0" prefWidth="320.0" textFill="#ff1a00" GridPane.columnSpan="6" GridPane.rowIndex="5">
             <padding>
@@ -66,7 +65,7 @@
             </GridPane.margin>
         </Label>
 
-        <TextArea fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" GridPane.rowSpan="3">
+        <TextArea fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" GridPane.rowSpan="3" wrapText="true" >
             <GridPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </GridPane.margin>
@@ -86,9 +85,7 @@
                 <Insets left="5.0" right="5.0" />
             </GridPane.margin>
         </ComboBox>
-      <DatePicker fx:id="datePicker" GridPane.columnIndex="4"
-                  GridPane.columnSpan="2"
-                   GridPane.rowIndex="1">
+      <DatePicker fx:id="datePicker" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>

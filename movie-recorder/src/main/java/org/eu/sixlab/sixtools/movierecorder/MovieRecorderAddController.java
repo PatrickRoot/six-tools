@@ -12,8 +12,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.eu.sixlab.sixtools.common.beans.MovieRecord;
-import org.eu.sixlab.sixtools.movierecorder.dao.MovieRecorderDao;
-import org.eu.sixlab.sixutil.StringUtil;
+import org.eu.sixlab.sixtools.movierecorder.dao.Dao;
+import org.eu.sixlab.sixutil.StrUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +48,7 @@ public class MovieRecorderAddController {
         tipsLabel.setText("");
 
         String name = addName.getText();
-        if(StringUtil.isEmpty(name)){
+        if( StrUtil.isEmpty(name)){
             tipsLabel.setText("电影名字为空，请重新填写！");
             tipsLabel.setTextFill(Color.RED);
             addName.requestFocus();
@@ -56,8 +56,8 @@ public class MovieRecorderAddController {
         }
 
         String year = addYear.getText();
-        if(StringUtil.isNotEmpty(year)){
-            if(year.length()!=4 || StringUtil.isNotNumber(year)){
+        if( StrUtil.isNotEmpty(year)){
+            if(year.length()!=4 || StrUtil.isNotNumber(year)){
                 tipsLabel.setText("年份填写不正确，四位数字");
                 tipsLabel.setTextFill(Color.RED);
                 addYear.requestFocus();
@@ -79,9 +79,9 @@ public class MovieRecorderAddController {
         MovieRecord movieRecord = new MovieRecord(null,name,country,year,
                 director,date,remark);
 
-        MovieRecorderDao.insertMovie(movieRecord);
+        Dao.insertMovie(movieRecord);
         MovieRecorderController.data.clear();
-        MovieRecorderController.data.addAll(MovieRecorderDao.getMoviesByMovieName(name));
+        MovieRecorderController.data.addAll(Dao.getMoviesByMovieName(name));
         canClose = true;
     }
 

@@ -5,7 +5,7 @@
  */
 package org.eu.sixlab.sixtools.sixplan.combo;
 
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
+import org.eu.sixlab.sixtools.common.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ import java.util.List;
  */
 public class PlanType {
 
-    private String typeValue;
+    private Integer typeValue;
     private String typeName;
 
     public PlanType() {
         super();
     }
 
-    public PlanType(String typeValue, String typeName) {
+    public PlanType(Integer typeValue, String typeName) {
         this.typeValue = typeValue;
         this.typeName = typeName;
     }
@@ -32,12 +32,12 @@ public class PlanType {
     public static List<PlanType> allTypes(Boolean hasAll){
         List<PlanType> typeList = new ArrayList<>();
         if(hasAll){
-            typeList.add(new PlanType(SixToolsConstants.PLAN_TYPE_ALL,"所有"));
+            typeList.add(new PlanType(Constant.PLAN_TYPE_ALL,"所有"));
         }
-        typeList.add(new PlanType(SixToolsConstants.PLAN_TYPE_YEAR, "年"));
-        typeList.add(new PlanType(SixToolsConstants.PLAN_TYPE_SEASON, "季度"));
-        typeList.add(new PlanType(SixToolsConstants.PLAN_TYPE_MONTH, "月"));
-        typeList.add(new PlanType(SixToolsConstants.PLAN_TYPE_WEEK, "周"));
+        typeList.add(new PlanType(Constant.PLAN_TYPE_YEAR, "年"));
+        typeList.add(new PlanType(Constant.PLAN_TYPE_SEASON, "季度"));
+        typeList.add(new PlanType(Constant.PLAN_TYPE_MONTH, "月"));
+        typeList.add(new PlanType(Constant.PLAN_TYPE_WEEK, "周"));
         return typeList;
     }
 
@@ -54,11 +54,11 @@ public class PlanType {
         this.typeName = typeName;
     }
 
-    public String getTypeValue() {
+    public Integer getTypeValue() {
         return typeValue;
     }
 
-    public void setTypeValue(String typeValue) {
+    public void setTypeValue(Integer typeValue) {
         this.typeValue = typeValue;
     }
 }

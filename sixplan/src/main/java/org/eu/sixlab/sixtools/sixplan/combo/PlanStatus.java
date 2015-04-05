@@ -5,7 +5,7 @@
  */
 package org.eu.sixlab.sixtools.sixplan.combo;
 
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
+import org.eu.sixlab.sixtools.common.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +37,11 @@ public class PlanStatus {
 
     public static List<PlanStatus> allStatus(){
         List<PlanStatus> statusList = new ArrayList<>();
-        statusList.add(new PlanStatus(SixToolsConstants.PLAN_STATUS_ALL, "所有"));
-        statusList.add(new PlanStatus(SixToolsConstants.PLAN_STATUS_ING,"进行中"));
-        statusList.add(new PlanStatus(SixToolsConstants.PLAN_STATUS_ED, "完成"));
-//        statusList.add(new PlanStatus(SixToolsConstants.PLAN_STATUS_TEMP, "暂存"));
-        statusList.add(new PlanStatus(SixToolsConstants.PLAN_STATUS_STOP, "未完成"));
+        statusList.add(new PlanStatus(Constant.PLAN_STATUS_ALL, "所有"));
+        statusList.add(new PlanStatus(Constant.PLAN_STATUS_ING,"进行中"));
+        statusList.add(new PlanStatus(Constant.PLAN_STATUS_ED, "完成"));
+//        statusList.add(new PlanStatus(Constant.PLAN_STATUS_TEMP, "暂存"));
+        statusList.add(new PlanStatus(Constant.PLAN_STATUS_STOP, "未完成"));
         return statusList;
     }
 

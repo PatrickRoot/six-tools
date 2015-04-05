@@ -18,8 +18,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.eu.sixlab.sixtools.common.beans.SixTray;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
-import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
+import org.eu.sixlab.sixtools.common.util.Constant;
+import org.eu.sixlab.sixtools.sixtray.dao.Dao;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,7 +91,7 @@ public class SixTrayMainController implements Initializable {
     }
 
     private void loadComboData() {
-        List<SixTray> sixTrayList = SixTrayDao.getToolFolders();
+        List<SixTray> sixTrayList = Dao.getToolFolders();
 
         SixTray notSelect = new SixTray();
         notSelect.setId(-1);
@@ -108,7 +108,7 @@ public class SixTrayMainController implements Initializable {
     }
 
     private void loadTableData() {
-        List<SixTray> sixTrayList = SixTrayDao.getAll();
+        List<SixTray> sixTrayList = Dao.getAll();
         tableData.clear();
         tableData.addAll(sixTrayList);
     }
@@ -135,7 +135,7 @@ public class SixTrayMainController implements Initializable {
     public void deleteTool(ActionEvent event) {
         SixTray sixTray = (SixTray) tableView.getSelectionModel().getSelectedItem();
         if(null!=sixTray){
-            SixTrayDao.delete(sixTray.getId());
+            Dao.delete(sixTray.getId());
             refreshTable(event);
             refreshTools(event);
         }
@@ -145,9 +145,9 @@ public class SixTrayMainController implements Initializable {
         SixTray sixTray = (SixTray) comboBox.getValue();
         List<SixTray> sixTrayList;
         if(sixTray.getId() == -1){
-            sixTrayList = SixTrayDao.getAll();
+            sixTrayList = Dao.getAll();
         }else{
-            sixTrayList = SixTrayDao.getSubTrays(sixTray.getId());
+            sixTrayList = Dao.getSubTrays(sixTray.getId());
         }
         tableData.clear();
         tableData.addAll(sixTrayList);
@@ -155,7 +155,7 @@ public class SixTrayMainController implements Initializable {
 
     public void refreshTools(ActionEvent event) {
         SixTrayMain.popup.removeAll();
-        new SixTrayController().loadPopupMenu(SixTrayMain.popup, SixToolsConstants.ROOT_PARENT_ID);
+        new SixTrayController().loadPopupMenu(SixTrayMain.popup, Constant.ROOT_PARENT_ID);
     }
 
     public void exit(ActionEvent event) {

@@ -6,7 +6,7 @@
 package org.eu.sixlab.sixtools.sixtray.service;
 
 import org.eu.sixlab.sixtools.common.beans.SixTray;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
+import org.eu.sixlab.sixtools.common.util.Constant;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -26,7 +26,7 @@ public class SixTrayActionListener {
     public void folderToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
+            Runtime.getRuntime().exec(Constant.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class SixTrayActionListener {
     public void fileToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
+            Runtime.getRuntime().exec(Constant.WINDOWS_EXPLORER_COMMAND+path,null,new File(path).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class SixTrayActionListener {
     public void websiteToolAction(SixTray sixTray, ActionEvent e) {
         String path = sixTray.getPath();
         try {
-            Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
+            Runtime.getRuntime().exec(Constant.WINDOWS_DEFAULT_IE_COMMAND+path);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

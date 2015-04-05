@@ -9,13 +9,15 @@ import org.eu.sixlab.sixtools.common.beans.SixPlan;
 import org.eu.sixlab.sixtools.common.dao.SixPlanMapper;
 import org.eu.sixlab.sixtools.common.util.SixDaoUtil;
 
+import java.util.List;
+
 /**
  * //TODO
  *
  * @author 六楼的雨/loki
  * @date 2015/4/3 19:49
  */
-public class SixPlanDao {
+public class Dao {
 
     public static void insert(SixPlan sixPlan) {
         SixPlanMapper sixPlanMapper = SixDaoUtil.getMapper(SixPlanMapper.class);
@@ -27,5 +29,14 @@ public class SixPlanDao {
         SixPlanMapper sixPlanMapper = SixDaoUtil.getMapper(SixPlanMapper.class);
         sixPlanMapper.updateByPrimaryKeySelective(sixPlan);
         SixDaoUtil.close();
+    }
+    
+    public static List<SixPlan> selectBySixPlan(SixPlan sixPlan) {
+        SixPlanMapper sixPlanMapper = SixDaoUtil.getMapper(SixPlanMapper.class);
+
+        List<SixPlan> sixPlanList = sixPlanMapper.selectBySixPlan(sixPlan);
+
+        SixDaoUtil.close();
+        return sixPlanList;
     }
 }

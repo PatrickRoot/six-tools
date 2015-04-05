@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author 六楼的雨/loki
  * @date 2015/4/3 12:43
  */
-public class SixPlan extends Application{
+public class SixPlanMain extends Application{
     
     @Override
     public void start(Stage primaryStage) throws Exception {

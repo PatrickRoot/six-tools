@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
+import org.eu.sixlab.sixtools.common.util.Constant;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -49,7 +49,7 @@ public class SixTrayMain extends Application{
             Image image = Toolkit.getDefaultToolkit().getImage("logo.png");
             // 创建弹出菜单
             popup = new PopupMenu();
-            new SixTrayController().loadPopupMenu(popup, SixToolsConstants.ROOT_PARENT_ID);
+            new SixTrayController().loadPopupMenu(popup, Constant.ROOT_PARENT_ID);
             // 创建trayIcon
             trayIcon = new TrayIcon(image, "待实现", popup);
             trayIcon.addMouseListener(trayListener(primaryStage));

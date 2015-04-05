@@ -7,15 +7,20 @@
         <result column="plan_time" jdbcType="INTEGER" property="planTime" />
         <result column="plan_per" jdbcType="INTEGER" property="planPer" />
         <result column="plan_status" jdbcType="INTEGER" property="planStatus" />
+        <result column="plan_status_value" jdbcType="VARCHAR"
+                property="planStatusValue" />
         <result column="plan_content" jdbcType="VARCHAR" property="planContent" />
         <result column="plan_type" jdbcType="INTEGER" property="planType" />
-        <result column="plan_date" jdbcType="VARCHAR" property="planDate" />
+        <result column="plan_year" jdbcType="INTEGER" property="planYear" />
+        <result column="plan_season" jdbcType="INTEGER" property="planSeason" />
+        <result column="plan_month" jdbcType="INTEGER" property="planMonth" />
+        <result column="plan_week" jdbcType="INTEGER" property="planWeek" />
         <result column="parent_id" jdbcType="INTEGER" property="parentId" />
         <result column="source_id" jdbcType="INTEGER" property="sourceId" />
     </resultMap>
     <sql id="Base_Column_List">
-        id, plan_name, plan_time, plan_per, plan_status, plan_content, plan_type, plan_date,
-        parent_id, source_id
+        id, plan_name, plan_time, plan_per, plan_status, plan_content, plan_type, plan_year,
+        plan_season, plan_month, plan_week, parent_id, source_id
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -23,17 +28,21 @@
         from six_plan
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
-    <!--delete from six_plan-->
-    <!--where id = #{id,jdbcType=INTEGER}-->
-    <!--</delete>-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from six_plan
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" keyProperty="id" parameterType="org.eu.sixlab.sixtools.common.beans.SixPlan" useGeneratedKeys="true">
         insert into six_plan (plan_name, plan_time, plan_per,
-            plan_status, plan_content, plan_type,
-            plan_date, parent_id, source_id)
+        plan_status, plan_content, plan_type,
+        plan_year, plan_season, plan_month,
+        plan_week, parent_id, source_id
+        )
         values (#{planName,jdbcType=VARCHAR}, #{planTime,jdbcType=INTEGER}, #{planPer,jdbcType=INTEGER},
-            #{planStatus,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, #{planType,jdbcType=INTEGER},
-            #{planDate,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER})
+        #{planStatus,jdbcType=INTEGER}, #{planContent,jdbcType=VARCHAR}, #{planType,jdbcType=INTEGER},
+        #{planYear,jdbcType=INTEGER}, #{planSeason,jdbcType=INTEGER}, #{planMonth,jdbcType=INTEGER},
+        #{planWeek,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER}
+        )
     </insert>
     <insert id="insertSelective" keyProperty="id" parameterType="org.eu.sixlab.sixtools.common.beans.SixPlan" useGeneratedKeys="true">
         insert into six_plan
@@ -56,8 +65,17 @@
             <if test="planType != null">
                 plan_type,
             </if>
-            <if test="planDate != null">
-                plan_date,
+            <if test="planYear != null">
+                plan_year,
+            </if>
+            <if test="planSeason != null">
+                plan_season,
+            </if>
+            <if test="planMonth != null">
+                plan_month,
+            </if>
+            <if test="planWeek != null">
+                plan_week,
             </if>
             <if test="parentId != null">
                 parent_id,
@@ -85,8 +103,17 @@
             <if test="planType != null">
                 #{planType,jdbcType=INTEGER},
             </if>
-            <if test="planDate != null">
-                #{planDate,jdbcType=VARCHAR},
+            <if test="planYear != null">
+                #{planYear,jdbcType=INTEGER},
+            </if>
+            <if test="planSeason != null">
+                #{planSeason,jdbcType=INTEGER},
+            </if>
+            <if test="planMonth != null">
+                #{planMonth,jdbcType=INTEGER},
+            </if>
+            <if test="planWeek != null">
+                #{planWeek,jdbcType=INTEGER},
             </if>
             <if test="parentId != null">
                 #{parentId,jdbcType=INTEGER},
@@ -117,8 +144,17 @@
             <if test="planType != null">
                 plan_type = #{planType,jdbcType=INTEGER},
             </if>
-            <if test="planDate != null">
-                plan_date = #{planDate,jdbcType=VARCHAR},
+            <if test="planYear != null">
+                plan_year = #{planYear,jdbcType=INTEGER},
+            </if>
+            <if test="planSeason != null">
+                plan_season = #{planSeason,jdbcType=INTEGER},
+            </if>
+            <if test="planMonth != null">
+                plan_month = #{planMonth,jdbcType=INTEGER},
+            </if>
+            <if test="planWeek != null">
+                plan_week = #{planWeek,jdbcType=INTEGER},
             </if>
             <if test="parentId != null">
                 parent_id = #{parentId,jdbcType=INTEGER},
@@ -137,7 +173,10 @@
         plan_status = #{planStatus,jdbcType=INTEGER},
         plan_content = #{planContent,jdbcType=VARCHAR},
         plan_type = #{planType,jdbcType=INTEGER},
-        plan_date = #{planDate,jdbcType=VARCHAR},
+        plan_year = #{planYear,jdbcType=INTEGER},
+        plan_season = #{planSeason,jdbcType=INTEGER},
+        plan_month = #{planMonth,jdbcType=INTEGER},
+        plan_week = #{planWeek,jdbcType=INTEGER},
         parent_id = #{parentId,jdbcType=INTEGER},
         source_id = #{sourceId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
@@ -148,37 +187,46 @@
     <select id="selectBySixPlan" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
+        ,(CASE plan_status WHEN 100 THEN '未完成' WHEN 300 THEN '已完成' WHEN 400
+        THEN '进行中' END) plan_status_value
         from six_plan
         where 1=1
-        <trim prefix=" AND " suffix=" " suffixOverrides=" AND " >
-            <if test="planName != null" >
-                plan_name = #{planName,jdbcType=VARCHAR}
-            </if>
-            <if test="planTime != null" >
-                plan_time = #{planTime,jdbcType=INTEGER}
-            </if>
-            <if test="planPer != null" >
-                plan_per = #{planPer,jdbcType=INTEGER}
-            </if>
-            <if test="planStatus != null" >
-                plan_status = #{planStatus,jdbcType=INTEGER}
-            </if>
-            <if test="planContent != null" >
-                plan_content = #{planContent,jdbcType=VARCHAR}
-            </if>
-            <if test="planType != null" >
-                plan_type = #{planType,jdbcType=INTEGER}
-            </if>
-            <if test="planDate != null" >
-                plan_date = #{planDate,jdbcType=INTEGER}
-            </if>
-            <if test="parentId != null" >
-                parent_id = #{parentId,jdbcType=INTEGER}
-            </if>
-            <if test="sourceId != null" >
-                source_id = #{sourceId,jdbcType=INTEGER}
-            </if>
-        </trim>
-        order BY plan_type DESC, plan_date DESC
+        <if test="planName != null" >
+            AND plan_name = #{planName,jdbcType=VARCHAR}
+        </if>
+        <if test="planTime != null" >
+            AND plan_time = #{planTime,jdbcType=INTEGER}
+        </if>
+        <if test="planPer != null" >
+            AND plan_per = #{planPer,jdbcType=INTEGER}
+        </if>
+        <if test="planStatus != null" >
+            AND plan_status = #{planStatus,jdbcType=INTEGER}
+        </if>
+        <if test="planContent != null" >
+            AND plan_content = #{planContent,jdbcType=VARCHAR}
+        </if>
+        <if test="planType != null" >
+            AND plan_type = #{planType,jdbcType=INTEGER}
+        </if>
+        <if test="planYear != null" >
+            AND plan_year = #{planYear,jdbcType=INTEGER}
+        </if>
+        <if test="planSeason != null" >
+            AND plan_season = #{planSeason,jdbcType=INTEGER}
+        </if>
+        <if test="planMonth != null" >
+            AND plan_month = #{planMonth,jdbcType=INTEGER}
+        </if>
+        <if test="planWeek != null" >
+            AND plan_week = #{planWeek,jdbcType=INTEGER}
+        </if>
+        <if test="parentId != null" >
+            AND parent_id = #{parentId,jdbcType=INTEGER}
+        </if>
+        <if test="sourceId != null" >
+            AND source_id = #{sourceId,jdbcType=INTEGER}
+        </if>
+        order BY plan_year DESC,plan_season desc,plan_month DESC ,plan_week DESC
     </select>
 </mapper>

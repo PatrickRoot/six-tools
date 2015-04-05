@@ -11,7 +11,7 @@ package org.eu.sixlab.sixtools.common.util;
  * @author 六楼的雨/loki
  * @date 2015/2/17 19:46
  */
-public class SixToolsConstants {
+public class Constant {
 
     //Six-Tray
     public static final Integer ROOT_PARENT_ID =0;
@@ -30,11 +30,11 @@ public class SixToolsConstants {
     public static final String DOUBAN_SEARCH_STRING = "http://movie.douban.com/subject_search?search_text=";
 
     //Six-Plan
-    public static final String PLAN_TYPE_ALL = "999";
-    public static final String PLAN_TYPE_YEAR = "400";
-    public static final String PLAN_TYPE_SEASON = "300";
-    public static final String PLAN_TYPE_MONTH = "200";
-    public static final String PLAN_TYPE_WEEK = "100";
+    public static final Integer PLAN_TYPE_ALL = 999;
+    public static final Integer PLAN_TYPE_YEAR = 400;
+    public static final Integer PLAN_TYPE_SEASON = 300;
+    public static final Integer PLAN_TYPE_MONTH = 200;
+    public static final Integer PLAN_TYPE_WEEK = 100;
 
     public static final Integer PLAN_STATUS_ALL = 999;
     public static final Integer PLAN_STATUS_ING = 400;
@@ -42,7 +42,7 @@ public class SixToolsConstants {
 //    public static final Integer PLAN_STATUS_TEMP = 200;
     public static final Integer PLAN_STATUS_STOP = 100;
 
-    private SixToolsConstants(){
+    private Constant(){
         super();
     }
 }

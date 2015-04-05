@@ -6,8 +6,8 @@
 package org.eu.sixlab.sixtools.sixtray;
 
 import org.eu.sixlab.sixtools.common.beans.SixTray;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
-import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
+import org.eu.sixlab.sixtools.common.util.Constant;
+import org.eu.sixlab.sixtools.sixtray.dao.Dao;
 import org.eu.sixlab.sixtools.sixtray.service.SixTrayActionListener;
 
 import java.awt.*;
@@ -51,9 +51,9 @@ public class SixTrayController {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
                     String text = (String)t.getTransferData(DataFlavor.stringFlavor);
                     if( null!=text && !"".equals(text) ){
-                        String path = SixToolsConstants.BAIDU_SEARCH_STRING+text;
+                        String path = Constant.BAIDU_SEARCH_STRING+text;
 
-                        Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
+                        Runtime.getRuntime().exec(Constant.WINDOWS_DEFAULT_IE_COMMAND+path);
                     }
                 }
             } catch (Exception e1) {
@@ -71,9 +71,9 @@ public class SixTrayController {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
                     String text = (String)t.getTransferData(DataFlavor.stringFlavor);
                     if( null!=text && !"".equals(text) ){
-                        String path = SixToolsConstants.DOUBAN_SEARCH_STRING+text;
+                        String path = Constant.DOUBAN_SEARCH_STRING+text;
 
-                        Runtime.getRuntime().exec(SixToolsConstants.WINDOWS_DEFAULT_IE_COMMAND+path);
+                        Runtime.getRuntime().exec(Constant.WINDOWS_DEFAULT_IE_COMMAND+path);
                     }
                 }
             } catch (Exception e1) {
@@ -109,11 +109,11 @@ public class SixTrayController {
     }
 
     public void initMenus(Menu popup, Integer parentId){
-        java.util.List<SixTray> sixTrayList = SixTrayDao.getSubTrays(parentId);
+        java.util.List<SixTray> sixTrayList = Dao.getSubTrays(parentId);
 
         for (SixTray sixTray : sixTrayList) {
             String trayName = sixTray.getTrayName();
-            if(SixToolsConstants.TOOL_TYPE_TRAY_FOLDER.equals(sixTray.getToolType())){
+            if( Constant.TOOL_TYPE_TRAY_FOLDER.equals(sixTray.getToolType())){
                 Menu menu =  new Menu(trayName);
                 initMenus(menu, sixTray.getId());
                 popup.add(menu);
@@ -128,23 +128,23 @@ public class SixTrayController {
     private void addListener(SixTray sixTray, MenuItem trayItem) {
         String toolType = sixTray.getToolType();
 
-        if(SixToolsConstants.TOOL_TYPE_FOLDER.equals(toolType)){
+        if( Constant.TOOL_TYPE_FOLDER.equals(toolType)){
             trayItem.addActionListener(e->{
                 new SixTrayActionListener().folderToolAction(sixTray, e);
             });
-        }else if(SixToolsConstants.TOOL_TYPE_FILE.equals(toolType)){
+        }else if( Constant.TOOL_TYPE_FILE.equals(toolType)){
             trayItem.addActionListener(e->{
                 new SixTrayActionListener().fileToolAction(sixTray, e);
             });
-        }else if(SixToolsConstants.TOOL_TYPE_WEBSITE.equals(toolType)){
+        }else if( Constant.TOOL_TYPE_WEBSITE.equals(toolType)){
             trayItem.addActionListener(e->{
                 new SixTrayActionListener().websiteToolAction(sixTray, e);
             });
-        }else if(SixToolsConstants.TOOL_TYPE_COMMAND.equals(toolType)){
+        }else if( Constant.TOOL_TYPE_COMMAND.equals(toolType)){
             trayItem.addActionListener(e->{
                 new SixTrayActionListener().commandToolAction(sixTray, e);
             });
-        }else if(SixToolsConstants.TOOL_TYPE_COPY_TOOL.equals(toolType)){
+        }else if( Constant.TOOL_TYPE_COPY_TOOL.equals(toolType)){
             trayItem.addActionListener(e->{
                 new SixTrayActionListener().copyToolAction(sixTray, e);
             });

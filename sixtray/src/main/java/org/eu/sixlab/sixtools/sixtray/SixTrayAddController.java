@@ -16,9 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.eu.sixlab.sixtools.common.beans.SixTray;
-import org.eu.sixlab.sixtools.common.util.SixToolsConstants;
-import org.eu.sixlab.sixtools.sixtray.dao.SixTrayDao;
-import org.eu.sixlab.sixutil.StringUtil;
+import org.eu.sixlab.sixtools.common.util.Constant;
+import org.eu.sixlab.sixtools.sixtray.dao.Dao;
+import org.eu.sixlab.sixutil.StrUtil;
 
 import java.io.File;
 import java.net.URL;
@@ -63,7 +63,7 @@ public class SixTrayAddController implements Initializable{
     }
 
     private void initAddParent() {
-        List<SixTray> sixTrayList = SixTrayDao.getToolFolders();
+        List<SixTray> sixTrayList = Dao.getToolFolders();
         SixTray noParent = new SixTray();
         noParent.setId(0);
         noParent.setTrayName("--不选择--");
@@ -150,7 +150,7 @@ public class SixTrayAddController implements Initializable{
 
     public void saveAndContinue(ActionEvent event) {
         String trayName = addName.getText();
-        if(StringUtil.isEmpty(trayName)){
+        if( StrUtil.isEmpty(trayName)){
             tipsLabel.setText("名字不能为空");
             addName.requestFocus();
             return;
@@ -165,24 +165,24 @@ public class SixTrayAddController implements Initializable{
         sixTray.setParentId(((SixTray)addParent.getValue()).getId());
         sixTray.setToolType(((ToolType)addType.getValue()).getToolType());
         if(null==id){
-            SixTrayDao.insert(sixTray);
+            Dao.insert(sixTray);
             tipsLabel.setText("添加工具成功：" + trayName);
         }else{
-            SixTrayDao.update(sixTray);
+            Dao.update(sixTray);
             tipsLabel.setText("编辑工具成功：" + trayName);
         }
 
 
 
 
-        List<SixTray> sixTrayTableList = SixTrayDao.getAll();
+        List<SixTray> sixTrayTableList = Dao.getAll();
         SixTrayMainController.tableData.clear();
         SixTrayMainController.tableData.addAll(sixTrayTableList);
 
 
 
 
-        List<SixTray> sixTrayComboList = SixTrayDao.getToolFolders();
+        List<SixTray> sixTrayComboList = Dao.getToolFolders();
 
         SixTray notSelect = new SixTray();
         notSelect.setId(-1);
@@ -202,7 +202,7 @@ public class SixTrayAddController implements Initializable{
 
 
         SixTrayMain.popup.removeAll();
-        new SixTrayController().loadPopupMenu(SixTrayMain.popup, SixToolsConstants.ROOT_PARENT_ID);
+        new SixTrayController().loadPopupMenu(SixTrayMain.popup, Constant.ROOT_PARENT_ID);
     }
 
     public void addClose(ActionEvent event) {
@@ -231,12 +231,12 @@ class ToolType{
 
     public static List<ToolType> allToolTypes(){
         List<ToolType> toolTypeList = new ArrayList<>();
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FOLDER,"目录"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_FILE,"文件"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_WEBSITE,"网址"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COMMAND, "命令"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_TRAY_FOLDER,"Tray文件夹"));
-        toolTypeList.add(new ToolType(SixToolsConstants.TOOL_TYPE_COPY_TOOL,"复制工具"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_FOLDER,"目录"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_FILE,"文件"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_WEBSITE,"网址"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_COMMAND, "命令"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_TRAY_FOLDER,"Tray文件夹"));
+        toolTypeList.add(new ToolType(Constant.TOOL_TYPE_COPY_TOOL,"复制工具"));
         return toolTypeList;
     }
 
