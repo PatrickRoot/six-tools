@@ -29,11 +29,8 @@ public class PlanType {
         this.typeName = typeName;
     }
 
-    public static List<PlanType> allTypes(Boolean hasAll){
+    public static List<PlanType> allTypes(){
         List<PlanType> typeList = new ArrayList<>();
-        if(hasAll){
-            typeList.add(new PlanType(Constant.PLAN_TYPE_ALL,"所有"));
-        }
         typeList.add(new PlanType(Constant.PLAN_TYPE_YEAR, "年"));
         typeList.add(new PlanType(Constant.PLAN_TYPE_SEASON, "季度"));
         typeList.add(new PlanType(Constant.PLAN_TYPE_MONTH, "月"));

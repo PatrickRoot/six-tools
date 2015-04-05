@@ -220,7 +220,7 @@ public class SixPlanController implements Initializable {
 
     private void initLoopCombo() {
 
-        List<PlanType> typeList = PlanType.allTypes(false);
+        List<PlanType> typeList = PlanType.allTypes();
         typeData.clear();
         typeData.addAll(typeList);
         loopCombo.setItems(typeData);

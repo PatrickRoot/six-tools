@@ -85,7 +85,7 @@ public class SixPlanAddController implements Initializable {
 
     private void initTypeCombo() {
 
-        List<PlanType> typeList = PlanType.allTypes(false);
+        List<PlanType> typeList = PlanType.allTypes();
         typeData.clear();
         typeData.addAll(typeList);
         loopCombo.setItems(typeData);

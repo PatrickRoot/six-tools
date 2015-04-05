@@ -39,4 +39,13 @@ public class Dao {
         SixDaoUtil.close();
         return sixPlanList;
     }
+
+    public static SixPlan queryById(Integer parentId) {
+        SixPlanMapper sixPlanMapper = SixDaoUtil.getMapper(SixPlanMapper.class);
+
+        SixPlan sixPlan = sixPlanMapper.selectByPrimaryKey(parentId);
+
+        SixDaoUtil.close();
+        return sixPlan;
+    }
 }

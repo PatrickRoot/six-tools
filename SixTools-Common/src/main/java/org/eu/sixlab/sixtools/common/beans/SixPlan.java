@@ -21,7 +21,7 @@ public class SixPlan {
     private Integer planPer;
 
     private Integer planStatus;
-    private String planStatusValue;
+    private String planStatusName;
 
     private String planContent;
 
@@ -143,11 +143,11 @@ public class SixPlan {
         this.sourceId = sourceId;
     }
 
-    public String getPlanStatusValue() {
-        return planStatusValue;
+    public String getPlanStatusName() {
+        return planStatusName;
     }
 
-    public void setPlanStatusValue(String planStatusValue) {
-        this.planStatusValue = planStatusValue;
+    public void setPlanStatusName(String planStatusName) {
+        this.planStatusName = planStatusName;
     }
 }
