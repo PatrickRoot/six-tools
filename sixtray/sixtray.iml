@@ -13,7 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="sixutil" />
-    <orderEntry type="module" module-name="sixtools-common" />
+    <orderEntry type="library" name="Maven: org.eu.sixlab:sixtools-common:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.8.7" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.2.7" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
