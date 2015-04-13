@@ -1,0 +1,165 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void initTable() {
+        initTableCellValueFactory();
+
+        yearTable.setItems(yearData);
+        seasonTable.setItems(seasonData);
+        monthTable.setItems(monthData);
+        weekTable.setItems(weekData);
+
+        yearTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            clickTable(e, yearTable);
+        });
+
+        seasonTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            clickTable(e, seasonTable);
+        });
+
+        monthTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            clickTable(e, monthTable);
+        });
+
+        weekTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            clickTable(e, weekTable);
+        });
+
+        initTableCellFactory();
+        searchData();
+    }
+
+
+    private void initCombo(ComboBox... statusCombo) {
+        for (ComboBox comboBox : statusCombo) {
+            comboBox.setItems(statusData);
+            comboBox.getSelectionModel().selectFirst();
+
+            comboBox.setCellFactory(p -> {
+                return new ListCell<PlanStatus>() {
+                    @Override
+                    protected void updateItem(PlanStatus planStatus, boolean bln) {
+                        super.updateItem(planStatus, bln);
+                        if (planStatus != null) {
+                            setText(planStatus.getStatusName());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            });
+        }
+
+        typeCombo.setItems(typeData);
+        typeCombo.getSelectionModel().selectLast();
+
+        typeCombo.setCellFactory(p -> {
+            return new ListCell<PlanType>() {
+                @Override
+                protected void updateItem(PlanType planType, boolean bln) {
+                    super.updateItem(planType, bln);
+                    if (planType != null) {
+                        setText(planType.getTypeName());
+                    } else {
+                        setText(null);
+                    }
+                }
+            };
+        });
+    }
+
+    private void initComboData() {
+        List<PlanStatus> statusList = PlanStatus.allStatus();
+        statusData.clear();
+        statusData.addAll(statusList);
+
+        List<PlanType> typeList = PlanType.allTypes();
+        typeData.clear();
+        typeData.addAll(typeList);
+    }
+
+
+    private void initFieldData() {
+        LocalDate localDate = LocalDate.now();
+
+        Integer year = localDate.getYear();
+        Integer month = localDate.getMonthValue();
+        Integer season = (month + 2) / 3;
+        Integer week = localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+
+        yearYearField.setText(year.toString());
+        seasonYearField.setText(year.toString());
+        monthYearField.setText(year.toString());
+        weekYearField.setText(year.toString());
+
+        seasonSeasonField.setText(season.toString());
+        monthSeasonField.setText(season.toString());
+        weekSeasonField.setText(season.toString());
+
+        monthMonthField.setText(month.toString());
+        weekMonthField.setText(month.toString());
+
+        weekWeekField.setText(week.toString());
+
+        yearDatePicker.setValue(localDate);
+        seasonDatePicker.setValue(localDate);
+        monthDatePicker.setValue(localDate);
+        weekDatePicker.setValue(localDate);
+    }

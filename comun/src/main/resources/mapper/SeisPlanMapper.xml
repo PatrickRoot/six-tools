@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.eu.sixlab.sixtools.comun.mapper.SeisPlanMapper">
+    <resultMap id="BaseResultMap" type="org.eu.sixlab.sixtools.comun.bean.SeisPlan" >
+        <id     column="id"               property="id"             jdbcType="INTEGER" />
+        <result column="plan_name"        property="planName"       jdbcType="VARCHAR" />
+        <result column="plan_time"        property="planTime"       jdbcType="VARCHAR" />
+        <result column="plan_per"         property="planPer"        jdbcType="VARCHAR" />
+        <result column="plan_status"      property="planStatus"     jdbcType="VARCHAR" />
+        <result column="plan_status_name" property="planStatusName" jdbcType="VARCHAR"/>
+        <result column="plan_content"     property="planContent"    jdbcType="VARCHAR" />
+        <result column="plan_type"        property="planType"       jdbcType="VARCHAR" />
+        <result column="plan_year"        property="planYear"       jdbcType="VARCHAR" />
+        <result column="plan_season"      property="planSeason"     jdbcType="VARCHAR" />
+        <result column="plan_month"       property="planMonth"      jdbcType="VARCHAR" />
+        <result column="plan_week"        property="planWeek"       jdbcType="VARCHAR" />
+        <result column="parent_id"        property="parentId"       jdbcType="INTEGER" />
+        <result column="source_id"        property="sourceId"       jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, plan_name, plan_time, plan_per, plan_status, plan_content, plan_type, plan_year,
+        plan_season, plan_month, plan_week, parent_id, source_id
+    </sql>
+
+    <insert id="insert" keyProperty="id" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisPlan" useGeneratedKeys="true">
+        insert into six_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planName    != null"> plan_name,    </if>
+            <if test="planTime    != null"> plan_time,    </if>
+            <if test="planPer     != null"> plan_per,     </if>
+            <if test="planStatus  != null"> plan_status,  </if>
+            <if test="planContent != null"> plan_content, </if>
+            <if test="planType    != null"> plan_type,    </if>
+            <if test="planYear    != null"> plan_year,    </if>
+            <if test="planSeason  != null"> plan_season,  </if>
+            <if test="planMonth   != null"> plan_month,   </if>
+            <if test="planWeek    != null"> plan_week,    </if>
+            <if test="parentId    != null"> parent_id,    </if>
+            <if test="sourceId    != null"> source_id,    </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planName    != null"> #{planName,    jdbcType=VARCHAR}, </if>
+            <if test="planTime    != null"> #{planTime,    jdbcType=VARCHAR}, </if>
+            <if test="planPer     != null"> #{planPer,     jdbcType=VARCHAR}, </if>
+            <if test="planStatus  != null"> #{planStatus,  jdbcType=VARCHAR}, </if>
+            <if test="planContent != null"> #{planContent, jdbcType=VARCHAR}, </if>
+            <if test="planType    != null"> #{planType,    jdbcType=VARCHAR}, </if>
+            <if test="planYear    != null"> #{planYear,    jdbcType=VARCHAR}, </if>
+            <if test="planSeason  != null"> #{planSeason,  jdbcType=VARCHAR}, </if>
+            <if test="planMonth   != null"> #{planMonth,   jdbcType=VARCHAR}, </if>
+            <if test="planWeek    != null"> #{planWeek,    jdbcType=VARCHAR}, </if>
+            <if test="parentId    != null"> #{parentId,    jdbcType=INTEGER}, </if>
+            <if test="sourceId    != null"> #{sourceId,    jdbcType=INTEGER}, </if>
+        </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List" />
+            ,(CASE plan_status WHEN 100 THEN '未完成' WHEN 300 THEN '已完成' WHEN 400
+              THEN '进行中' END) plan_status_name
+        from
+          six_plan
+        where
+          id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+          six_plan
+        where
+          id = #{id,jdbcType=INTEGER}
+    </delete>
+    <update id="update" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisPlan">
+        update six_plan
+        <set>
+            <if test="planName    != null"> plan_name    = #{planName,    jdbcType=VARCHAR},  </if>
+            <if test="planTime    != null"> plan_time    = #{planTime,    jdbcType=VARCHAR},  </if>
+            <if test="planPer     != null"> plan_per     = #{planPer,     jdbcType=VARCHAR},  </if>
+            <if test="planStatus  != null"> plan_status  = #{planStatus,  jdbcType=VARCHAR},  </if>
+            <if test="planContent != null"> plan_content = #{planContent, jdbcType=VARCHAR},  </if>
+            <if test="planType    != null"> plan_type    = #{planType,    jdbcType=VARCHAR},  </if>
+            <if test="planYear    != null"> plan_year    = #{planYear,    jdbcType=VARCHAR},  </if>
+            <if test="planSeason  != null"> plan_season  = #{planSeason,  jdbcType=VARCHAR},  </if>
+            <if test="planMonth   != null"> plan_month   = #{planMonth,   jdbcType=VARCHAR},  </if>
+            <if test="planWeek    != null"> plan_week    = #{planWeek,    jdbcType=VARCHAR},  </if>
+            <if test="parentId    != null"> parent_id    = #{parentId,    jdbcType=INTEGER},  </if>
+            <if test="sourceId    != null"> source_id    = #{sourceId,    jdbcType=INTEGER},  </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <!---->
+    <select id="selectByPlan" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        ,(CASE plan_status WHEN 100 THEN '未完成' WHEN 300 THEN '已完成' WHEN 400
+        THEN '进行中' END) plan_status_name
+        from six_plan
+        where 1=1
+            <if test="planName    != null" > AND plan_name    = #{planName,    jdbcType=VARCHAR} </if>
+            <if test="planTime    != null" > AND plan_time    = #{planTime,    jdbcType=VARCHAR} </if>
+            <if test="planPer     != null" > AND plan_per     = #{planPer,     jdbcType=VARCHAR} </if>
+            <if test="planStatus  != null" > AND plan_status  = #{planStatus,  jdbcType=VARCHAR} </if>
+            <if test="planContent != null" > AND plan_content = #{planContent, jdbcType=VARCHAR} </if>
+            <if test="planType    != null" > AND plan_type    = #{planType,    jdbcType=VARCHAR} </if>
+            <if test="planYear    != null" > AND plan_year    = #{planYear,    jdbcType=VARCHAR} </if>
+            <if test="planSeason  != null" > AND plan_season  = #{planSeason,  jdbcType=VARCHAR} </if>
+            <if test="planMonth   != null" > AND plan_month   = #{planMonth,   jdbcType=VARCHAR} </if>
+            <if test="planWeek    != null" > AND plan_week    = #{planWeek,    jdbcType=VARCHAR} </if>
+            <if test="parentId    != null" > AND parent_id    = #{parentId,    jdbcType=INTEGER} </if>
+            <if test="sourceId    != null" > AND source_id    = #{sourceId,    jdbcType=INTEGER} </if>
+        order BY plan_year DESC,plan_type desc,id DESC
+    </select>
+</mapper>

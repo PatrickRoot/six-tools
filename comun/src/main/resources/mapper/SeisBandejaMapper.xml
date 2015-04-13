@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.eu.sixlab.sixtools.comun.mapper.SeisBandejaMapper">
+    <resultMap id="BaseResultMap" type="org.eu.sixlab.sixtools.comun.bean.SeisBandeja">
+        <id     column="id"         property="id"        jdbcType="INTEGER"/>
+        <result column="tray_name"  property="trayName"  jdbcType="VARCHAR"/>
+        <result column="path"       property="path"      jdbcType="VARCHAR"/>
+        <result column="command"    property="command"   jdbcType="VARCHAR"/>
+        <result column="params"     property="params"    jdbcType="VARCHAR"/>
+        <result column="tool_type"  property="toolType"  jdbcType="VARCHAR"/>
+        <result column="tool_order" property="toolOrder" jdbcType="VARCHAR"/>
+        <result column="tray_type"  property="trayType"  jdbcType="VARCHAR"/>
+        <result column="parent_id"  property="parentId"  jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, tray_name, path, command, params, tool_type, tool_order, tray_type, parent_id
+    </sql>
+
+    <insert id="insert" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into six_tray
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trayName  != null" > tray_name,  </if>
+            <if test="path      != null" > path,       </if>
+            <if test="command   != null" > command,    </if>
+            <if test="params    != null" > params,     </if>
+            <if test="toolType  != null" > tool_type,  </if>
+            <if test="toolOrder != null" > tool_order, </if>
+            <if test="trayType  != null" > tray_type,  </if>
+            <if test="parentId  != null" > parent_id,  </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trayName  != null" > #{trayName,     jdbcType=VARCHAR},  </if>
+            <if test="path      != null" > #{path,         jdbcType=VARCHAR},  </if>
+            <if test="command   != null" > #{command,      jdbcType=VARCHAR},  </if>
+            <if test="params    != null" > #{params,       jdbcType=VARCHAR},  </if>
+            <if test="toolType  != null" > #{toolType,     jdbcType=VARCHAR},  </if>
+            <if test="toolOrder != null" > #{toolOrder,    jdbcType=VARCHAR},  </if>
+            <if test="trayType  != null" > #{trayType,     jdbcType=VARCHAR},  </if>
+            <if test="parentId  != null" > #{parentId,     jdbcType=INTEGER},  </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja">
+        UPDATE six_tray
+        <set>
+            <if test="trayName  != null"> tray_name    = #{trayName,   jdbcType=VARCHAR},  </if>
+            <if test="path      != null"> path         = #{path,       jdbcType=VARCHAR},  </if>
+            <if test="command   != null"> command      = #{command,    jdbcType=VARCHAR},  </if>
+            <if test="params    != null"> params       = #{params,     jdbcType=VARCHAR},  </if>
+            <if test="toolType  != null"> tool_type    = #{toolType,   jdbcType=VARCHAR},  </if>
+            <if test="trayType  != null"> tray_type    = #{trayType,   jdbcType=VARCHAR},  </if>
+            <if test="toolOrder != null"> tool_order   = #{toolOrder,  jdbcType=VARCHAR},  </if>
+            <if test="parentId  != null"> parent_id    = #{parentId,   jdbcType=INTEGER},  </if>
+        </set>
+        WHERE
+        id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM
+        six_tray
+        WHERE
+        id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        six_tray
+        ORDER BY id
+    </select>
+
+    <select id="selectByOne" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja" resultMap="BaseResultMap">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+          six_tray
+        <where>1=1
+            <if test="id        !=null and id        !='' "> AND id         = #{id,         jdbcType=INTEGER} </if>
+            <if test="trayName  !=null and trayName  !='' "> AND tray_name  = #{trayName,   jdbcType=VARCHAR} </if>
+            <if test="path      !=null and path      !='' "> AND path       = #{path,       jdbcType=VARCHAR} </if>
+            <if test="command   !=null and command   !='' "> AND command    = #{command,    jdbcType=VARCHAR} </if>
+            <if test="params    !=null and params    !='' "> AND params     = #{params,     jdbcType=VARCHAR} </if>
+            <if test="toolType  !=null and toolType  !='' "> AND tool_type  = #{toolType,   jdbcType=VARCHAR} </if>
+            <if test="trayType  !=null and trayType  !='' "> AND tray_type  = #{trayType,   jdbcType=VARCHAR} </if>
+            <if test="toolOrder !=null and toolOrder !='' "> AND tool_order = #{toolOrder,  jdbcType=VARCHAR} </if>
+            <if test=" parentId !=null ">                    AND parent_id  = #{parentId,   jdbcType=INTEGER} </if>
+        </where>
+        ORDER BY tool_order,id
+    </select>
+
+    <select id="selectToolFolders" resultMap="BaseResultMap">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+            six_tray
+        WHERE
+          tool_type = 'TF'
+        ORDER BY tool_order,id
+    </select>
+
+</mapper>

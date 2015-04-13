@@ -6,20 +6,20 @@
 
     <groupId>org.eu.sixlab</groupId>
     <artifactId>sixtools</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SixTools</name>
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>sixtools-common</module>
-        <module>sixtray</module>
-        <module>movie-recorder</module>
-        <module>sixplan</module>
+        <module>comun</module>
+        <module>seis-plan</module>
+        <module>seis-pelicula</module>
+        <module>seis</module>
     </modules>
 
     <properties>
-        <version.sixtools>${project.version}</version.sixtools>
+        <version.seis>${project.version}</version.seis>
 
         <version.sixutil>1.0-SNAPSHOT</version.sixutil>
 
@@ -56,26 +56,26 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Six -->
+            <!-- Seis -->
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
-                <artifactId>sixtools-common</artifactId>
-                <version>${version.sixtools}</version>
+                <artifactId>seis</artifactId>
+                <version>${version.seis}</version>
             </dependency>
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
-                <artifactId>sixtray</artifactId>
-                <version>${version.sixtools}</version>
+                <artifactId>comun</artifactId>
+                <version>${version.seis}</version>
             </dependency>
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
-                <artifactId>movierecorder</artifactId>
-                <version>${version.sixtools}</version>
+                <artifactId>seis-pelicula</artifactId>
+                <version>${version.seis}</version>
             </dependency>
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
-                <artifactId>sixplan</artifactId>
-                <version>${version.sixtools}</version>
+                <artifactId>seis-plan</artifactId>
+                <version>${version.seis}</version>
             </dependency>
 
             <!-- SixUtil -->
