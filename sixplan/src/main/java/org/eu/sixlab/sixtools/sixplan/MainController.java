@@ -8,6 +8,7 @@ package org.eu.sixlab.sixtools.sixplan;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -42,18 +43,13 @@ import java.util.ResourceBundle;
  */
 public class MainController implements Initializable {
 
-    private final ObservableList<SixPlan> yearData = FXCollections
-            .observableArrayList();
-    private final ObservableList<SixPlan> seasonData = FXCollections
-            .observableArrayList();
-    private final ObservableList<SixPlan> monthData = FXCollections
-            .observableArrayList();
-    private final ObservableList<SixPlan> weekData = FXCollections
-            .observableArrayList();
-    private final ObservableList<PlanStatus> statusData = FXCollections
-            .observableArrayList();
-    private final ObservableList<PlanType> typeData = FXCollections
-            .observableArrayList();
+    private final ObservableList<SixPlan> yearData = FXCollections.observableArrayList();
+    private final ObservableList<SixPlan> seasonData = FXCollections.observableArrayList();
+    private final ObservableList<SixPlan> monthData = FXCollections.observableArrayList();
+    private final ObservableList<SixPlan> weekData = FXCollections.observableArrayList();
+    private final ObservableList<PlanStatus> statusData = FXCollections.observableArrayList();
+    private final ObservableList<PlanType> typeData = FXCollections.observableArrayList();
+
     @FXML
     public TabPane tabPane;
     @FXML
@@ -171,22 +167,30 @@ public class MainController implements Initializable {
     @FXML
     public Label tipLabel;
     @FXML
+
     public Label taskTitleLabel;
     private Integer parentId = null;
-
     private SixPlan thePlan;
 
+    /**
+     * 初始化界面中所有的控件，所有控件的Action等等。
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initComboData();
-        initCombo(yearStatusCombo, seasonStatusCombo, monthStatusCombo,
-                weekStatusCombo);
+        initCombo(yearStatusCombo, seasonStatusCombo, monthStatusCombo, weekStatusCombo);
         initFieldData();
         initField();
         initTable();
         initTab();
     }
 
+    /**
+     * 初始化ComboBox的数据，状态、类型。
+     */
     private void initComboData() {
         List<PlanStatus> statusList = PlanStatus.allStatus();
         statusData.clear();
@@ -197,6 +201,11 @@ public class MainController implements Initializable {
         typeData.addAll(typeList);
     }
 
+    /**
+     * 初始化多个ComboBox，选择时间等等。
+     *
+     * @param statusCombo
+     */
     private void initCombo(ComboBox... statusCombo) {
         for (ComboBox comboBox : statusCombo) {
             comboBox.setItems(statusData);
@@ -218,7 +227,7 @@ public class MainController implements Initializable {
         }
 
         typeCombo.setItems(typeData);
-        typeCombo.getSelectionModel().selectFirst();
+        typeCombo.getSelectionModel().selectLast();
 
         typeCombo.setCellFactory(p -> {
             return new ListCell<PlanType>() {
@@ -235,6 +244,9 @@ public class MainController implements Initializable {
         });
     }
 
+    /**
+     * 初始化各种TextField的值
+     */
     private void initFieldData() {
         LocalDate localDate = LocalDate.now();
 
@@ -263,6 +275,9 @@ public class MainController implements Initializable {
         weekDatePicker.setValue(localDate);
     }
 
+    /**
+     * 初始化各种TextField的值改变事件。绑定回车事件
+     */
     private void initField() {
         yearYearField.textProperty().addListener(e -> {
             searchYear();
@@ -330,6 +345,9 @@ public class MainController implements Initializable {
         });
     }
 
+    /**
+     * 初始化Table，设置table鼠标事件。
+     */
     private void initTable() {
         initTableCellValueFactory();
 
@@ -353,14 +371,21 @@ public class MainController implements Initializable {
         weekTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             clickTable(e, weekTable);
         });
+
         initTableCellFactory();
         searchData();
     }
 
+    /**
+     * 鼠标点击Table的处理
+     *
+     * @param e     鼠标事件
+     * @param table 点击的Table
+     */
     private void clickTable(MouseEvent e, TableView table) {
         if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2) {
             SixPlan sixPlan = (SixPlan) table.getSelectionModel().getSelectedItem();
-            if(null!=sixPlan && e.getTarget().getClass()!= TableColumnHeader.class){
+            if (null != sixPlan && e.getTarget().getClass() != TableColumnHeader.class) {
                 System.out.println(sixPlan.getId());
                 modifyPlan(sixPlan);
             }
@@ -369,6 +394,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * 设置Table每一行的颜色。
+     */
     private void initTableCellFactory() {
 
         TableColumn[] tableColumns = new TableColumn[]{
@@ -444,6 +472,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * 将TableColumn与对象结合
+     */
     private void initTableCellValueFactory() {
         yearIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
         seasonIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
@@ -476,19 +507,22 @@ public class MainController implements Initializable {
         weekStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
     }
 
+    /**
+     * Table右键点击后的菜单。
+     *
+     * @param table 所点击的Table
+     * @param e     鼠标事件
+     */
     private void showContextMenu(TableView table, MouseEvent e) {
         SixPlan sixPlan = (SixPlan) table.getSelectionModel().getSelectedItem();
         if (null != sixPlan) {
             List<MenuItem> itemArrayList = new ArrayList<>();
 
-            if (Constant.PLAN_TYPE_WEEK.equals(sixPlan.getPlanType())
-                    && Constant.PLAN_STATUS_ING.equals(sixPlan.getPlanStatus())) {
-                MenuItem menu6 = new MenuItem("填写完成度");
-                menu6.setOnAction(p -> {
-                    inputPlanPer(sixPlan);
-                });
-                itemArrayList.add(menu6);
-            }
+            MenuItem menu6 = new MenuItem("填写完成度");
+            menu6.setOnAction(p -> {
+                inputPlanPer(sixPlan);
+            });
+            itemArrayList.add(menu6);
 
             MenuItem menu1 = new MenuItem("修改任务");
             menu1.setOnAction(p -> {
@@ -502,6 +536,7 @@ public class MainController implements Initializable {
                     confirmFinishPlan(sixPlan);
                 });
                 itemArrayList.add(menu40);
+
                 MenuItem menu4 = new MenuItem("终止任务");
                 menu4.setOnAction(p -> {
                     confirmStopPlan(sixPlan);
@@ -509,7 +544,7 @@ public class MainController implements Initializable {
                 itemArrayList.add(menu4);
             }
 
-            if (!Constant.PLAN_TYPE_WEEK.equals(sixPlan.getPlanType())) {
+            if (!Constant.PLAN_TYPE_WEEK.equals(sixPlan.getPlanType()) && !sixPlan.getPlanName().startsWith(Constant.PLAN_OUT_COUNT)) {
                 if (!Constant.PLAN_STATUS_ED.equals(sixPlan.getPlanStatus())) {
                     MenuItem menu2 = new MenuItem("创建子任务");
                     menu2.setOnAction(p -> {
@@ -524,13 +559,14 @@ public class MainController implements Initializable {
                 itemArrayList.add(menu3);
             }
 
-            if (!Constant.PLAN_TYPE_YEAR.equals(sixPlan.getPlanType())) {
+            if (Constant.PLAN_TYPE_SEASON.equals(sixPlan.getPlanType()) || Constant.PLAN_TYPE_MONTH.equals(sixPlan.getPlanType())) {
                 MenuItem menu5 = new MenuItem("查看父任务");
                 menu5.setOnAction(p -> {
                     viewSuperPlan(sixPlan);
                 });
                 itemArrayList.add(menu5);
             }
+
             ContextMenu contextMenu = new ContextMenu(itemArrayList.toArray(new MenuItem[]{}));
             contextMenu.setX(e.getScreenX());
             contextMenu.setY(e.getScreenY());
@@ -590,17 +626,20 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    private void processPlan(SixPlan sixPlan, Integer integer) {
-        sixPlan.setPlanPer(integer);
-        Dao.updateById(sixPlan);
+    private void processPlan(SixPlan sixPlan, Integer newPer) {
 
-        if (!Constant.PLAN_TYPE_YEAR.equals(sixPlan.getPlanType())) {
+        if (Constant.PLAN_TYPE_YEAR.equals(sixPlan.getPlanType()) || Constant.PLAN_TYPE_WEEK.equals(sixPlan.getPlanType()) ) {
+            sixPlan.setPlanPer(newPer);
+            Dao.updateById(sixPlan);
+        }else{
             Integer parentId = sixPlan.getParentId();
+            Integer oldPer = sixPlan.getPlanPer();
             SixPlan parentPlan = Dao.queryById(parentId);
+
             double dividend = sixPlan.getPlanTime();
             double divisor = parentPlan.getPlanTime();
             double multiple = dividend / divisor;
-            Integer per = (int) (parentPlan.getPlanPer() + multiple * integer);
+            Integer per = (int) (parentPlan.getPlanPer() + multiple * (newPer-oldPer));
             processPlan(parentPlan, per);
         }
     }
@@ -616,6 +655,7 @@ public class MainController implements Initializable {
                 .forEach(type -> {
                     typeCombo.getSelectionModel().select(type);
                 });
+        typeCombo.setDisable(true);
         datePicker.setValue(LocalDate.of(sixPlan.getPlanYear(),
                 sixPlan.getPlanMonth(), 1));
         contentArea.setText(sixPlan.getPlanContent());
@@ -661,10 +701,12 @@ public class MainController implements Initializable {
         Integer id = sixPlan.getId();
         SixPlan plan = new SixPlan();
         plan.setParentId(id);
-        List<SixPlan> sixPlanList = Dao.selectBySixPlan(plan);
-        sixPlanList.stream().forEach(aPlan -> {
-            stopPlan(aPlan);
-        });
+        if(Constant.PLAN_TYPE_MONTH < sixPlan.getPlanType()){
+            List<SixPlan> sixPlanList = Dao.selectBySixPlan(plan);
+            sixPlanList.stream().forEach(aPlan -> {
+                finishPlan(aPlan);
+            });
+        }
         sixPlan.setPlanStatus(Constant.PLAN_STATUS_ED);
         Dao.updateById(sixPlan);
     }
@@ -707,10 +749,12 @@ public class MainController implements Initializable {
         Integer id = sixPlan.getId();
         SixPlan plan = new SixPlan();
         plan.setParentId(id);
-        List<SixPlan> sixPlanList = Dao.selectBySixPlan(plan);
-        sixPlanList.stream().forEach(aPlan -> {
-            stopPlan(aPlan);
-        });
+        if(Constant.PLAN_TYPE_MONTH < sixPlan.getPlanType()){
+            List<SixPlan> sixPlanList = Dao.selectBySixPlan(plan);
+            sixPlanList.stream().forEach(aPlan -> {
+                stopPlan(aPlan);
+            });
+        }
         sixPlan.setPlanStatus(Constant.PLAN_STATUS_STOP);
         Dao.updateById(sixPlan);
     }
@@ -726,10 +770,13 @@ public class MainController implements Initializable {
                 .forEach(type -> {
                     typeCombo.getSelectionModel().select(type);
                 });
-        datePicker.setValue(LocalDate.of(sixPlan.getPlanYear(),
-                sixPlan.getPlanMonth(), 1));
+        if(Constant.PLAN_TYPE_MONTH.equals(sixPlan.getPlanType())){
+            datePicker.setValue(LocalDate.now().plusDays(5));
+        }else{
+            datePicker.setValue(LocalDate.now().plusMonths(1));
+        }
         contentArea.setText(sixPlan.getPlanContent());
-        taskTitleLabel.setText("添加子任务：" + sixPlan.getPlanName());
+        taskTitleLabel.setText("添加【子】任务：" + sixPlan.getPlanName());
         tabPane.getSelectionModel().select(taskTab);
     }
 
@@ -768,9 +815,15 @@ public class MainController implements Initializable {
     }
 
     private void initTab() {
-        tabPane.selectionModelProperty().addListener(e -> {
-            changeTab();
-        });
+
+        yearTab.selectedProperty().addListener(e -> {changeTab();});
+
+        monthTab.selectedProperty().addListener(e -> {changeTab();});
+
+        weekTab.selectedProperty().addListener(e -> {changeTab();});
+
+        seasonTab.selectedProperty().addListener(e -> {changeTab();});
+
         tabPane.getSelectionModel().select(weekTab);
         initTaskTab();
     }
@@ -782,22 +835,20 @@ public class MainController implements Initializable {
         nameField.setText("");
         timeField.setText("");
         typeCombo.getSelectionModel().selectFirst();
-        datePicker.setValue(LocalDate.now());
+        typeCombo.setDisable(false);
         contentArea.setText("");
     }
 
     private void changeTab() {
         Tab selectTab = tabPane.getSelectionModel().getSelectedItem();
-        if(selectTab == yearTab){
+        if (selectTab == yearTab && yearTab.isSelected()) {
             tipLabel.setText("任务数量为：" + yearData.size());
-        }else if(selectTab == seasonTab){
+        } else if (selectTab == seasonTab && seasonTab.isSelected()) {
             tipLabel.setText("任务数量为：" + seasonData.size());
-        }else if(selectTab == monthTab){
+        } else if (selectTab == monthTab && monthTab.isSelected()) {
             tipLabel.setText("任务数量为：" + monthData.size());
-        }else if(selectTab == weekTab){
+        } else if (selectTab == weekTab && weekTab.isSelected()) {
             tipLabel.setText("任务数量为：" + weekData.size());
-        }else if(selectTab == taskTab){
-            tipLabel.setText("");
         }
     }
 
@@ -925,16 +976,22 @@ public class MainController implements Initializable {
     public void okPlan() {
         String name = nameField.getText();
         if (StrUtil.isEmpty(name)) {
+            tipLabel.setText("任务名为空");
+            nameField.requestFocus();
             return;
         }
 
         String timeStr = timeField.getText();
-        if (StrUtil.isNotPositiveIntegralNumber(timeStr)) {
+        if (StrUtil.isNotNaturalNumber(timeStr)) {
+            tipLabel.setText("日期请输入自然数");
+            timeField.requestFocus();
             return;
         }
 
         LocalDate localDate = datePicker.getValue();
         if (null == localDate) {
+            tipLabel.setText("日期为空");
+            datePicker.requestFocus();
             return;
         }
 
@@ -964,6 +1021,12 @@ public class MainController implements Initializable {
         thePlan.setPlanSeason((localDate.getMonthValue() + 2) / 3);
         thePlan.setPlanWeek(localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR));
         thePlan.setPlanContent(content);
+        if(name.startsWith(Constant.PLAN_OUT_COUNT)){
+            thePlan.setPlanType(Constant.PLAN_TYPE_YEAR);
+            type = Constant.PLAN_TYPE_YEAR;
+            thePlan.setSourceId(-1);
+            thePlan.setParentId(0);
+        }
         if (isInsert) {
             if (thePlan.getParentId() == 0 && type != Constant.PLAN_TYPE_YEAR) {
                 thePlan.setId(0);
@@ -987,5 +1050,14 @@ public class MainController implements Initializable {
 
     public void resetPlan() {
         initTaskTab();
+    }
+
+    public void typeChange(ActionEvent event) {
+        Integer type = ((PlanType)(typeCombo.getSelectionModel().getSelectedItem())).getTypeValue();
+        if( Constant.PLAN_TYPE_WEEK.equals(type)){
+            datePicker.setValue(LocalDate.now().plusDays(5));
+        }else{
+            datePicker.setValue(LocalDate.now().plusMonths(1));
+        }
     }
 }

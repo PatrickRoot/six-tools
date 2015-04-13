@@ -40,7 +40,9 @@ public class Constant {
     public static final Integer PLAN_STATUS_ING = 400;
     public static final Integer PLAN_STATUS_ED = 300;
 //    public static final Integer PLAN_STATUS_TEMP = 200;
-    public static final Integer PLAN_STATUS_STOP = 100;
+public static final Integer PLAN_STATUS_STOP = 100;
+
+    public static final String PLAN_OUT_COUNT = "[plan]";
 
     private Constant(){
         super();

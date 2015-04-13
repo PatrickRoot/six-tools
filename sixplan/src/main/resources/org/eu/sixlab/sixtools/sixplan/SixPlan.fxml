@@ -47,7 +47,7 @@
                                                 <ComboBox fx:id="yearStatusCombo" onAction="#searchYear" prefHeight="23.0" prefWidth="79.0" />
                                                 <TextField fx:id="yearYearField" onAction="#searchYear" prefHeight="23.0" prefWidth="53.0" />
                                                 <Label text="年" />
-                                                <DatePicker fx:id="yearDatePicker"/>
+                                                <DatePicker fx:id="yearDatePicker" showWeekNumbers="true" />
                                             </items>
                                         </ToolBar>
                                     </top>
@@ -104,7 +104,7 @@
                                                 <Label text="年" />
                                                 <TextField fx:id="seasonSeasonField" onAction="#searchSeason" prefHeight="23.0" prefWidth="53.0" />
                                                 <Label text="季" />
-                                                <DatePicker fx:id="seasonDatePicker"/>
+                                                <DatePicker fx:id="seasonDatePicker" showWeekNumbers="true" />
                                             </items>
                                         </ToolBar>
                                     </top>
@@ -144,7 +144,7 @@
                                                 <Label text="季" />
                                                 <TextField fx:id="monthMonthField" onAction="#searchMonth" prefHeight="23.0" prefWidth="53.0" />
                                                 <Label text="月" />
-                                                <DatePicker fx:id="monthDatePicker"/>
+                                                <DatePicker fx:id="monthDatePicker" showWeekNumbers="true"/>
                                             </items>
                                         </ToolBar>
                                     </top>
@@ -186,7 +186,7 @@
                                                 <Label text="月" />
                                                 <TextField fx:id="weekWeekField" onAction="#searchWeek" prefHeight="23.0" prefWidth="53.0" />
                                                 <Label text="周" />
-                                                <DatePicker fx:id="weekDatePicker"/>
+                                                <DatePicker fx:id="weekDatePicker" showWeekNumbers="true"/>
                                             </items>
                                         </ToolBar>
                                     </top>
@@ -244,7 +244,7 @@
                                                 <Insets left="5.0" />
                                             </GridPane.margin>
                                         </Label>
-                                        <ComboBox fx:id="typeCombo" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                        <ComboBox fx:id="typeCombo" onAction="#typeChange" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                             <GridPane.margin>
                                                 <Insets left="5.0" right="5.0" />
                                             </GridPane.margin>
@@ -254,7 +254,7 @@
                                                 <Insets left="5.0" />
                                             </GridPane.margin>
                                         </Label>
-                                        <DatePicker fx:id="datePicker" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                        <DatePicker fx:id="datePicker" showWeekNumbers="true" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                             <GridPane.margin>
                                                 <Insets left="5.0" right="5.0" />
                                             </GridPane.margin>
