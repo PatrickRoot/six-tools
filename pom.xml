@@ -16,6 +16,7 @@
         <module>seis-plan</module>
         <module>seis-pelicula</module>
         <module>seis</module>
+        <module>seis-update</module>
     </modules>
 
     <properties>

@@ -21,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import org.eu.sixlab.sixtools.comun.bean.old.MovieRecord;
 import org.eu.sixlab.sixtools.comun.dao.MovieDao;
 import org.eu.sixlab.sixtools.comun.util.C;
 
