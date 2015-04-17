@@ -13,15 +13,19 @@ package org.eu.sixlab.sixtools.comun.util;
  */
 public class C {
 
+    //Six-Tools 的ID
+    public static final int TOOLS_PLAN_ID =0;
+    public static final int TOOLS_PELICULA_ID =1;
+
     //Six-Tray
     public static final Integer ROOT_PARENT_ID =0;
 
-    public static final String TOOL_TYPE_FOLDER = "D";
-    public static final String TOOL_TYPE_FILE = "F";
-    public static final String TOOL_TYPE_WEBSITE = "W";
-    public static final String TOOL_TYPE_COMMAND = "C";
-    public static final String TOOL_TYPE_TRAY_FOLDER = "TF";
-    public static final String TOOL_TYPE_COPY_TOOL = "CT";
+    public static final Integer TOOL_TYPE_TRAY_FOLDER = 10;
+    public static final Integer TOOL_TYPE_COMMAND     = 100;
+    public static final Integer TOOL_TYPE_WEBSITE     = 200;
+    public static final Integer TOOL_TYPE_COPY_TOOL   = 300;
+    public static final Integer TOOL_TYPE_FILE        = 400;
+    public static final Integer TOOL_TYPE_FOLDER      = 500;
 
     public static final String WINDOWS_DEFAULT_IE_COMMAND = " rundll32 url.dll,FileProtocolHandler ";
     public static final String WINDOWS_EXPLORER_COMMAND = " explorer ";

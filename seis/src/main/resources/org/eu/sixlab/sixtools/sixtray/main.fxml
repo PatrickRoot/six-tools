@@ -7,7 +7,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eu.sixlab.sixtools.sixtray.SixTrayMainController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eu.sixlab.sixtools.seis.SeisController">
    <children>
       <MenuBar prefHeight="20.0">
         <menus>

@@ -15,8 +15,8 @@
         <!--配置实体bean-->
         <javaModelGenerator targetPackage="org.eu.sixlab.sixtools.comun.bean" targetProject="./temp" />
         <!--配置Mapper的xml-->
-        <sqlMapGenerator targetPackage="mapper" targetProject="./temp" />
-        <!--配置Mapper的java接口-->
+        <sqlMapGenerator targetPackage="org.eu.sixlab.sixtools.comun.mapper" targetProject="./temp" />
+        <!--配置Mapper接口的java-->
         <javaClientGenerator targetPackage="org.eu.sixlab.sixtools.comun.mapper" targetProject="./temp" type="XMLMAPPER" />
 
         <table tableName="six_plan" domainObjectName="SixPlan" enableCountByExample="false" enableUpdateByExample="false"

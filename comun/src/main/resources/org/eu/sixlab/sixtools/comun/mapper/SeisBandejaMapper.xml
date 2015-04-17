@@ -18,7 +18,7 @@
 
     <insert id="insert" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja" useGeneratedKeys="true"
             keyProperty="id">
-        insert into six_tray
+        insert into seis_bandeja
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="trayName  != null" > tray_name,  </if>
             <if test="path      != null" > path,       </if>
@@ -42,7 +42,7 @@
     </insert>
 
     <update id="update" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja">
-        UPDATE six_tray
+        UPDATE seis_bandeja
         <set>
             <if test="trayName  != null"> tray_name    = #{trayName,   jdbcType=VARCHAR},  </if>
             <if test="path      != null"> path         = #{path,       jdbcType=VARCHAR},  </if>
@@ -59,7 +59,7 @@
 
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE FROM
-        six_tray
+        seis_bandeja
         WHERE
         id = #{id,jdbcType=INTEGER}
     </delete>
@@ -68,15 +68,15 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        six_tray
+        seis_bandeja
         ORDER BY id
     </select>
 
     <select id="selectByOne" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisBandeja" resultMap="BaseResultMap">
         SELECT
-          <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM
-          six_tray
+        seis_bandeja
         <where>1=1
             <if test="id        !=null and id        !='' "> AND id         = #{id,         jdbcType=INTEGER} </if>
             <if test="trayName  !=null and trayName  !='' "> AND tray_name  = #{trayName,   jdbcType=VARCHAR} </if>
@@ -93,11 +93,11 @@
 
     <select id="selectToolFolders" resultMap="BaseResultMap">
         SELECT
-          <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM
-            six_tray
+        seis_bandeja
         WHERE
-          tool_type = 'TF'
+        tool_type = 'TF'
         ORDER BY tool_order,id
     </select>
 

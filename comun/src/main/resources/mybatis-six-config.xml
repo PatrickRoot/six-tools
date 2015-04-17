@@ -17,8 +17,6 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="mapper/SixTrayMapper.xml" />
-        <mapper resource="mapper/MovieRecordMapper.xml" />
-        <mapper resource="mapper/SixPlanMapper.xml" />
+        <package name="org.eu.sixlab.sixtools.comun.mapper" />
 	</mappers>
 </configuration>

@@ -2,43 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.eu.sixlab.sixtools.comun.mapper.SeisToolsMapper">
     <resultMap id="BaseResultMap" type="org.eu.sixlab.sixtools.comun.bean.SeisTools">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id     column="id"        property="id"       jdbcType="INTEGER"/>
         <result column="tool_name" property="toolName" jdbcType="VARCHAR"/>
-        <result column="enable" property="enable" jdbcType="VARCHAR"/>
+        <result column="enable"    property="enable"   jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, tool_name, enable
     </sql>
 
     <insert id="insert" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisTools" useGeneratedKeys="true" keyProperty="id">
-        insert into six_tools
+        insert into seis_tools
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="toolName != null" > tool_name, </if>
             <if test="enable   != null" > enable,    </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="toolName != null" > #{toolName,jdbcType=VARCHAR}, </if>
-            <if test="enable   != null" > #{enable,jdbcType=VARCHAR},   </if>
+            <if test="toolName != null" > #{toolName, jdbcType=VARCHAR}, </if>
+            <if test="enable   != null" > #{enable,   jdbcType=VARCHAR},   </if>
         </trim>
     </insert>
 
     <update id="update" parameterType="org.eu.sixlab.sixtools.comun.bean.SeisTools">
-        update six_tools
+        update seis_tools
         <set>
             <if test="toolName != null" > tool_name = #{toolName, jdbcType=VARCHAR}, </if>
             <if test="enable   != null" > enable    = #{enable,   jdbcType=VARCHAR}, </if>
         </set>
         where
-            id = #{id,jdbcType=INTEGER}
+        id = #{id,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         from
-            six_tools
+        seis_tools
         where
-            id = #{id,jdbcType=INTEGER}
+        id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getEnableTools" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        seis_tools
+        where
+        enable = 1
     </select>
 
 </mapper>

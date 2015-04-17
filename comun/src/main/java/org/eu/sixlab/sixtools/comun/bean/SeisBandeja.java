@@ -90,4 +90,9 @@ public class SeisBandeja {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return trayName;
+    }
 }
