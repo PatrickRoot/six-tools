@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class ToolType{
 
-    private Integer toolType;
+    private String toolType;
     private String toolTypeName;
 
     public ToolType() {
         super();
     }
 
-    public ToolType(Integer toolType, String toolTypeName) {
+    public ToolType(String toolType, String toolTypeName) {
         this.toolType = toolType;
         this.toolTypeName = toolTypeName;
     }
@@ -46,11 +46,11 @@ public class ToolType{
         return toolTypeName;
     }
 
-    public Integer getToolType() {
+    public String getToolType() {
         return toolType;
     }
 
-    public void setToolType(Integer toolType) {
+    public void setToolType(String toolType) {
         this.toolType = toolType;
     }
 

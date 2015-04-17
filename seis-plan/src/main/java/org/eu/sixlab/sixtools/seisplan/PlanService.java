@@ -522,7 +522,7 @@ public class PlanService {
             });
         }
 
-        sixPlan.setPlanStatus(C.PLAN_STATUS_STOP.toString());
+        sixPlan.setPlanStatus(C.PLAN_STATUS_STOP);
         dao.updateById(sixPlan);
     }
 
@@ -550,7 +550,7 @@ public class PlanService {
                 finishPlan(aPlan);
             });
         }
-        seisPlan.setPlanStatus(C.PLAN_STATUS_ED.toString());
+        seisPlan.setPlanStatus(C.PLAN_STATUS_ED);
         dao.updateById(seisPlan);
     }
 
@@ -643,10 +643,10 @@ public class PlanService {
             return;
         }
 
-        Integer status = ((PlanStatus) controller.yearStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
-        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status.toString());
+        String status = ((PlanStatus) controller.yearStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
-        sixPlan.setPlanType(C.PLAN_TYPE_YEAR.toString());
+        sixPlan.setPlanType(C.PLAN_TYPE_YEAR);
         yearData.clear();
         yearData.addAll(dao.selectByPlan(sixPlan));
     }
@@ -668,10 +668,10 @@ public class PlanService {
             return;
         }
 
-        Integer status = ((PlanStatus) controller.seasonStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
-        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status.toString());
+        String status = ((PlanStatus) controller.seasonStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
-        sixPlan.setPlanType(C.PLAN_TYPE_SEASON.toString());
+        sixPlan.setPlanType(C.PLAN_TYPE_SEASON);
         seasonData.clear();
         seasonData.addAll(dao.selectByPlan(sixPlan));
     }
@@ -700,10 +700,10 @@ public class PlanService {
             }
         }
 
-        Integer status = ((PlanStatus) controller.monthStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
-        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status.toString());
+        String status = ((PlanStatus) controller.monthStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
-        sixPlan.setPlanType(C.PLAN_TYPE_MONTH.toString());
+        sixPlan.setPlanType(C.PLAN_TYPE_MONTH);
         monthData.clear();
         monthData.addAll(dao.selectByPlan(sixPlan));
     }
@@ -739,10 +739,10 @@ public class PlanService {
             }
         }
 
-        Integer status = ((PlanStatus) controller.weekStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
-        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status.toString());
+        String status = ((PlanStatus) controller.weekStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
-        sixPlan.setPlanType(C.PLAN_TYPE_WEEK.toString());
+        sixPlan.setPlanType(C.PLAN_TYPE_WEEK);
         weekData.clear();
         weekData.addAll(dao.selectByPlan(sixPlan));
     }
@@ -771,7 +771,7 @@ public class PlanService {
 
         String content = controller.contentArea.getText();
 
-        Integer type = ((PlanType) controller.typeCombo.getSelectionModel()
+        String type = ((PlanType) controller.typeCombo.getSelectionModel()
                 .getSelectedItem()).getTypeValue();
 
         boolean isInsert = false;
@@ -783,20 +783,20 @@ public class PlanService {
             } else {
                 thePlan.setParentId(0);
             }
-            thePlan.setPlanStatus(C.PLAN_STATUS_ING.toString());
+            thePlan.setPlanStatus(C.PLAN_STATUS_ING);
             thePlan.setSourceId(0);
             thePlan.setPlanPer("0");
         }
         thePlan.setPlanName(name);
         thePlan.setPlanTime(timeStr);
-        thePlan.setPlanType(type.toString());
+        thePlan.setPlanType(type);
         thePlan.setPlanYear(String.valueOf(localDate.getYear()));
         thePlan.setPlanMonth(String.valueOf(localDate.getMonthValue()));
         thePlan.setPlanSeason(String.valueOf((localDate.getMonthValue() + 2) / 3));
         thePlan.setPlanWeek(String.valueOf(localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)));
         thePlan.setPlanContent(content);
         if(name.startsWith(C.PLAN_OUT_COUNT)){
-            thePlan.setPlanType(C.PLAN_TYPE_YEAR.toString());
+            thePlan.setPlanType(C.PLAN_TYPE_YEAR);
             type = C.PLAN_TYPE_YEAR;
             thePlan.setSourceId(-1);
             thePlan.setParentId(0);
@@ -804,7 +804,7 @@ public class PlanService {
         if (isInsert) {
             if (thePlan.getParentId() == 0 && type != C.PLAN_TYPE_YEAR) {
                 thePlan.setId(0);
-                for (int i = C.PLAN_TYPE_YEAR; i >= type; i -= 100) {
+                for (int i = Integer.valueOf(C.PLAN_TYPE_YEAR); i >= Integer.valueOf(type); i -= 100) {
                     thePlan.setPlanType(String.valueOf(i));
                     thePlan.setParentId(thePlan.getId());
                     thePlan.setId(null);
@@ -823,7 +823,7 @@ public class PlanService {
     }
 
     public void typeChange() {
-        Integer type = ((PlanType)(controller.typeCombo.getSelectionModel().getSelectedItem())).getTypeValue();
+        String type = ((PlanType)(controller.typeCombo.getSelectionModel().getSelectedItem())).getTypeValue();
         if( C.PLAN_TYPE_WEEK.equals(type)){
             controller.datePicker.setValue(LocalDate.now().plusDays(5));
         }else{

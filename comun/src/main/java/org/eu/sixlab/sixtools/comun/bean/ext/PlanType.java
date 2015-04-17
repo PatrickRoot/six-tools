@@ -17,14 +17,14 @@ import java.util.List;
  */
 public class PlanType {
 
-    private Integer typeValue;
+    private String typeValue;
     private String typeName;
 
     public PlanType() {
         super();
     }
 
-    public PlanType(Integer typeValue, String typeName) {
+    public PlanType(String typeValue, String typeName) {
         this.typeValue = typeValue;
         this.typeName = typeName;
     }
@@ -37,11 +37,11 @@ public class PlanType {
         this.typeName = typeName;
     }
 
-    public Integer getTypeValue() {
+    public String getTypeValue() {
         return typeValue;
     }
 
-    public void setTypeValue(Integer typeValue) {
+    public void setTypeValue(String typeValue) {
         this.typeValue = typeValue;
     }
 

@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class PlanStatus {
 
-    private Integer statusValue;
+    private String statusValue;
     private String statusName;
 
     public PlanStatus(){
         super();
     }
 
-    public PlanStatus(Integer statusValue, String statusName){
+    public PlanStatus(String statusValue, String statusName){
         this.statusName = statusName;
         this.statusValue = statusValue;
     }
@@ -38,11 +38,11 @@ public class PlanStatus {
         this.statusName = statusName;
     }
 
-    public Integer getStatusValue() {
+    public String getStatusValue() {
         return statusValue;
     }
 
-    public void setStatusValue(Integer statusValue) {
+    public void setStatusValue(String statusValue) {
         this.statusValue = statusValue;
     }
 
