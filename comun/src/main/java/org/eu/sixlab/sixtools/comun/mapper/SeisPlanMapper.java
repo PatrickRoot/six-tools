@@ -14,4 +14,5 @@ public interface SeisPlanMapper {
 
     List<SeisPlan> selectByPlan(SeisPlan record);
 
+    Integer queryTimeLeft(Integer id);
 }

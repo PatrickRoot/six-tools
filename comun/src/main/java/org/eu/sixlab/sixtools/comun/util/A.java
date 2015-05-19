@@ -15,12 +15,15 @@ import java.util.Random;
  */
 public class A {
 
-    private static String[] aforismos = new String[]{
-            "用80%时间做20%事情"
-    };
-
     public static String get(){
         int index = new Random().nextInt(aforismos.length);
         return aforismos[index];
     }
+
+    private static String[] aforismos = new String[]{
+            "用80%时间做20%事情",
+            "吾日三省吾身",
+            "记日记啦，记日记啦",
+            "每天做好一件事"
+    };
 }

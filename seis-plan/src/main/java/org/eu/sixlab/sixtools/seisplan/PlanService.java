@@ -255,73 +255,66 @@ public class PlanService {
     }
 
     private Callback<TableColumn, TableCell> tableColorCallback() {
-        return p->new TableCell<SeisPlan, String>() {
+        return p -> new TableCell<SeisPlan, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    //TODO ce shi yi xia dao di dai ma fu gai ru he
-                    //can save same code?
-                    TableRow tableRow = this.getTableRow();
-                    if (null != tableRow) {
-                        SeisPlan colorPlan = (SeisPlan) tableRow.getItem();
-                        if (null != colorPlan) {
-                            tableRow.setStyle("");
-                            setText(null);
-                            if (C.PLAN_STATUS_ED.equals(colorPlan.getPlanStatus())) {
-                                tableRow.setStyle("-fx-background-color: #00A2E8");
-                            } else if (C.PLAN_STATUS_STOP.equals(colorPlan.getPlanStatus())) {
-                                tableRow.setStyle("-fx-background-color: #FF7F27");
-                            } else if (C.PLAN_STATUS_ING.equals(colorPlan.getPlanStatus())) {
-                                LocalDate localDate = LocalDate.now();
-                                int year = localDate.getYear();
-                                int month = localDate.getMonthValue();
-                                int season = (month + 2) / 3;
-                                int week = localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-                                boolean outColor = false;
-                                boolean rightColor = false;
-                                if (year < Integer.valueOf(colorPlan.getPlanYear())) {
+                //TODO ce shi yi xia dao di dai ma fu gai ru he
+                //can save same code?
+                TableRow tableRow = this.getTableRow();
+                setText(null);
+                setGraphic(null);
+                setStyle("");
+                if (null != tableRow) {
+                    SeisPlan colorPlan = (SeisPlan) tableRow.getItem();
+                    if (null != colorPlan) {
+                        setText(item);
+                        if (C.PLAN_STATUS_ED.equals(colorPlan.getPlanStatus())) {
+                            tableRow.setStyle("-fx-background-color: #A2A2E8");
+                        } else if (C.PLAN_STATUS_STOP.equals(colorPlan.getPlanStatus())) {
+                            tableRow.setStyle("-fx-background-color: #FF7F27");
+                        } else if (C.PLAN_STATUS_ING.equals(colorPlan.getPlanStatus())) {
+                            LocalDate localDate = LocalDate.now();
+                            int year = localDate.getYear();
+                            int month = localDate.getMonthValue();
+                            int season = (month + 2) / 3;
+                            int week = localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+                            boolean outColor = false;
+                            boolean rightColor = false;
+                            if (year < Integer.valueOf(colorPlan.getPlanYear())) {
+                                outColor = true;
+                            } else if (C.PLAN_TYPE_YEAR.equals(colorPlan.getPlanType()) &&
+                                    year == Integer.valueOf(colorPlan.getPlanYear())) {
+                                rightColor = true;
+                            } else if (C.PLAN_TYPE_SEASON.equals(colorPlan.getPlanType())) {
+                                if (season < Integer.valueOf(colorPlan.getPlanSeason())) {
                                     outColor = true;
-                                } else if (C.PLAN_TYPE_YEAR.equals(colorPlan.getPlanType()) &&
-                                        year == Integer.valueOf(colorPlan.getPlanYear())) {
+                                } else if (season == Integer.valueOf(colorPlan.getPlanSeason())) {
                                     rightColor = true;
-                                } else if (C.PLAN_TYPE_SEASON.equals(colorPlan.getPlanType())) {
-                                    if (season < Integer.valueOf(colorPlan.getPlanSeason())) {
-                                        outColor = true;
-                                    } else if (season == Integer.valueOf(colorPlan.getPlanSeason())) {
-                                        rightColor = true;
-                                    }
-                                } else if (C.PLAN_TYPE_MONTH.equals(colorPlan.getPlanType())) {
-                                    if (month < Integer.valueOf(colorPlan.getPlanMonth())) {
-                                        outColor = true;
-                                    } else if (month == Integer.valueOf(colorPlan.getPlanMonth())) {
-                                        rightColor = true;
-                                    }
-                                } else if (C.PLAN_TYPE_WEEK.equals(colorPlan.getPlanType())) {
-                                    if (week < Integer.valueOf(colorPlan.getPlanWeek())) {
-                                        outColor = true;
-                                    } else if (week == Integer.valueOf(colorPlan.getPlanWeek())) {
-                                        rightColor = true;
-                                    }
                                 }
-
-                                if (rightColor) {
-                                    tableRow.setStyle("-fx-background-color: #BEE02A");
+                            } else if (C.PLAN_TYPE_MONTH.equals(colorPlan.getPlanType())) {
+                                if (month < Integer.valueOf(colorPlan.getPlanMonth())) {
+                                    outColor = true;
+                                } else if (month == Integer.valueOf(colorPlan.getPlanMonth())) {
+                                    rightColor = true;
                                 }
-
-                                if (outColor) {
-                                    tableRow.setStyle("-fx-background-color: #F3705E");
+                            } else if (C.PLAN_TYPE_WEEK.equals(colorPlan.getPlanType())) {
+                                if (week < Integer.valueOf(colorPlan.getPlanWeek())) {
+                                    outColor = true;
+                                } else if (week == Integer.valueOf(colorPlan.getPlanWeek())) {
+                                    rightColor = true;
                                 }
                             }
-                            setText(item);
-                            return;
+
+                            if (rightColor) {
+                                tableRow.setStyle("-fx-background-color: #BEE02A");
+                            }
+
+                            if (outColor) {
+                                tableRow.setStyle("-fx-background-color: #F3705E");
+                            }
                         }
                     }
-                    tableRow.setStyle("");
-                    setText(null);
                 }
             }
         };
@@ -361,12 +354,12 @@ public class PlanService {
         Integer year = Integer.valueOf(clickedPlan.getPlanYear());
         Integer month = Integer.valueOf(clickedPlan.getPlanMonth());
         Integer day = 1;
-        if(C.PLAN_TYPE_WEEK.equals(clickedPlan.getPlanType())){
+        if (C.PLAN_TYPE_WEEK.equals(clickedPlan.getPlanType())) {
             LocalDate localDate = LocalDate.of(year, month, 1);
             int firstDay = localDate.getDayOfWeek().getValue();
             int firstWeek = localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
             int oldWeek = Integer.valueOf(clickedPlan.getPlanWeek());
-            day = 7 * (oldWeek - firstWeek) + (7-firstDay + 1) ;
+            day = 7 * (oldWeek - firstWeek) + (7 - firstDay + 1);
         }
 
         controller.datePicker.setValue(LocalDate.of(year, month, day));
@@ -475,21 +468,31 @@ public class PlanService {
     }
 
     private void addSubPlan(SeisPlan seisPlan) {
+        Integer usedTime = dao.queryTimeLeft(seisPlan.getId());
+        String time = "";
+        if (null != usedTime) {
+            time = String.valueOf(Integer.valueOf(seisPlan.getPlanTime()) - usedTime);
+        } else {
+            time = seisPlan.getPlanTime();
+        }
+        controller.timeField.setText(time);
+
         taskTabStatus = PlanC.T_STATUS_SUB;
         thePlan = null;
         parentId = seisPlan.getId();
         controller.nameField.setText(seisPlan.getPlanName());
-        //TODO count all sub task and count the result of the time
-        controller.timeField.setText(seisPlan.getPlanTime().toString());
         controller.typeCombo.getItems().stream()
-                .filter(type -> ((PlanType) type).getTypeValue().equals(
-                        Integer.valueOf(seisPlan.getPlanType()) - 100))
+                .filter(type -> (
+                        Integer.valueOf( ((PlanType) type).getTypeValue() )
+                                == ( Integer.valueOf(seisPlan.getPlanType()) - 100) )
+                )
                 .forEach(type -> {
                     controller.typeCombo.getSelectionModel().select(type);
                 });
-        if(C.PLAN_TYPE_MONTH.equals(seisPlan.getPlanType())){
+        controller.typeCombo.setDisable(true);
+        if (C.PLAN_TYPE_MONTH.equals(seisPlan.getPlanType())) {
             controller.datePicker.setValue(LocalDate.now().plusDays(5));
-        }else{
+        } else {
             controller.datePicker.setValue(LocalDate.now().plusMonths(1));
         }
         controller.contentArea.setText(seisPlan.getPlanContent());
@@ -498,7 +501,7 @@ public class PlanService {
     }
 
     private void confirmStopPlan(SeisPlan seisPlan) {
-        ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认" , "确定终止任务：" + seisPlan.getPlanName());
+        ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认", "确定终止任务：" + seisPlan.getPlanName());
 
         dialogExt.setOnAction(e -> {
             stopPlan(seisPlan);
@@ -510,8 +513,8 @@ public class PlanService {
     }
 
     private void stopPlan(SeisPlan sixPlan) {
-        if(C.PLAN_TYPE_YEAR.equals(sixPlan.getPlanType())
-                || C.PLAN_TYPE_SEASON.equals(sixPlan.getPlanType())){
+        if (C.PLAN_TYPE_YEAR.equals(sixPlan.getPlanType())
+                || C.PLAN_TYPE_SEASON.equals(sixPlan.getPlanType())) {
 
             Integer id = sixPlan.getId();
             SeisPlan plan = new SeisPlan();
@@ -527,7 +530,7 @@ public class PlanService {
     }
 
     private void confirmFinishPlan(SeisPlan seisPlan) {
-        ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认" , "确定完成任务：" + seisPlan.getPlanName());
+        ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认", "确定完成任务：" + seisPlan.getPlanName());
 
         dialogExt.setOnAction(e -> {
             finishPlan(seisPlan);
@@ -540,8 +543,8 @@ public class PlanService {
 
     private void finishPlan(SeisPlan seisPlan) {
 
-        if(C.PLAN_TYPE_YEAR.equals(seisPlan.getPlanType())
-                || C.PLAN_TYPE_SEASON.equals(seisPlan.getPlanType()) ){
+        if (C.PLAN_TYPE_YEAR.equals(seisPlan.getPlanType())
+                || C.PLAN_TYPE_SEASON.equals(seisPlan.getPlanType())) {
             Integer id = seisPlan.getId();
             SeisPlan plan = new SeisPlan();
             plan.setParentId(id);
@@ -555,9 +558,9 @@ public class PlanService {
     }
 
     private void inputPlanPer(SeisPlan seisPlan) {
-        InputDialogExt dialogExt = new InputDialogExt("修改任务进度","[ "+seisPlan.getPlanName()+" ]进度");
+        InputDialogExt dialogExt = new InputDialogExt("修改任务进度", "[ " + seisPlan.getPlanName() + " ]进度");
         TextField textField = dialogExt.getTextField();
-        dialogExt.setOnAction(e->{
+        dialogExt.setOnAction(e -> {
             String text = textField.getText();
             if (StrUtil.isNotPositiveIntegralNumber(text)) {
                 controller.tipLabel.setText("请输入数字");
@@ -571,13 +574,11 @@ public class PlanService {
     }
 
     public void processPlanPer(SeisPlan seisPlan, String newPer) {
+        seisPlan.setPlanPer(newPer);
+        dao.updateById(seisPlan);
 
-        if (C.PLAN_TYPE_YEAR.equals(seisPlan.getPlanType())
-                || C.PLAN_TYPE_WEEK.equals(seisPlan.getPlanType()) ) {
-
-            seisPlan.setPlanPer(newPer);
-            dao.updateById(seisPlan);
-        }else{
+        if (!C.PLAN_TYPE_YEAR.equals(seisPlan.getPlanType())
+                && !C.PLAN_TYPE_WEEK.equals(seisPlan.getPlanType())) {
             Integer parentId = seisPlan.getParentId();
             Integer oldPer = Integer.valueOf(seisPlan.getPlanPer());
             SeisPlan parentPlan = dao.queryById(parentId);
@@ -586,20 +587,28 @@ public class PlanService {
             double divisor = Double.valueOf(parentPlan.getPlanTime());
             double multiple = dividend / divisor;
 
-            Integer per = (int) (Integer.valueOf(parentPlan.getPlanPer()) + multiple * (Integer.valueOf(newPer)-oldPer));
+            Integer per = (int) (Integer.valueOf(parentPlan.getPlanPer()) + multiple * (Integer.valueOf(newPer) - oldPer));
             processPlanPer(parentPlan, String.valueOf(per));
         }
     }
 
     public void initTab() {
 
-        controller.yearTab.selectedProperty().addListener(e -> {changeTab();});
+        controller.yearTab.selectedProperty().addListener(e -> {
+            changeTab();
+        });
 
-        controller.monthTab.selectedProperty().addListener(e -> {changeTab();});
+        controller.monthTab.selectedProperty().addListener(e -> {
+            changeTab();
+        });
 
-        controller.weekTab.selectedProperty().addListener(e -> {changeTab();});
+        controller.weekTab.selectedProperty().addListener(e -> {
+            changeTab();
+        });
 
-        controller.seasonTab.selectedProperty().addListener(e -> {changeTab();});
+        controller.seasonTab.selectedProperty().addListener(e -> {
+            changeTab();
+        });
 
         controller.tabPane.getSelectionModel().select(controller.weekTab);
         currentTab = controller.weekTab;
@@ -630,7 +639,6 @@ public class PlanService {
         controller.typeCombo.setDisable(false);
         controller.contentArea.setText("");
     }
-
 
 
     public void searchYear() {
@@ -795,7 +803,7 @@ public class PlanService {
         thePlan.setPlanSeason(String.valueOf((localDate.getMonthValue() + 2) / 3));
         thePlan.setPlanWeek(String.valueOf(localDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)));
         thePlan.setPlanContent(content);
-        if(name.startsWith(C.PLAN_OUT_COUNT)){
+        if (name.startsWith(C.PLAN_OUT_COUNT)) {
             thePlan.setPlanType(C.PLAN_TYPE_YEAR);
             type = C.PLAN_TYPE_YEAR;
             thePlan.setSourceId(-1);
@@ -823,10 +831,10 @@ public class PlanService {
     }
 
     public void typeChange() {
-        String type = ((PlanType)(controller.typeCombo.getSelectionModel().getSelectedItem())).getTypeValue();
-        if( C.PLAN_TYPE_WEEK.equals(type)){
+        String type = ((PlanType) (controller.typeCombo.getSelectionModel().getSelectedItem())).getTypeValue();
+        if (C.PLAN_TYPE_WEEK.equals(type)) {
             controller.datePicker.setValue(LocalDate.now().plusDays(5));
-        }else{
+        } else {
             controller.datePicker.setValue(LocalDate.now().plusMonths(1));
         }
     }

@@ -5,6 +5,7 @@
  */
 package org.eu.sixlab.sixtools.comun.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.eu.sixlab.sixtools.comun.bean.SeisBandeja;
 import org.eu.sixlab.sixtools.comun.mapper.SeisBandejaMapper;
 import org.eu.sixlab.sixtools.comun.util.Du;
@@ -17,65 +18,61 @@ import java.util.List;
  * @author 六楼的雨/loki
  * @date 2015/4/13 16:52
  */
-public class TrayDao {
+public class TrayDao extends Du{
 
     public List<SeisBandeja> getSubTrays(Integer parentId){
-        try{
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             SeisBandeja sixTray = new SeisBandeja();
             sixTray.setParentId(parentId);
 
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
             List<SeisBandeja> sixTrayList = seisBandejaMapper.selectByOne(sixTray);
             return sixTrayList;
-        }finally {
-            Du.close();
         }
     }
 
     public List<SeisBandeja> getToolFolders(){
-        try{
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             List<SeisBandeja> sixTrayList = seisBandejaMapper.selectToolFolders();
             return sixTrayList;
-        }finally {
-            Du.close();
         }
     }
 
     public List<SeisBandeja> getAll() {
-        try{
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             List<SeisBandeja> sixTrayList = seisBandejaMapper.selectAll();
             return sixTrayList;
-        }finally {
-            Du.close();
         }
     }
 
     public void insert(SeisBandeja sixTray) {
-        try{
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             seisBandejaMapper.insert(sixTray);
-        }finally {
-            Du.close();
+            ss.commit();
         }
     }
 
     public void delete(Integer id) {
-        try{
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             seisBandejaMapper.delete(id);
-        }finally {
-            Du.close();
+            ss.commit();
         }
     }
 
     public void update(SeisBandeja sixTray) {
-        try{
-            SeisBandejaMapper seisBandejaMapper = Du.getMapper(SeisBandejaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisBandejaMapper seisBandejaMapper = getMapper(ss);
             seisBandejaMapper.update(sixTray);
-        }finally {
-            Du.close();
+            ss.commit();
         }
+    }
+
+    @Override
+    public SeisBandejaMapper getMapper(SqlSession sqlSession) {
+        return sqlSession.getMapper(SeisBandejaMapper.class);
     }
 }

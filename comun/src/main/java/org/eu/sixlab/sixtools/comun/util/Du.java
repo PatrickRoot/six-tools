@@ -17,26 +17,13 @@ import java.io.InputStream;
  * @author 六楼的雨/loki
  * @date 2015/2/17 19:46
  */
-public class Du {
-    private static SqlSessionFactory factory;
-    private static SqlSession sqlSession;
+public abstract class Du {
+    protected SqlSessionFactory factory;
 
-    static {
+    public Du(){
         InputStream in = Du.class.getClassLoader().getResourceAsStream("mybatis-six-config.xml");
         factory = new SqlSessionFactoryBuilder().build(in);
     }
 
-    private Du(){
-        super();
-    }
-
-    public static<T> T getMapper(Class<T> clz){
-        sqlSession = factory.openSession();
-        return sqlSession.getMapper(clz);
-    }
-
-    public static void close(){
-        sqlSession.commit();
-        sqlSession.close();
-    }
+    public abstract Object getMapper(SqlSession sqlSession);
 }

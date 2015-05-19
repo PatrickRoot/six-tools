@@ -5,6 +5,7 @@
  */
 package org.eu.sixlab.sixtools.comun.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.eu.sixlab.sixtools.comun.bean.SeisBandeja;
 import org.eu.sixlab.sixtools.comun.bean.SeisTools;
 import org.eu.sixlab.sixtools.comun.mapper.SeisToolsMapper;
@@ -18,29 +19,28 @@ import java.util.List;
  * @author 六楼的雨/loki
  * @date 2015/4/14 19:24
  */
-public class ToolsDao {
+public class ToolsDao extends Du{
 
     private List<SeisBandeja> allTools;
 
     public List<SeisTools> getEnableTools() {
-        try{
-            SeisToolsMapper seisToolsMapper = Du.getMapper(SeisToolsMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisToolsMapper seisToolsMapper = getMapper(ss);
             List<SeisTools> seisToolsList = seisToolsMapper.getEnableTools();
-
             return seisToolsList;
-        }finally {
-            Du.close();
         }
     }
 
     public List<SeisTools> getAllTools() {
-        try{
-            SeisToolsMapper seisToolsMapper = Du.getMapper(SeisToolsMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisToolsMapper seisToolsMapper = getMapper(ss);
             List<SeisTools> seisToolsList = seisToolsMapper.getEnableTools();
-
             return seisToolsList;
-        }finally {
-            Du.close();
         }
+    }
+
+    @Override
+    public SeisToolsMapper getMapper(SqlSession sqlSession) {
+        return sqlSession.getMapper(SeisToolsMapper.class);
     }
 }

@@ -5,6 +5,7 @@
  */
 package org.eu.sixlab.sixtools.comun.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.eu.sixlab.sixtools.comun.bean.SeisPelicula;
 import org.eu.sixlab.sixtools.comun.mapper.SeisPeliculaMapper;
 import org.eu.sixlab.sixtools.comun.util.Du;
@@ -17,54 +18,61 @@ import java.util.List;
  * @author 六楼的雨/loki
  * @date 2015/4/13 16:43
  */
-public class MovieDao {
+public class MovieDao extends Du{
+
+    @Override
+    public SeisPeliculaMapper getMapper(SqlSession sqlSession) {
+        return sqlSession.getMapper(SeisPeliculaMapper.class);
+    }
 
     public void insert(SeisPelicula record){
-        try{
-            SeisPeliculaMapper movieRecordMapper = Du.getMapper(SeisPeliculaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPeliculaMapper movieRecordMapper = getMapper(ss);
             movieRecordMapper.insert(record);
-        }finally {
-            Du.close();
+            ss.commit();
         }
     }
 
     public List<SeisPelicula> getAllMovies() {
-        try{
-            SeisPeliculaMapper movieRecordMapper = Du.getMapper(SeisPeliculaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPeliculaMapper movieRecordMapper = getMapper(ss);
             List<SeisPelicula> movieRecordList = movieRecordMapper.selectAll();
             return movieRecordList;
-        }finally {
-            Du.close();
         }
     }
 
     public List<SeisPelicula> getMoviesByKeyword(String keyword) {
-        try{
-            SeisPeliculaMapper movieRecordMapper = Du.getMapper(SeisPeliculaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPeliculaMapper movieRecordMapper = getMapper(ss);
             List<SeisPelicula> movieRecordList = movieRecordMapper.selectByKeyword(keyword);
             return movieRecordList;
-        }finally {
-            Du.close();
         }
     }
 
     public void update(SeisPelicula record) {
-        try{
-            SeisPeliculaMapper movieRecordMapper = Du.getMapper(SeisPeliculaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPeliculaMapper movieRecordMapper = getMapper(ss);
             movieRecordMapper.update(record);
-        }finally {
-            Du.close();
+            ss.commit();
         }
     }
 
     public List<SeisPelicula> getMoviesByMovieName(String name) {
-        try{
-            SeisPeliculaMapper movieRecordMapper = Du.getMapper(SeisPeliculaMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPeliculaMapper movieRecordMapper = getMapper(ss);
             List<SeisPelicula> movieRecordList = movieRecordMapper.selectByMovieName(name);
-
             return movieRecordList;
-        }finally {
-            Du.close();
         }
+    }
+
+    public static void main(String[] args) {
+        MovieDao dao = new MovieDao();
+
+        System.out.println(dao.getAllMovies().size());
+        SeisPelicula pelicula = new SeisPelicula();
+        pelicula.setMovieName("ttttt");
+        pelicula.setViewDate("20");
+        dao.insert(pelicula);
+        System.out.println(dao.getAllMovies().size());
     }
 }

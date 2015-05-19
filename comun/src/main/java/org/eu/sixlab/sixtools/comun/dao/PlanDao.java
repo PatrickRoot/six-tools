@@ -5,6 +5,7 @@
  */
 package org.eu.sixlab.sixtools.comun.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.eu.sixlab.sixtools.comun.bean.SeisPlan;
 import org.eu.sixlab.sixtools.comun.mapper.SeisPlanMapper;
 import org.eu.sixlab.sixtools.comun.util.Du;
@@ -17,46 +18,50 @@ import java.util.List;
  * @author 六楼的雨/loki
  * @date 2015/4/13 11:36
  */
-public class PlanDao {
-    public void insert(SeisPlan sixPlan) {
-        try{
-            SeisPlanMapper seisPlanMapper = Du.getMapper(SeisPlanMapper.class);
-            seisPlanMapper.insert(sixPlan);
+public class PlanDao extends Du{
 
-        }finally {
-            Du.close();
+    public void insert(SeisPlan sixPlan) {
+        try(SqlSession ss = factory.openSession()){
+            SeisPlanMapper seisPlanMapper = getMapper(ss);
+            seisPlanMapper.insert(sixPlan);
+            ss.commit();
         }
     }
 
     public void updateById(SeisPlan sixPlan) {
-        try{
-            SeisPlanMapper seisPlanMapper = Du.getMapper(SeisPlanMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPlanMapper seisPlanMapper = getMapper(ss);
             seisPlanMapper.update(sixPlan);
-
-        }finally {
-            Du.close();
+            ss.commit();
         }
     }
 
     public List<SeisPlan> selectByPlan(SeisPlan sixPlan) {
-        try{
-            SeisPlanMapper seisPlanMapper = Du.getMapper(SeisPlanMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPlanMapper seisPlanMapper = getMapper(ss);
             List<SeisPlan> sixPlanList = seisPlanMapper.selectByPlan(sixPlan);
 
             return sixPlanList;
-        }finally {
-            Du.close();
         }
     }
 
     public SeisPlan queryById(Integer parentId) {
-        try{
-            SeisPlanMapper seisPlanMapper = Du.getMapper(SeisPlanMapper.class);
+        try(SqlSession ss = factory.openSession()){
+            SeisPlanMapper seisPlanMapper = getMapper(ss);
             SeisPlan sixPlan = seisPlanMapper.selectById(parentId);
-
             return sixPlan;
-        }finally {
-            Du.close();
         }
+    }
+
+    public Integer queryTimeLeft(Integer id) {
+        try(SqlSession ss = factory.openSession()){
+            SeisPlanMapper seisPlanMapper = getMapper(ss);
+            return seisPlanMapper.queryTimeLeft(id);
+        }
+    }
+
+    @Override
+    public SeisPlanMapper getMapper(SqlSession sqlSession) {
+        return sqlSession.getMapper(SeisPlanMapper.class);
     }
 }

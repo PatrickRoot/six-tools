@@ -98,18 +98,32 @@
         THEN '进行中' END) plan_status_name
         from seis_plan
         where 1=1
-            <if test="planName    != null" > AND plan_name    = #{planName,    jdbcType=VARCHAR} </if>
-            <if test="planTime    != null" > AND plan_time    = #{planTime,    jdbcType=VARCHAR} </if>
-            <if test="planPer     != null" > AND plan_per     = #{planPer,     jdbcType=VARCHAR} </if>
-            <if test="planStatus  != null" > AND plan_status  = #{planStatus,  jdbcType=VARCHAR} </if>
-            <if test="planContent != null" > AND plan_content = #{planContent, jdbcType=VARCHAR} </if>
-            <if test="planType    != null" > AND plan_type    = #{planType,    jdbcType=VARCHAR} </if>
-            <if test="planYear    != null" > AND plan_year    = #{planYear,    jdbcType=VARCHAR} </if>
-            <if test="planSeason  != null" > AND plan_season  = #{planSeason,  jdbcType=VARCHAR} </if>
-            <if test="planMonth   != null" > AND plan_month   = #{planMonth,   jdbcType=VARCHAR} </if>
-            <if test="planWeek    != null" > AND plan_week    = #{planWeek,    jdbcType=VARCHAR} </if>
-            <if test="parentId    != null" > AND parent_id    = #{parentId,    jdbcType=INTEGER} </if>
-            <if test="sourceId    != null" > AND source_id    = #{sourceId,    jdbcType=INTEGER} </if>
+        <if test="planName    != null" > AND plan_name    = #{planName,    jdbcType=VARCHAR} </if>
+        <if test="planTime    != null" > AND plan_time    = #{planTime,    jdbcType=VARCHAR} </if>
+        <if test="planPer     != null" > AND plan_per     = #{planPer,     jdbcType=VARCHAR} </if>
+        <if test="planStatus  != null" > AND plan_status  = #{planStatus,  jdbcType=VARCHAR} </if>
+        <if test="planContent != null" > AND plan_content = #{planContent, jdbcType=VARCHAR} </if>
+        <if test="planType    != null" > AND plan_type    = #{planType,    jdbcType=VARCHAR} </if>
+        <if test="planYear    != null" > AND plan_year    = #{planYear,    jdbcType=VARCHAR} </if>
+        <if test="planSeason  != null" > AND plan_season  = #{planSeason,  jdbcType=VARCHAR} </if>
+        <if test="planMonth   != null" > AND plan_month   = #{planMonth,   jdbcType=VARCHAR} </if>
+        <if test="planWeek    != null" > AND plan_week    = #{planWeek,    jdbcType=VARCHAR} </if>
+        <if test="parentId    != null" > AND parent_id    = #{parentId,    jdbcType=INTEGER} </if>
+        <if test="sourceId    != null" > AND source_id    = #{sourceId,    jdbcType=INTEGER} </if>
         order BY plan_year DESC,plan_type desc,id DESC
     </select>
+
+    <select id="queryTimeLeft" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+        SELECT
+            SUM(CASE plan_status
+                WHEN 100 THEN (plan_per * plan_time + 99) / 100
+                ELSE plan_time
+                END)
+        FROM
+            seis_plan
+        WHERE
+            parent_id = #{id, jdbcType=INTEGER};
+    </select>
+
+
 </mapper>
