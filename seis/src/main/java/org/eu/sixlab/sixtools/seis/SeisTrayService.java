@@ -13,9 +13,6 @@ import org.eu.sixlab.sixtools.comun.dao.ToolsDao;
 import org.eu.sixlab.sixtools.comun.dao.TrayDao;
 import org.eu.sixlab.sixtools.comun.util.A;
 import org.eu.sixlab.sixtools.comun.util.C;
-import org.eu.sixlab.sixtools.comun.util.ToolLaunch;
-import org.eu.sixlab.sixtools.seispelicula.Pelicula;
-import org.eu.sixlab.sixtools.seisplan.Plan;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -42,25 +39,11 @@ public class SeisTrayService {
 
     private TrayDao dao = new TrayDao();
     private ToolsDao toolsDao = new ToolsDao();
-    private ToolLaunch toolLaunch = null;
     public PopupMenu popupMenu = new PopupMenu();
 
     private void addToolsListener(SeisTools aTool, MenuItem trayItem) {
         trayItem.addActionListener(e -> {
-            toolLaunch = null;
-            switch (aTool.getId()) {
-                case C.TOOLS_PLAN_ID:
-                    toolLaunch = new Plan();
-                    break;
-                case C.TOOLS_PELICULA_ID:
-                    toolLaunch = new Pelicula();
-                    break;
-                default:
-                    return;
-            }
-            Platform.runLater(() -> {
-                toolLaunch.launch();
-            });
+            Launcher.launchTool(aTool.getId());
         });
     }
 

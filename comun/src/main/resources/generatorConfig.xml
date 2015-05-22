@@ -10,7 +10,7 @@
         <!-- jdbc连接信息 -->
         <commentGenerator><property name="suppressAllComments" value="true" /></commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/six_tools?useUnicode=true&amp;characterEncoding=UTF-8" userId="test" password="test" />
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/six_tools?useUnicode=true&amp;characterEncoding=UTF-8" userId="root" password="root" />
 
         <!--配置实体bean-->
         <javaModelGenerator targetPackage="org.eu.sixlab.sixtools.comun.bean" targetProject="./temp" />
@@ -24,7 +24,7 @@
             <generatedKey column="id" sqlStatement="JDBC"
                           identity="true"></generatedKey>
         </table>
-        <table tableName="six_tools" domainObjectName="SixTools" enableCountByExample="false" enableUpdateByExample="false"
+        <!--table tableName="six_tools" domainObjectName="SixTools" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="JDBC"
                           identity="true"></generatedKey>
@@ -38,7 +38,7 @@
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="JDBC"
                           identity="true"></generatedKey>
-        </table>
+        </table-->
 
     </context>
 </generatorConfiguration>

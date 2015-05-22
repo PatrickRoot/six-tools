@@ -196,7 +196,9 @@ public class SeisService {
             controller.flowPane.setMargin(vBox, insets);
 
             vBox.setOnMouseClicked(e -> {
-                //todo tools enable or disable
+                if(e.getClickCount()==2){
+                    Launcher.launchTool(tool.getId());
+                }
             });
         });
     }
