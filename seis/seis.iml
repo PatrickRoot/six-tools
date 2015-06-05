@@ -16,6 +16,7 @@
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.8.7" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.2.7" level="project" />
     <orderEntry type="module" module-name="seis-pelicula" />
+    <orderEntry type="module" module-name="seis-punto" />
     <orderEntry type="module" module-name="sixutil" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />

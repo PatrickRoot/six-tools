@@ -10,6 +10,7 @@ import org.eu.sixlab.sixtools.comun.util.C;
 import org.eu.sixlab.sixtools.comun.util.ToolLaunch;
 import org.eu.sixlab.sixtools.seispelicula.Pelicula;
 import org.eu.sixlab.sixtools.seisplan.Plan;
+import org.eu.sixlab.sixtools.sixpunto.Punto;
 
 /**
  * TODO
@@ -27,6 +28,9 @@ public class Launcher {
                 break;
             case C.TOOLS_PELICULA_ID:
                 toolLaunch = new Pelicula();
+                break;
+            case C.TOOLS_PUNTO_ID:
+                toolLaunch = new Punto();
                 break;
             default:
                 return;
