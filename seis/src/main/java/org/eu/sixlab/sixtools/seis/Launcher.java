@@ -11,6 +11,7 @@ import org.eu.sixlab.sixtools.comun.util.ToolLaunch;
 import org.eu.sixlab.sixtools.seispelicula.Pelicula;
 import org.eu.sixlab.sixtools.seisplan.Plan;
 import org.eu.sixlab.sixtools.sixpunto.Punto;
+import org.eu.sixlab.sixtools.sixtomcat.Tomcat;
 
 /**
  * TODO
@@ -31,6 +32,9 @@ public class Launcher {
                 break;
             case C.TOOLS_PUNTO_ID:
                 toolLaunch = new Punto();
+                break;
+            case C.TOOLS_TOMCAT_ID:
+                toolLaunch = new Tomcat();
                 break;
             default:
                 return;

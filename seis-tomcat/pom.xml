@@ -9,32 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>seis</artifactId>
+    <artifactId>seis-tomcat</artifactId>
+
 
     <dependencies>
 
         <!-- Seis -->
         <dependency>
             <groupId>org.eu.sixlab</groupId>
-            <artifactId>seis-plan</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eu.sixlab</groupId>
-            <artifactId>seis-pelicula</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eu.sixlab</groupId>
-            <artifactId>seis-punto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eu.sixlab</groupId>
-            <artifactId>seis-tomcat</artifactId>
+            <artifactId>comun</artifactId>
         </dependency>
 
         <!-- Sixlab -->
         <dependency>
             <groupId>org.eu.sixlab</groupId>
             <artifactId>sixutil</artifactId>
+        </dependency>
+
+        <!-- XML -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
         </dependency>
 
         <!-- 日志 -->
@@ -61,22 +56,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-jar-2-sixtools</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <copyfile src="${project.basedir}/target/seis-${project.version}.jar"
-                                          dest="D:/Program/Sixtools/gen/seis.jar">
-                                </copyfile>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

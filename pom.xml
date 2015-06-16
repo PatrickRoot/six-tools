@@ -18,6 +18,8 @@
         <module>seis</module>
         <module>seis-update</module>
         <module>seis-punto</module>
+        <module>seis-resolverpelicula</module>
+        <module>seis-tomcat</module>
     </modules>
 
     <properties>
@@ -49,8 +51,8 @@
         <version.pinyin4j>2.5.0</version.pinyin4j>
         <version.jackson>1.7.1</version.jackson>
         <version.poi>3.10-FINAL</version.poi>
-        <version.jsoup>1.7.3</version.jsoup>
         <version.dom4j>1.6.1</version.dom4j>
+        <version.jsoup>1.8.1</version.jsoup>
         <version.guava>17.0</version.guava>
     </properties>
 
@@ -80,6 +82,11 @@
             <dependency>
                 <groupId>org.eu.sixlab</groupId>
                 <artifactId>seis-punto</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eu.sixlab</groupId>
+                <artifactId>seis-tomcat</artifactId>
                 <version>${version.seis}</version>
             </dependency>
 
@@ -117,6 +124,13 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${version.mybatis}</version>
+            </dependency>
+
+            <!-- jsoup -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${version.jsoup}</version>
             </dependency>
 
             <!-- log -->

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.eu.sixlab.sixtools.comun.util.A;
+import org.eu.sixlab.sixtools.sixpunto.PuntoTask;
 
 
 /**
@@ -23,7 +24,12 @@ import org.eu.sixlab.sixtools.comun.util.A;
 public class Seis extends Application{
 
     public static void main(String[] args) {
+        startTimers();
         launch(args);
+    }
+
+    private static void startTimers() {
+        PuntoTask.startTask();
     }
     
     @Override

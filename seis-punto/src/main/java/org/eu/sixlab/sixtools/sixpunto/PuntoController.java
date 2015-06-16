@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import org.eu.sixlab.sixtools.comun.bean.SeisPunto;
 import org.eu.sixlab.sixtools.comun.dao.PuntoDao;
 import org.eu.sixlab.sixutil.StrUtil;
@@ -56,20 +57,22 @@ public class PuntoController implements Initializable {
         puntoColumn.setCellValueFactory(new PropertyValueFactory("punto"));
         reasonColumn.setCellValueFactory(new PropertyValueFactory("reason"));
         timeColumn.setCellValueFactory(new PropertyValueFactory("indate"));
+        idColumn.setMaxWidth(500d);
+        puntoColumn.setMaxWidth(800d);
 
         puntoTable.setItems(data);
     }
 
-    public void minPunto(ActionEvent event) {
-        SeisPunto seisPunto = getInput(-1);
-        if (null != seisPunto) {
-            dao.insert(seisPunto);
-            tipLabel.setText("减分成功：" + String.format("%.2f", seisPunto.getPunto()));
-            loadPunto();
-        } else {
-            tipLabel.setText("减分失败");
-        }
-    }
+    //public void minPunto(ActionEvent event) {
+    //    SeisPunto seisPunto = getInput(-1);
+    //    if (null != seisPunto) {
+    //        dao.insert(seisPunto);
+    //        tipLabel.setText("减分成功：" + String.format("%.2f", seisPunto.getPunto()));
+    //        loadPunto();
+    //    } else {
+    //        tipLabel.setText("减分失败");
+    //    }
+    //}
 
     private SeisPunto getInput(int i) {
         SeisPunto seisPunto = new SeisPunto();
@@ -89,10 +92,10 @@ public class PuntoController implements Initializable {
         SeisPunto seisPunto = getInput(1);
         if(null!=seisPunto){
             dao.insert(seisPunto);
-            tipLabel.setText("加分成功：" + String.format("%.2f", seisPunto.getPunto()));
+            tipLabel.setText("计分成功：" + String.format("%.2f", seisPunto.getPunto()));
             loadPunto();
         }else{
-            tipLabel.setText("加分失败");
+            tipLabel.setText("计分失败");
         }
     }
 
@@ -108,6 +111,11 @@ public class PuntoController implements Initializable {
     private void loadPuntoHis() {
         Double punto = dao.queryPunto();
         if(null!=punto){
+            if(punto<=0){
+                totalPunto.setTextFill(Color.RED);
+            }else{
+                totalPunto.setTextFill(Color.GREEN);
+            }
             totalPunto.setText("总分：" + String.format("%.2f", punto));
         }
     }

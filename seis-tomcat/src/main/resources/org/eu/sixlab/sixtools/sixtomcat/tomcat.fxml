@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eu.sixlab.sixtools.sixpunto.PuntoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eu.sixlab.sixtools.sixtomcat.TomcatController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -38,19 +38,13 @@
             <center>
                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <center>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0"
-                                    BorderPane.alignment="CENTER">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <content>
-                                <TableView fx:id="puntoTable" prefHeight="200.0" prefWidth="200.0">
+                                <TableView fx:id="tomcatTable" editable="true" prefHeight="200.0" prefWidth="200.0">
                                     <columns>
-                                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID"/>
-                                        <TableColumn fx:id="puntoColumn" prefWidth="75.0" text="分数"/>
-                                        <TableColumn fx:id="reasonColumn" prefWidth="75.0" text="原因"/>
-                                        <TableColumn fx:id="timeColumn" prefWidth="75.0" text="时间"/>
+                                        <TableColumn fx:id="pathColumn" prefWidth="100.0" text="path" />
+                                        <TableColumn fx:id="docColumn" prefWidth="495.0" text="docBase" />
                                     </columns>
-                                    <columnResizePolicy>
-                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                                    </columnResizePolicy>
                                 </TableView>
                             </content>
                         </ScrollPane>
@@ -58,12 +52,10 @@
                     <top>
                         <ToolBar prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <items>
-                                <Label text="分数"/>
-                                <TextField fx:id="puntoField" prefHeight="23.0" prefWidth="52.0"/>
-                                <Label text="原因"/>
-                                <TextField fx:id="reasonField"/>
-                                <Button mnemonicParsing="false" onAction="#addPunto" text="计分"/>
-                                <Label fx:id="totalPunto"/>
+                                <Label text="路径" />
+                                <TextField prefHeight="23.0" prefWidth="490.0" fx:id="xmlPathField" />
+                                <Button mnemonicParsing="false" onAction="#chooseFile" text="选择文件" />
+                                <Label fx:id="totalPunto" />
                             </items>
                         </ToolBar>
                     </top>
