@@ -48,11 +48,11 @@ public class PeliculaController implements Initializable{
         service = new PeliculaService(PeliculaController.this);
         service.reset();
         service.initTable();
-        service.loadMovies();
+        service.loadMovies(null);
     }
 
     public void searchByKeyword(ActionEvent event) {
-        service.loadMovies();
+        service.loadMovies(null);
     }
 
     public void searchByBaidu(ActionEvent event) {
@@ -69,5 +69,10 @@ public class PeliculaController implements Initializable{
 
     public void confirm(ActionEvent event) {
         service.confirm();
+    }
+
+    public void searchReset(ActionEvent event) {
+        toolbarKeyword.setText("");
+        service.loadMovies(null);
     }
 }

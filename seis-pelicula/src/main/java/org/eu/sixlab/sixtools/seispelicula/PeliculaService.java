@@ -88,19 +88,25 @@ public class PeliculaService {
         controller.addDate.setValue(LocalDate.now());
     }
 
-    public void loadMovies() {
-        String keyword = controller.toolbarKeyword.getText();
+    public void loadMovies(String text) {
         List<SeisPelicula> movieList;
 
-        if( "".equals(keyword)){
-            movieList = dao.getAllMovies();
+        if(null!=text){
+            movieList = dao.getMoviesByMovieName(text);
+            controller.toolbarKeyword.setText(text);
+            controller.tipsLabel.setText(controller.tipsLabel.getText()+".共有 " + movieList.size() + " 部相似名字电影。");
         }else{
-            movieList = dao.getMoviesByKeyword(keyword);
+            String keyword = controller.toolbarKeyword.getText();
+            if ("".equals(keyword)) {
+                movieList = dao.getAllMovies();
+            } else {
+                movieList = dao.getMoviesByKeyword(keyword);
+            }
+            controller.tipsLabel.setText("共有 " + movieList.size() + " 部电影。");
         }
 
         data.clear();
         data.addAll(movieList);
-        controller.tipsLabel.setText("共有 " + data.size() + " 部电影。");
     }
 
     public void searchByNet(String url) {
@@ -142,6 +148,7 @@ public class PeliculaService {
             thePelicula.setRemark(remark);
             thePelicula.setProduceYear(year);
             dao.update(thePelicula);
+            controller.tipsLabel.setText("更新 " + text + "成功。");
         }else{
             SeisPelicula seisPelicula = new SeisPelicula();
             seisPelicula.setMovieName(text);
@@ -151,8 +158,9 @@ public class PeliculaService {
             seisPelicula.setRemark(remark);
             seisPelicula.setProduceYear(year);
             dao.insert(seisPelicula);
+            controller.tipsLabel.setText("添加 " + text + "成功。");
         }
 
-        loadMovies();
+        loadMovies(text);
     }
 }

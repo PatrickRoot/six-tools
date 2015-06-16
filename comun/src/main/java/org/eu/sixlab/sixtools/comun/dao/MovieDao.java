@@ -64,15 +64,4 @@ public class MovieDao extends Du{
             return movieRecordList;
         }
     }
-
-    public static void main(String[] args) {
-        MovieDao dao = new MovieDao();
-
-        System.out.println(dao.getAllMovies().size());
-        SeisPelicula pelicula = new SeisPelicula();
-        pelicula.setMovieName("ttttt");
-        pelicula.setViewDate("20");
-        dao.insert(pelicula);
-        System.out.println(dao.getAllMovies().size());
-    }
 }

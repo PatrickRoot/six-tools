@@ -39,10 +39,10 @@
                                         <ToolBar prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                             <items>
                                                 <Label text="关键字" />
-                                                <Separator />
                                                 <TextField fx:id="toolbarKeyword" promptText="以空格分隔关键字" />
                                                 <Button fx:id="toolbarSearch" mnemonicParsing="false" onAction="#searchByKeyword" text="搜索" />
-                                                <Label text=" | " />
+                                                <Button fx:id="toolbarSearchReset" mnemonicParsing="false" onAction="#searchReset" text="重置"/>
+                                                <Separator/>
                                                 <Button fx:id="toolbarBaidu" mnemonicParsing="false" onAction="#searchByBaidu" text="百度一下" />
                                                 <Button fx:id="toolbarDouban" mnemonicParsing="false" onAction="#searchByDouban" text="豆瓣电影" />
                                             </items>
