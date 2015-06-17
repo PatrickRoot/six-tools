@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.eu.sixlab</groupId>
+    <groupId>cn.sixlab</groupId>
     <artifactId>sixtools</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -60,46 +60,46 @@
         <dependencies>
             <!-- Seis -->
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>comun</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-pelicula</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-plan</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-punto</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-tomcat</artifactId>
                 <version>${version.seis}</version>
             </dependency>
 
             <!-- SixUtil -->
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>sixutil</artifactId>
                 <version>${version.sixutil}</version>
             </dependency>
 
             <!-- J2p -->
             <dependency>
-                <groupId>org.eu.sixlab</groupId>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>j2p</artifactId>
                 <version>${version.j2p}</version>
             </dependency>

@@ -13,11 +13,11 @@
                         connectionURL="jdbc:mysql://127.0.0.1:3306/six_tools?useUnicode=true&amp;characterEncoding=UTF-8" userId="root" password="root" />
 
         <!--配置实体bean-->
-        <javaModelGenerator targetPackage="org.eu.sixlab.sixtools.comun.bean" targetProject="./temp" />
+        <javaModelGenerator targetPackage="cn.sixlab.sixtools.comun.bean" targetProject="./temp" />
         <!--配置Mapper的xml-->
-        <sqlMapGenerator targetPackage="org.eu.sixlab.sixtools.comun.mapper" targetProject="./temp" />
+        <sqlMapGenerator targetPackage="cn.sixlab.sixtools.comun.mapper" targetProject="./temp" />
         <!--配置Mapper接口的java-->
-        <javaClientGenerator targetPackage="org.eu.sixlab.sixtools.comun.mapper" targetProject="./temp" type="XMLMAPPER" />
+        <javaClientGenerator targetPackage="cn.sixlab.sixtools.comun.mapper" targetProject="./temp" type="XMLMAPPER" />
 
         <table tableName="six_plan" domainObjectName="SixPlan" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">

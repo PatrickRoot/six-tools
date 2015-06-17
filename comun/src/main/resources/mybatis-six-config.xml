@@ -17,6 +17,6 @@
 	</environments>
 
 	<mappers>
-        <package name="org.eu.sixlab.sixtools.comun.mapper" />
+        <package name="cn.sixlab.sixtools.comun.mapper" />
 	</mappers>
 </configuration>

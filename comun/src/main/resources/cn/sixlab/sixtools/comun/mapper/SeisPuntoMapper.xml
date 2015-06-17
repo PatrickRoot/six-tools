@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixlab.sixtools.comun.mapper.SeisPuntoMapper">
+    <resultMap id="BaseResultMap" type="cn.sixlab.sixtools.comun.bean.SeisPunto">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="punto" property="punto" jdbcType="DOUBLE"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="indate" property="indate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, punto, reason, indate
+    </sql>
+
+    <insert id="insert" keyProperty="id" parameterType="cn.sixlab.sixtools.comun.bean.SeisPunto"
+            useGeneratedKeys="true">
+        insert into seis_punto
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="punto    != null"> punto,    </if>
+            <if test="reason    != null"> reason,    </if>
+            <if test="indate  != null">      indate,  </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="punto    != null"> #{punto,    jdbcType=DOUBLE}, </if>
+            <if test="reason    != null"> #{reason,    jdbcType=VARCHAR}, </if>
+            <if test="indate    != null"> #{indate,    jdbcType=VARCHAR}, </if>
+        </trim>
+    </insert>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM seis_punto order by id DESC
+    </select>
+
+    <select id="queryPunto" resultType="java.lang.Double">
+        select sum(punto) from seis_punto
+    </select>
+
+
+</mapper>
