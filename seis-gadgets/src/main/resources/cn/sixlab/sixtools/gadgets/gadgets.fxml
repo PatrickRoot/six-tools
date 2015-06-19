@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.gadgets.GadgetsController">
+   <top>
+      <HBox fx:id="topPane" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #666666;" BorderPane.alignment="CENTER">
+          <children>
+              <Button fx:id="group01" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="23.0" prefWidth="197.0" styleClass="groupBtn" text="Button" />
+              <Button fx:id="group02" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="23.0" prefWidth="197.0" styleClass="groupBtn" text="Button" />
+          </children>
+      </HBox>
+   </top>
+   <bottom>
+      <Pane fx:id="bottomPane" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #99CCFF;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="tipsLabel" layoutX="20.0" layoutY="5.0" prefHeight="30.0" style="-fx-font-size: 30px;" text="" />
+         </children></Pane>
+   </bottom>
+   <center>
+      <SplitPane fx:id="splitPane" dividerPositions="0.2" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #CCCCCC;" BorderPane.alignment="CENTER">
+         <items>
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+               <content>
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="mainPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+         </items>
+      </SplitPane>
+   </center>
+    <stylesheets>
+
+    </stylesheets>
+</BorderPane>

@@ -20,6 +20,7 @@
         <module>seis-punto</module>
         <module>seis-resolverpelicula</module>
         <module>seis-tomcat</module>
+        <module>seis-gadgets</module>
     </modules>
 
     <properties>
@@ -87,6 +88,11 @@
             <dependency>
                 <groupId>cn.sixlab</groupId>
                 <artifactId>seis-tomcat</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
+                <artifactId>seis-gadgets</artifactId>
                 <version>${version.seis}</version>
             </dependency>
 

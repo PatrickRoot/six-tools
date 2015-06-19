@@ -27,7 +27,7 @@ public class J2p {
     private static String sendIp = "127.0.0.1";
     private static SocketThread thread = null;
 
-    public static void setCallBack(Callback<String> callBack){
+    public static void setCallBack(Callback callBack){
         if(null==thread){
             thread = new SocketThread();
         }

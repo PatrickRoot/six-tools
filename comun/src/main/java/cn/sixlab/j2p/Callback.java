@@ -11,6 +11,6 @@ package cn.sixlab.j2p;
  * @author 六楼的雨/loki
  * @date 2015/5/29 10:15
  */
-public interface Callback<T> {
-    void call(T t);
+public interface Callback {
+    void call(String message);
 }

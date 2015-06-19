@@ -5,6 +5,8 @@
  */
 package cn.sixlab.j2p;
 
+import cn.sixlab.StrUtil;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
@@ -19,7 +21,7 @@ public class SocketThread extends Thread{
     private int pPort = 12345;
     private DatagramSocket inDs;
     private DatagramPacket inDp;
-    private Callback<String> callBack;
+    private Callback callBack;
     private boolean keepRun = true;
 
     public void close(){
@@ -27,7 +29,7 @@ public class SocketThread extends Thread{
         inDs.close();
     }
 
-    public void setCallBack(Callback<String> callBack) {
+    public void setCallBack(Callback callBack) {
         this.callBack = callBack;
     }
 
@@ -43,7 +45,7 @@ public class SocketThread extends Thread{
                 }else{
                     inDs.receive(inDp);
                     String message = new String(inDp.getData(),0,inDp.getData().length);
-                    if( null!=message && !"".equals(message)){
+                    if(StrUtil.isNotEmpty(message)){
                         callBack.call(message);
                     }
                 }

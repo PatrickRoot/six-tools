@@ -18,6 +18,7 @@ public class C {
     public static final int TOOLS_PELICULA_ID = 1;
     public static final int TOOLS_PUNTO_ID = 2;
     public static final int TOOLS_TOMCAT_ID = 3;
+    public static final int TOOLS_GADGETS_ID = 4;
 
     //Six-Tray
     public static final Integer ROOT_PARENT_ID =0;

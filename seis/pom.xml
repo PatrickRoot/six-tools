@@ -30,6 +30,10 @@
             <groupId>cn.sixlab</groupId>
             <artifactId>seis-tomcat</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.sixlab</groupId>
+            <artifactId>seis-gadgets</artifactId>
+        </dependency>
 
         <!-- Sixlab -->
         <dependency>

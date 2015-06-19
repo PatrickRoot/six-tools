@@ -5,13 +5,14 @@
  */
 package cn.sixlab.sixtools.sixpunto;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import cn.sixlab.sixtools.comun.util.A;
-import cn.sixlab.sixtools.comun.util.ToolLaunch;
+import cn.sixlab.sixtools.comun.util.ToolLoader;
 
 import java.io.IOException;
 
@@ -21,10 +22,13 @@ import java.io.IOException;
  * @author 六楼的雨/loki
  * @date 2015/5/22 21:06
  */
-public class Punto implements ToolLaunch{
-    
-    @Override
-    public void launch() {
+public class Punto extends Application implements ToolLoader {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    private void show() {
         Stage stage = new Stage();
         Platform.setImplicitExit(false);
         Parent parent = null;
@@ -37,5 +41,15 @@ public class Punto implements ToolLaunch{
         stage.setScene(scene);
         stage.setTitle("Six Punto : " + A.get());
         stage.show();
+    }
+
+    @Override
+    public void load() {
+        show();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        show();
     }
 }

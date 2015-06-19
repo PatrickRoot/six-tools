@@ -61,26 +61,30 @@ public class TomcatController implements Initializable {
         pathColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         docColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        pathColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent e) {
-                String newPath = (String) e.getNewValue();
-                String oldPath = (String) e.getOldValue();
-                String docBase = ((SeisTomcat) e.getRowValue()).getDocBase();
-                update(oldPath, newPath, docBase);
-            }
-        });
-        docColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent e) {
-                String path = ((SeisTomcat) e.getRowValue()).getPath();
-                String docBase = (String) e.getNewValue();
-                update(path, path, docBase);
-            }
-        });
+        pathColumn.setOnEditCommit(pathEdit());
+        pathColumn.setOnEditCancel(pathEdit());
+        docColumn.setOnEditCommit(docEdit());
+        docColumn.setOnEditCancel(docEdit());
 
         tomcatTable.setItems(data);
         initData();
+    }
+
+    private EventHandler<TableColumn.CellEditEvent> docEdit() {
+        return e -> {
+            String path = ((SeisTomcat) e.getRowValue()).getPath();
+            String docBase = (String) e.getNewValue();
+            update(path, path, docBase);
+        };
+    }
+
+    private EventHandler<TableColumn.CellEditEvent> pathEdit() {
+        return e -> {
+            String newPath = (String) e.getNewValue();
+            String oldPath = (String) e.getOldValue();
+            String docBase = ((SeisTomcat) e.getRowValue()).getDocBase();
+            update(oldPath, newPath, docBase);
+        };
     }
 
     private void update(String oldPath, String newPath, String newDocBase) {
@@ -96,8 +100,12 @@ public class TomcatController implements Initializable {
             for (Element context : contexts) {
                 String path = context.attributeValue("path").substring(1);
                 if(path.equals(oldPath)){
-                    context.setAttributeValue("path", "/"+newPath);
-                    context.setAttributeValue("docBase", newDocBase.replaceAll("\\\\", "/"));
+                    if("".equals(newPath)){
+                        host.remove(context);
+                    }else{
+                        context.setAttributeValue("path", "/" + newPath);
+                        context.setAttributeValue("docBase", newDocBase.replaceAll("\\\\", "/"));
+                    }
                     found = true;
                     break;
                 }
