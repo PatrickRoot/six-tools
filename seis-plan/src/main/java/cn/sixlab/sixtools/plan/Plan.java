@@ -3,45 +3,43 @@
  * @author 六楼的雨/loki
  * @email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixtools.gadgets;
+package cn.sixlab.sixtools.plan;
 
-import cn.sixlab.sixtools.comun.util.A;
-import cn.sixlab.sixtools.comun.util.ToolLoader;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import cn.sixlab.sixtools.comun.util.A;
+import cn.sixlab.sixtools.comun.util.ToolLoader;
 
 import java.io.IOException;
 
 /**
- * TODO
+ * //TODO
  *
  * @author 六楼的雨/loki
- * @date 2015/6/17 22:40
+ * @date 2015/4/5 9:30
  */
-public class Gadgets extends Application implements ToolLoader {
-    public static Stage stage;
+public class Plan extends Application implements ToolLoader {
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    private void show(){
+    private void show() {
         Stage stage = new Stage();
-        this.stage = stage;
         Platform.setImplicitExit(false);
         Parent parent = null;
         try {
-            parent = FXMLLoader.load(getClass().getResource("gadgets.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("plan.fxml"));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        Scene scene = new Scene(parent, 1000, 600);
+        Scene scene = new Scene(parent, 600, 600);
         stage.setScene(scene);
-        stage.setTitle("Seis Gadgets : " + A.get());
+        stage.setTitle("Six Plan : " + A.get());
         stage.show();
     }
 

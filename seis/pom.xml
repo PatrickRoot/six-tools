@@ -16,22 +16,6 @@
         <!-- Seis -->
         <dependency>
             <groupId>cn.sixlab</groupId>
-            <artifactId>seis-plan</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.sixlab</groupId>
-            <artifactId>seis-pelicula</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.sixlab</groupId>
-            <artifactId>seis-punto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.sixlab</groupId>
-            <artifactId>seis-tomcat</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.sixlab</groupId>
             <artifactId>seis-gadgets</artifactId>
         </dependency>
 

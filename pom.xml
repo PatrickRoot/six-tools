@@ -21,6 +21,7 @@
         <module>seis-resolverpelicula</module>
         <module>seis-tomcat</module>
         <module>seis-gadgets</module>
+        <module>seis-encode</module>
     </modules>
 
     <properties>
@@ -61,12 +62,22 @@
             <!-- Seis -->
             <dependency>
                 <groupId>cn.sixlab</groupId>
+                <artifactId>comun</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
                 <groupId>cn.sixlab</groupId>
-                <artifactId>comun</artifactId>
+                <artifactId>seis-encode</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
+                <artifactId>seis-gadgets</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
@@ -86,12 +97,17 @@
             </dependency>
             <dependency>
                 <groupId>cn.sixlab</groupId>
+                <artifactId>seis-resolverpelicula</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-tomcat</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
                 <groupId>cn.sixlab</groupId>
-                <artifactId>seis-gadgets</artifactId>
+                <artifactId>seis-update</artifactId>
                 <version>${version.seis}</version>
             </dependency>
 
