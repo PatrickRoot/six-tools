@@ -13,4 +13,6 @@ public interface SeisToolsMapper {
     SeisTools selectById(Integer id);
 
     List<SeisTools> getEnableTools();
+
+    SeisTools selectByBtnId(String btnId);
 }

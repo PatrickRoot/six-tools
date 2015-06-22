@@ -20,10 +20,6 @@ public class PlanType {
     private String typeValue;
     private String typeName;
 
-    public PlanType() {
-        super();
-    }
-
     public PlanType(String typeValue, String typeName) {
         this.typeValue = typeValue;
         this.typeName = typeName;
@@ -51,6 +47,7 @@ public class PlanType {
         typeList.add(new PlanType(C.PLAN_TYPE_SEASON, "季度"));
         typeList.add(new PlanType(C.PLAN_TYPE_MONTH, "月"));
         typeList.add(new PlanType(C.PLAN_TYPE_WEEK, "周"));
+        typeList.add(new PlanType(C.PLAN_TYPE_DAY, "日"));
         return typeList;
     }
 

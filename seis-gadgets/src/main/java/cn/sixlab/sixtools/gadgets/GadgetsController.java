@@ -5,7 +5,9 @@
  */
 package cn.sixlab.sixtools.gadgets;
 
-import cn.sixlab.StrUtil;
+import cn.sixlab.sixtools.comun.bean.SeisTools;
+import cn.sixlab.sixtools.comun.dao.ToolsDao;
+import cn.sixlab.sixtools.comun.util.UI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +18,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,12 +34,12 @@ import java.util.ResourceBundle;
  */
 public class GadgetsController implements Initializable{
     private static Logger logger = LoggerFactory.getLogger(GadgetsController.class);
-    public static GadgetsController ctrl;
-
+    public static GadgetsController self;
+    private ToolsDao dao = new ToolsDao();
 
     public BorderPane rootPane;
+    public GridPane topPane;
     public Pane bottomPane;
-    public HBox topPane;
 
     public SplitPane splitPane;
     public ScrollPane scrollPane;
@@ -47,34 +48,65 @@ public class GadgetsController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ctrl = this;
+        System.out.println("init->"+this);
+        self = this;
         Platform.runLater(() -> {
+            Parent parent = null;
             try {
-                Parent parent = FXMLLoader.load(getClass().getResource("groups/group01.fxml"));
-                scrollPane.setContent(parent);
+                parent = FXMLLoader.load(getClass().getResource("groups/group01.fxml"));
+                Parent mainParent = null;
+                try {
+                    Button btn = (Button) parent.getChildrenUnmodifiable().get(0);
+                    String btnId = btn.getId();
+                    SeisTools seisTools = dao.getTool(btnId);
+                    String className = seisTools.getClassName();
+                    Class clz = Class.forName(className);
 
-                Parent mainParent = FXMLLoader.load(getClass().getResource("tools/01/tool01.fxml"));
+                    mainParent = FXMLLoader.load(clz.getResource("tool.fxml"));
+                }catch (Exception e){
+                    mainParent = UI.nullParent();
+                    logger.error(e.getMessage(), e);
+                }
                 mainPane.setContent(mainParent);
-            } catch (IOException e1) {
+            } catch (Exception e1) {
+                parent = UI.nullParent();
                 logger.error(e1.getMessage(), e1);
             }
+            scrollPane.setContent(parent);
         });
     }
 
     public void groupBtnClick(ActionEvent event) {
-        String idStr = ((Button) event.getTarget()).getId().substring(5);
-        if (StrUtil.isNumber(idStr)) {
-            Platform.runLater(() -> {
-                try {
-                    Parent parent = FXMLLoader.load(getClass().getResource("groups/group" + idStr + ".fxml"));
-                    scrollPane.setContent(parent);
+        System.out.println("groupBtnClick->" + this);
+        String idStr = ((Button) event.getTarget()).getId();
+        Platform.runLater(() -> {
+            Parent parent = null;
+            try {
+                parent = FXMLLoader.load(getClass().getResource("groups/" + idStr + ".fxml"));
 
-                    Parent mainParent = FXMLLoader.load(getClass().getResource("tools/"+idStr+"/tool01.fxml"));
-                    mainPane.setContent(mainParent);
-                } catch (IOException e1) {
-                    logger.error(e1.getMessage(), e1);
+                Parent mainParent = null;
+                try {
+                    Button btn = (Button) parent.getChildrenUnmodifiable().get(0);
+                    String btnId = btn.getId();
+                    SeisTools seisTools = dao.getTool(btnId);
+                    String className = seisTools.getClassName();
+                    Class clz = Class.forName(className);
+
+                    mainParent = FXMLLoader.load(clz.getResource("tool.fxml"));
+                }catch (Exception e){
+                    mainParent = UI.nullParent();
+                    logger.error(e.getMessage(), e);
                 }
-            });
-        }
+                mainPane.setContent(mainParent);
+            } catch (Exception e1) {
+                parent = UI.nullParent();
+                logger.error(e1.getMessage(), e1);
+            }
+            scrollPane.setContent(parent);
+        });
+    }
+
+    public void exit(ActionEvent event) {
+        System.exit(0);
     }
 }

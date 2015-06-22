@@ -6,8 +6,8 @@
 package cn.sixlab.sixtools.gadgets;
 
 import cn.sixlab.sixtools.comun.util.A;
+import cn.sixlab.sixtools.comun.util.C;
 import cn.sixlab.sixtools.comun.util.ToolLoader;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,17 +22,22 @@ import java.io.IOException;
  * @author 六楼的雨/loki
  * @date 2015/6/17 22:40
  */
-public class Gadgets extends Application implements ToolLoader {
-    public static Stage stage;
+public class Gadgets extends ToolLoader {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
+        title = "Seis Gadgets : " + A.get();
+        C.implicitExit = true;
         launch(args);
     }
 
-    private void show(){
-        Stage stage = new Stage();
+    @Override
+    public void show(Stage stage){
+        this.loader = this;
+        if (null == stage) {
+            stage = new Stage();
+        }
         this.stage = stage;
-        Platform.setImplicitExit(false);
+        Platform.setImplicitExit(C.implicitExit);
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource("gadgets.fxml"));
@@ -41,17 +46,6 @@ public class Gadgets extends Application implements ToolLoader {
         }
         Scene scene = new Scene(parent, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle("Seis Gadgets : " + A.get());
-        stage.show();
-    }
-
-    @Override
-    public void load() {
-        show();
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        show();
+        stage.setTitle(title);
     }
 }

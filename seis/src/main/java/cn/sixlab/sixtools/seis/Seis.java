@@ -5,13 +5,16 @@
  */
 package cn.sixlab.sixtools.seis;
 
-import cn.sixlab.sixtools.punto.PuntoTask;
+import cn.sixlab.sixtools.bandeja.BandejaService;
+import cn.sixlab.sixtools.comun.util.A;
+import cn.sixlab.sixtools.gadgets.Gadgets;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 
 /**
- * Seis main方法,启动所有定时器,初始化右下角界面.
+ * cn.sixlab.sixtools.seis.Seis main方法,启动托盘工具
  *
  * @author 六楼的雨/loki
  * @date 2015/4/14 12:21
@@ -19,19 +22,18 @@ import javafx.stage.Stage;
 public class Seis extends Application {
 
     public static void main(String[] args) {
-        startTimers();
-        (new SeisTrayService()).initTray();
         launch(args);
-    }
-
-    private static void startTimers() {
-        PuntoTask.startTask();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setOnCloseRequest(e -> {
-            primaryStage.hide();
+        Platform.setImplicitExit(false);
+        Platform.runLater(()->{
+            Gadgets.title = "Seis Tools : " + A.get();
+            Gadgets gadgets = new Gadgets();
+            gadgets.load(gadgets);
+            BandejaService service = new BandejaService();
+            service.initTray(gadgets);
         });
     }
 }

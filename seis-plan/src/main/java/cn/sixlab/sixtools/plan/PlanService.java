@@ -5,6 +5,7 @@
  */
 package cn.sixlab.sixtools.plan;
 
+import cn.sixlab.sixtools.comun.util.S;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,8 +28,9 @@ import cn.sixlab.sixtools.comun.bean.ext.PlanStatus;
 import cn.sixlab.sixtools.comun.bean.ext.PlanType;
 import cn.sixlab.sixtools.comun.dao.PlanDao;
 import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.StrUtil;
 import cn.sixlab.sixfx.ConfirmDialogExt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -41,19 +43,21 @@ import java.util.List;
  * @date 2015/4/13 17:32
  */
 public class PlanService {
+    private Logger logger = LoggerFactory.getLogger(PlanService.class);
 
     private final ObservableList<SeisPlan> yearData = FXCollections.observableArrayList();
     private final ObservableList<SeisPlan> seasonData = FXCollections.observableArrayList();
     private final ObservableList<SeisPlan> monthData = FXCollections.observableArrayList();
     private final ObservableList<SeisPlan> weekData = FXCollections.observableArrayList();
+    private final ObservableList<SeisPlan> dayData = FXCollections.observableArrayList();
     private final ObservableList<PlanStatus> statusData = FXCollections.observableArrayList();
     private final ObservableList<PlanType> typeData = FXCollections.observableArrayList();
     private PlanDao dao = new PlanDao();
-    private PlanController controller;
+    private PlanController ctrl;
     private SeisPlan thePlan = null;
 
     public PlanService(PlanController planController) {
-        this.controller = planController;
+        this.ctrl = planController;
     }
 
     public void initCombo() {
@@ -61,11 +65,11 @@ public class PlanService {
         statusData.clear();
         statusData.addAll(statusList);
 
-        List<ComboBox> statusCombos = Arrays.asList(controller.yearStatusCombo, controller.monthStatusCombo,
-                controller.seasonStatusCombo, controller.weekStatusCombo);
+        List<ComboBox> statusCombos = Arrays.asList(ctrl.yearStatusCombo, ctrl.monthStatusCombo,
+                ctrl.seasonStatusCombo, ctrl.weekStatusCombo, ctrl.dayStatusCombo);
         statusCombos.stream().forEach(comboBox -> {
             comboBox.setItems(statusData);
-            comboBox.getSelectionModel().selectFirst();
+            comboBox.getSelectionModel().select(1);
             comboBox.setCellFactory(param -> new ListCell<PlanStatus>() {
                 @Override
                 protected void updateItem(PlanStatus planStatus, boolean bln) {
@@ -84,9 +88,8 @@ public class PlanService {
         typeData.clear();
         typeData.addAll(typeList);
 
-        controller.typeCombo.setItems(typeData);
-        controller.typeCombo.getSelectionModel().selectLast();
-        controller.typeCombo.setCellFactory(p -> new ListCell<PlanType>() {
+        ctrl.typeCombo.setItems(typeData);
+        ctrl.typeCombo.setCellFactory(p -> new ListCell<PlanType>() {
             @Override
             protected void updateItem(PlanType planType, boolean bln) {
                 super.updateItem(planType, bln);
@@ -103,17 +106,20 @@ public class PlanService {
     public void initTable() {
         searchAllTableData();
         initTableCellValueFactory();
+        initTableColumnWidth();
         initTableCellFactory();
 
-        controller.yearTable.setItems(yearData);
-        controller.seasonTable.setItems(seasonData);
-        controller.monthTable.setItems(monthData);
-        controller.weekTable.setItems(weekData);
+        ctrl.yearTable.setItems(yearData);
+        ctrl.seasonTable.setItems(seasonData);
+        ctrl.monthTable.setItems(monthData);
+        ctrl.weekTable.setItems(weekData);
+        ctrl.dayTable.setItems(dayData);
 
-        controller.yearTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(controller.yearTable));
-        controller.seasonTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(controller.seasonTable));
-        controller.monthTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(controller.monthTable));
-        controller.weekTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(controller.weekTable));
+        ctrl.yearTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(ctrl.yearTable));
+        ctrl.seasonTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(ctrl.seasonTable));
+        ctrl.monthTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(ctrl.monthTable));
+        ctrl.weekTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(ctrl.weekTable));
+        ctrl.dayTable.addEventFilter(MouseEvent.MOUSE_CLICKED, tableClick(ctrl.dayTable));
     }
 
     private void searchAllTableData() {
@@ -121,40 +127,79 @@ public class PlanService {
         searchSeason();
         searchMonth();
         searchWeek();
+        searchDay();
     }
 
     private void initTableCellValueFactory() {
-        controller.yearIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
-        controller.seasonIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
-        controller.monthIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
-        controller.weekIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.yearIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.seasonIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.monthIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.weekIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.dayIdColumn.setCellValueFactory(new PropertyValueFactory("id"));
 
-        controller.yearNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
-        controller.seasonNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
-        controller.monthNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
-        controller.weekNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
+        ctrl.yearNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
+        ctrl.seasonNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
+        ctrl.monthNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
+        ctrl.weekNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
+        ctrl.dayNameColumn.setCellValueFactory(new PropertyValueFactory("planName"));
 
-        controller.yearDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
-        controller.seasonDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
-        controller.monthDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
-        controller.weekDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
+        ctrl.yearDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
+        ctrl.seasonDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
+        ctrl.monthDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
+        ctrl.weekDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
+        ctrl.dayDateColumn.setCellValueFactory(new PropertyValueFactory("planDate"));
 
-        controller.yearTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
-        controller.seasonTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
-        controller.monthTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
-        controller.weekTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
+        ctrl.yearTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
+        ctrl.seasonTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
+        ctrl.monthTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
+        ctrl.weekTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
+        ctrl.dayTimeColumn.setCellValueFactory(new PropertyValueFactory("planTime"));
 
-        controller.yearStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatus"));
-        controller.seasonStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatus"));
-        controller.monthStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatus"));
-        controller.weekStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatus"));
+        ctrl.yearStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
+        ctrl.seasonStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
+        ctrl.monthStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
+        ctrl.weekStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
+        ctrl.dayStatusColumn.setCellValueFactory(new PropertyValueFactory("planStatusName"));
+    }
+
+    private void initTableColumnWidth() {
+        ctrl.yearIdColumn.setPrefWidth(60);
+        ctrl.seasonIdColumn.setPrefWidth(60);
+        ctrl.monthIdColumn.setPrefWidth(60);
+        ctrl.weekIdColumn.setPrefWidth(60);
+        ctrl.dayIdColumn.setPrefWidth(60);
+
+        ctrl.yearNameColumn.setPrefWidth(510);
+        ctrl.seasonNameColumn.setPrefWidth(510);
+        ctrl.monthNameColumn.setPrefWidth(510);
+        ctrl.weekNameColumn.setPrefWidth(510);
+        ctrl.dayNameColumn.setPrefWidth(510);
+
+        ctrl.yearDateColumn.setPrefWidth(90);
+        ctrl.seasonDateColumn.setPrefWidth(90);
+        ctrl.monthDateColumn.setPrefWidth(90);
+        ctrl.weekDateColumn.setPrefWidth(90);
+        ctrl.dayDateColumn.setPrefWidth(90);
+
+        ctrl.yearTimeColumn.setPrefWidth(60);
+        ctrl.seasonTimeColumn.setPrefWidth(60);
+        ctrl.monthTimeColumn.setPrefWidth(60);
+        ctrl.weekTimeColumn.setPrefWidth(60);
+        ctrl.dayTimeColumn.setPrefWidth(60);
+
+        ctrl.yearStatusColumn.setPrefWidth(60);
+        ctrl.seasonStatusColumn.setPrefWidth(60);
+        ctrl.monthStatusColumn.setPrefWidth(60);
+        ctrl.weekStatusColumn.setPrefWidth(60);
+        ctrl.dayStatusColumn.setPrefWidth(60);
     }
 
     private void initTableCellFactory() {
-        controller.yearStatusColumn.setCellFactory(tableColorCallback());
-        controller.seasonStatusColumn.setCellFactory(tableColorCallback());
-        controller.monthStatusColumn.setCellFactory(tableColorCallback());
-        controller.weekStatusColumn.setCellFactory(tableColorCallback());
+        ctrl.yearStatusColumn.setCellFactory(tableColorCallback());
+        ctrl.seasonStatusColumn.setCellFactory(tableColorCallback());
+        ctrl.monthStatusColumn.setCellFactory(tableColorCallback());
+        ctrl.weekStatusColumn.setCellFactory(tableColorCallback());
+        ctrl.dayStatusColumn.setCellFactory(tableColorCallback());
     }
 
     private Callback<TableColumn, TableCell> tableColorCallback() {
@@ -175,11 +220,11 @@ public class PlanService {
                     if (null != colorPlan) {
                         setText(item);
                         if (C.PLAN_STATUS_ED.equals(colorPlan.getPlanStatus())) {
-                            tableRow.setStyle("-fx-background-color: #F3705E");
+                            tableRow.setStyle("-fx-background-color: #3366CC");
                         } else if (C.PLAN_STATUS_STOP.equals(colorPlan.getPlanStatus())) {
-                            tableRow.setStyle("-fx-background-color: #FF7F27");
+                            tableRow.setStyle("-fx-background-color: #F3705E");
                         } else if (C.PLAN_STATUS_ING.equals(colorPlan.getPlanStatus())) {
-                            tableRow.setStyle("-fx-background-color: #BEE02A");
+                            tableRow.setStyle("-fx-background-color: #99CC33");
                         }
                     }
                 }
@@ -204,21 +249,23 @@ public class PlanService {
     private void modifyPlan(SeisPlan clickedPlan) {
         thePlan = clickedPlan;
 
-        controller.nameField.setText(clickedPlan.getPlanName());
-        controller.timeField.setText(clickedPlan.getPlanTime());
-        controller.contentArea.setText(clickedPlan.getPlanContent());
+        ctrl.nameField.setText(clickedPlan.getPlanName());
+        ctrl.timeField.setText(clickedPlan.getPlanTime());
+        ctrl.contentArea.setText(clickedPlan.getPlanContent());
 
-        controller.typeCombo.getItems().stream()
+        ctrl.typeCombo.getItems().stream()
                 .filter(type -> ((PlanType) type).getTypeValue().equals(
                         clickedPlan.getPlanType()))
                 .forEach(type -> {
-                    controller.typeCombo.getSelectionModel().select(type);
+                    ctrl.typeCombo.getSelectionModel().select(type);
                 });
 
-        controller.datePicker.setValue(LocalDate.parse(clickedPlan.getPlanDate()));
+        if(S.isNotEmpty(clickedPlan.getPlanDate())){
+            ctrl.datePicker.setValue(LocalDate.parse(clickedPlan.getPlanDate()));
+        }
 
-        controller.taskTitleLabel.setText("修改任务：" + clickedPlan.getPlanName());
-        controller.tabPane.getSelectionModel().select(controller.taskTab);
+        ctrl.taskTitleLabel.setText("修改任务ID：" + clickedPlan.getId());
+        ctrl.tabPane.getSelectionModel().select(ctrl.taskTab);
     }
 
     private void showContextMenu(TableView table, MouseEvent e) {
@@ -250,7 +297,7 @@ public class PlanService {
 
             contextMenu.setX(e.getScreenX());
             contextMenu.setY(e.getScreenY());
-            contextMenu.show(controller.yearTable.getScene().getWindow());
+            contextMenu.show(ctrl.yearTable.getScene().getWindow());
         }
     }
 
@@ -258,41 +305,34 @@ public class PlanService {
         ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认", "确定重启任务：" + seisPlan.getPlanName());
 
         dialogExt.setOnAction(e -> {
-            startPlan(seisPlan);
+            seisPlan.setPlanStatus(C.PLAN_STATUS_ING);
+            dao.updateById(seisPlan);
             searchAllTableData();
         });
         dialogExt.setTipContent(seisPlan.getPlanContent());
 
         dialogExt.show();
-    }
-
-    private void startPlan(SeisPlan seisPlan) {
-        seisPlan.setPlanStatus(C.PLAN_STATUS_ING);
-        dao.updateById(seisPlan);
     }
 
     private void confirmStopPlan(SeisPlan seisPlan) {
         ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认", "确定终止任务：" + seisPlan.getPlanName());
 
         dialogExt.setOnAction(e -> {
-            stopPlan(seisPlan);
+            seisPlan.setPlanStatus(C.PLAN_STATUS_STOP);
+            dao.updateById(seisPlan);
             searchAllTableData();
         });
         dialogExt.setTipContent(seisPlan.getPlanContent());
 
         dialogExt.show();
-    }
-
-    private void stopPlan(SeisPlan sixPlan) {
-        sixPlan.setPlanStatus(C.PLAN_STATUS_STOP);
-        dao.updateById(sixPlan);
     }
 
     private void confirmFinishPlan(SeisPlan seisPlan) {
         ConfirmDialogExt dialogExt = new ConfirmDialogExt("确认", "确定完成任务：" + seisPlan.getPlanName());
 
         dialogExt.setOnAction(e -> {
-            finishPlan(seisPlan);
+            seisPlan.setPlanStatus(C.PLAN_STATUS_ED);
+            dao.updateById(seisPlan);
             searchAllTableData();
         });
         dialogExt.setTipContent(seisPlan.getPlanContent());
@@ -300,62 +340,62 @@ public class PlanService {
         dialogExt.show();
     }
 
-    private void finishPlan(SeisPlan seisPlan) {
-        seisPlan.setPlanStatus(C.PLAN_STATUS_ED);
-        dao.updateById(seisPlan);
-    }
-
     public void initTab() {
 
-        controller.yearTab.selectedProperty().addListener(e -> {
+        ctrl.yearTab.selectedProperty().addListener(e -> {
             changeTab();
         });
 
-        controller.monthTab.selectedProperty().addListener(e -> {
+        ctrl.monthTab.selectedProperty().addListener(e -> {
             changeTab();
         });
 
-        controller.weekTab.selectedProperty().addListener(e -> {
+        ctrl.seasonTab.selectedProperty().addListener(e -> {
             changeTab();
         });
 
-        controller.seasonTab.selectedProperty().addListener(e -> {
+        ctrl.weekTab.selectedProperty().addListener(e -> {
             changeTab();
         });
 
-        controller.tabPane.getSelectionModel().select(controller.weekTab);
+        ctrl.dayTab.selectedProperty().addListener(e -> {
+            changeTab();
+        });
+
+        ctrl.tabPane.getSelectionModel().select(ctrl.dayTab);
 
         initTaskTab();
     }
 
     private void changeTab() {
-        //TODO currentTab && controller.yearTab.isSelected() dao di na ge hao yong
-        Tab selectTab = controller.tabPane.getSelectionModel().getSelectedItem();
-        if (selectTab == controller.yearTab && controller.yearTab.isSelected()) {
-            controller.tipLabel.setText("任务数量为：" + yearData.size());
-        } else if (selectTab == controller.seasonTab && controller.seasonTab.isSelected()) {
-            controller.tipLabel.setText("任务数量为：" + seasonData.size());
-        } else if (selectTab == controller.monthTab && controller.monthTab.isSelected()) {
-            controller.tipLabel.setText("任务数量为：" + monthData.size());
-        } else if (selectTab == controller.weekTab && controller.weekTab.isSelected()) {
-            controller.tipLabel.setText("任务数量为：" + weekData.size());
+        //TODO currentTab && ctrl.yearTab.isSelected() 到底哪个好用
+        Tab selectTab = ctrl.tabPane.getSelectionModel().getSelectedItem();
+        if (selectTab == ctrl.yearTab && ctrl.yearTab.isSelected()) {
+            ctrl.tipLabel.setText("任务数量为：" + yearData.size());
+        } else if (selectTab == ctrl.seasonTab && ctrl.seasonTab.isSelected()) {
+            ctrl.tipLabel.setText("任务数量为：" + seasonData.size());
+        } else if (selectTab == ctrl.monthTab && ctrl.monthTab.isSelected()) {
+            ctrl.tipLabel.setText("任务数量为：" + monthData.size());
+        } else if (selectTab == ctrl.weekTab && ctrl.weekTab.isSelected()) {
+            ctrl.tipLabel.setText("任务数量为：" + weekData.size());
+        } else if (selectTab == ctrl.dayTab && ctrl.dayTab.isSelected()) {
+            ctrl.tipLabel.setText("任务数量为：" + dayData.size());
         }
     }
 
     public void initTaskTab() {
         thePlan = null;
-        controller.taskTitleLabel.setText("添加新任务");
-        controller.nameField.setText("");
-        controller.typeCombo.getSelectionModel().selectFirst();
-        controller.typeCombo.setDisable(false);
-        controller.contentArea.setText("");
+        ctrl.taskTitleLabel.setText("添加新任务");
+        ctrl.nameField.setText("");
+        ctrl.typeCombo.getSelectionModel().selectLast();
+        ctrl.contentArea.setText("");
     }
 
 
     public void searchYear() {
         SeisPlan sixPlan = new SeisPlan();
 
-        String status = ((PlanStatus) controller.yearStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        String status = ((PlanStatus) ctrl.yearStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
         sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
         sixPlan.setPlanType(C.PLAN_TYPE_YEAR);
@@ -366,7 +406,7 @@ public class PlanService {
     public void searchSeason() {
         SeisPlan sixPlan = new SeisPlan();
 
-        String status = ((PlanStatus) controller.seasonStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        String status = ((PlanStatus) ctrl.seasonStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
         sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
         sixPlan.setPlanType(C.PLAN_TYPE_SEASON);
@@ -377,7 +417,7 @@ public class PlanService {
     public void searchMonth() {
         SeisPlan sixPlan = new SeisPlan();
 
-        String status = ((PlanStatus) controller.monthStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        String status = ((PlanStatus) ctrl.monthStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
         sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
         sixPlan.setPlanType(C.PLAN_TYPE_MONTH);
@@ -388,7 +428,7 @@ public class PlanService {
     public void searchWeek() {
         SeisPlan sixPlan = new SeisPlan();
 
-        String status = ((PlanStatus) controller.weekStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        String status = ((PlanStatus) ctrl.weekStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
         sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
 
         sixPlan.setPlanType(C.PLAN_TYPE_WEEK);
@@ -396,17 +436,28 @@ public class PlanService {
         weekData.addAll(dao.selectByPlan(sixPlan));
     }
 
+    public void searchDay() {
+        SeisPlan sixPlan = new SeisPlan();
+
+        String status = ((PlanStatus) ctrl.weekStatusCombo.getSelectionModel().getSelectedItem()).getStatusValue();
+        sixPlan.setPlanStatus(C.PLAN_STATUS_ALL.equals(status) ? null : status);
+
+        sixPlan.setPlanType(C.PLAN_TYPE_DAY);
+        dayData.clear();
+        dayData.addAll(dao.selectByPlan(sixPlan));
+    }
+
     public void okPlan() {
-        String name = controller.nameField.getText();
-        if (StrUtil.isEmpty(name)) {
-            controller.tipLabel.setText("任务名为空");
-            controller.nameField.requestFocus();
+        String name = ctrl.nameField.getText();
+        if (S.isEmpty(name)) {
+            ctrl.tipLabel.setText("任务名为空");
+            ctrl.nameField.requestFocus();
             return;
         }
 
-        String content = controller.contentArea.getText();
+        String content = ctrl.contentArea.getText();
 
-        String type = ((PlanType) controller.typeCombo.getSelectionModel()
+        String type = ((PlanType) ctrl.typeCombo.getSelectionModel()
                 .getSelectedItem()).getTypeValue();
 
         boolean isInsert = false;
@@ -416,8 +467,9 @@ public class PlanService {
             thePlan.setPlanStatus(C.PLAN_STATUS_ING);
         }
         thePlan.setPlanName(name);
-        thePlan.setPlanTime(controller.timeField.getText());
-        thePlan.setPlanDate(controller.datePicker.getValue().toString());
+        thePlan.setPlanTime(ctrl.timeField.getText());
+        LocalDate localDate = ctrl.datePicker.getValue();
+        thePlan.setPlanDate(null== localDate?null:localDate.toString());
         thePlan.setPlanType(type);
         thePlan.setPlanContent(content);
         if (name.startsWith(C.PLAN_OUT_COUNT)) {
@@ -425,11 +477,11 @@ public class PlanService {
         }
         if (isInsert) {
             dao.insert(thePlan);
-            controller.tipLabel.setText("添加任务成功：" + name);
-            initTaskTab();
+            ctrl.tipLabel.setText("添加任务成功：" + name);
+            ctrl.taskTitleLabel.setText("修改任务ID："+thePlan.getId());
         } else {
             dao.updateById(thePlan);
-            controller.tipLabel.setText("更新任务成功：" + name);
+            ctrl.tipLabel.setText("更新任务成功：" + name);
         }
         searchAllTableData();
     }

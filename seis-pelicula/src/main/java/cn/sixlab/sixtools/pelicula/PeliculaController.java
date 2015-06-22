@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import cn.sixlab.sixtools.comun.util.C;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import java.util.ResourceBundle;
  * @date 2015/3/21 19:46
  */
 public class PeliculaController implements Initializable{
+    private Logger logger = LoggerFactory.getLogger(PeliculaController.class);
     private PeliculaService service ;
 
     public Label titleLabel;
@@ -57,6 +60,15 @@ public class PeliculaController implements Initializable{
 
     public void searchByBaidu(ActionEvent event) {
         service.searchByNet(C.BAIDU_SEARCH_STRING);
+        System.out.println("--------------------");
+        System.out.println(tcNo.getWidth());
+        System.out.println(tcName.getWidth());
+        System.out.println(tcYear.getWidth());
+        System.out.println(tcCountry.getWidth());
+        System.out.println(tcDirector.getWidth());
+        System.out.println(tcRemark.getWidth());
+        System.out.println(tcDate.getWidth());
+        System.out.println("--------------------");
     }
 
     public void searchByDouban(ActionEvent event) {

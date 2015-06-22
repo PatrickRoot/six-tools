@@ -108,13 +108,13 @@ public class T extends TimerTask{
      * 方法描述：每周的week[1-7]周的hour点minute分重复一次
      */
     public static void repeatByWeek(TimerTask timerTask, Integer week, Integer hour, Integer minute) {
-        //Date alreadyDate = new Date();
+        //Date alreadyDate = newp Date();
         //alreadyDate.setYear(0);
         //alreadyDate.setMonth(0);
         //alreadyDate.setDate(0);
         //System.out.println(alreadyDate.toGMTString());
         //
-        //Date specificDate = new Date(0, 0, 0, hour, minute, 0);
+        //Date specificDate = newp Date(0, 0, 0, hour, minute, 0);
         //System.out.println(specificDate.toGMTString());
         //
         //Long delayTimes = specificDate.getTime() - alreadyDate.getTime();

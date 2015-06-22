@@ -5,6 +5,7 @@
  */
 package cn.sixlab.sixtools.plan;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -15,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +29,7 @@ import java.util.ResourceBundle;
  * @date 2015/4/5 9:31
  */
 public class PlanController implements Initializable {
+    private Logger logger = LoggerFactory.getLogger(PlanController.class);
     private PlanService service = new PlanService(PlanController.this);
 
     public TabPane tabPane;
@@ -33,6 +37,7 @@ public class PlanController implements Initializable {
     public Tab seasonTab;
     public Tab monthTab;
     public Tab weekTab;
+    public Tab dayTab;
     public Tab taskTab;
 
     public ComboBox yearStatusCombo;
@@ -61,6 +66,15 @@ public class PlanController implements Initializable {
     public TableColumn monthDateColumn;
     public TableColumn monthTimeColumn;
     public TableColumn monthStatusColumn;
+
+    public ComboBox dayStatusCombo;
+
+    public TableView dayTable;
+    public TableColumn dayIdColumn;
+    public TableColumn dayNameColumn;
+    public TableColumn dayTimeColumn;
+    public TableColumn dayDateColumn;
+    public TableColumn dayStatusColumn;
 
     public ComboBox weekStatusCombo;
 
@@ -111,5 +125,9 @@ public class PlanController implements Initializable {
 
     public void resetPlan() {
         service.initTaskTab();
+    }
+
+    public void searchDay(ActionEvent event) {
+        service.searchDay();
     }
 }

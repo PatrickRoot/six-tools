@@ -2,31 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sixlab.sixtools.comun.mapper.SeisToolsMapper">
     <resultMap id="BaseResultMap" type="cn.sixlab.sixtools.comun.bean.SeisTools">
-        <id     column="id"        property="id"       jdbcType="INTEGER"/>
-        <result column="tool_name" property="toolName" jdbcType="VARCHAR"/>
-        <result column="enable"    property="enable"   jdbcType="VARCHAR"/>
+        <id     column="id"         property="id"        jdbcType="INTEGER"/>
+        <result column="tool_name"  property="toolName"  jdbcType="VARCHAR"/>
+        <result column="btn_id"     property="btnId"     jdbcType="VARCHAR"/>
+        <result column="enable"     property="enable"    jdbcType="VARCHAR"/>
+        <result column="class_name" property="className" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, tool_name, enable
+        id, tool_name, enable, btn_id, class_name
     </sql>
 
     <insert id="insert" parameterType="cn.sixlab.sixtools.comun.bean.SeisTools" useGeneratedKeys="true" keyProperty="id">
         insert into seis_tools
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="toolName != null" > tool_name, </if>
-            <if test="enable   != null" > enable,    </if>
+            <if test="toolName  != null" > tool_name, </if>
+            <if test="enable    != null" > enable,    </if>
+            <if test="btnId     != null" > btn_id,    </if>
+            <if test="className != null" > class_name,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="toolName != null" > #{toolName, jdbcType=VARCHAR}, </if>
-            <if test="enable   != null" > #{enable,   jdbcType=VARCHAR},   </if>
+            <if test="toolName  != null" > #{toolName,  jdbcType=VARCHAR}, </if>
+            <if test="btnId     != null" > #{btnId,     jdbcType=VARCHAR}, </if>
+            <if test="enable    != null" > #{enable,    jdbcType=VARCHAR}, </if>
+            <if test="className != null" > #{className, jdbcType=VARCHAR}, </if>
         </trim>
     </insert>
 
     <update id="update" parameterType="cn.sixlab.sixtools.comun.bean.SeisTools">
         update seis_tools
         <set>
-            <if test="toolName != null" > tool_name = #{toolName, jdbcType=VARCHAR}, </if>
-            <if test="enable   != null" > enable    = #{enable,   jdbcType=VARCHAR}, </if>
+            <if test="toolName  != null" > tool_name  = #{toolName,  jdbcType=VARCHAR}, </if>
+            <if test="enable    != null" > enable     = #{enable,    jdbcType=VARCHAR}, </if>
+            <if test="btnId     != null" > btn_id     = #{btnId,     jdbcType=VARCHAR}, </if>
+            <if test="className != null" > class_name = #{className, jdbcType=VARCHAR}, </if>
         </set>
         where
         id = #{id,jdbcType=INTEGER}
@@ -48,6 +56,15 @@
         seis_tools
         where
         enable = 1
+    </select>
+
+    <select id="selectByBtnId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        seis_tools
+        where
+        btn_id = #{btnId,jdbcType=VARCHAR}
     </select>
 
 </mapper>

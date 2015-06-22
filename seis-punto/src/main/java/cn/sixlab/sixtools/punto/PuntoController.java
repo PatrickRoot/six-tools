@@ -5,6 +5,9 @@
  */
 package cn.sixlab.sixtools.punto;
 
+import cn.sixlab.sixtools.comun.bean.SeisPunto;
+import cn.sixlab.sixtools.comun.dao.PuntoDao;
+import cn.sixlab.sixtools.comun.util.S;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
-import cn.sixlab.sixtools.comun.bean.SeisPunto;
-import cn.sixlab.sixtools.comun.dao.PuntoDao;
-import cn.sixlab.StrUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -57,28 +57,19 @@ public class PuntoController implements Initializable {
         puntoColumn.setCellValueFactory(new PropertyValueFactory("punto"));
         reasonColumn.setCellValueFactory(new PropertyValueFactory("reason"));
         timeColumn.setCellValueFactory(new PropertyValueFactory("indate"));
-        idColumn.setMaxWidth(500d);
-        puntoColumn.setMaxWidth(800d);
+        idColumn.setPrefWidth(50);
+        puntoColumn.setPrefWidth(70);
+        reasonColumn.setPrefWidth(580);
+        timeColumn.setPrefWidth(90);
 
         puntoTable.setItems(data);
     }
-
-    //public void minPunto(ActionEvent event) {
-    //    SeisPunto seisPunto = getInput(-1);
-    //    if (null != seisPunto) {
-    //        dao.insert(seisPunto);
-    //        tipLabel.setText("减分成功：" + String.format("%.2f", seisPunto.getPunto()));
-    //        loadPunto();
-    //    } else {
-    //        tipLabel.setText("减分失败");
-    //    }
-    //}
 
     private SeisPunto getInput(int i) {
         SeisPunto seisPunto = new SeisPunto();
         String reason = reasonField.getText();
         String punto = puntoField.getText();
-        if (StrUtil.isNumber(punto)) {
+        if (S.isNumber(punto)) {
             seisPunto.setPunto(i * Double.valueOf(punto));
         } else {
             return null;
@@ -97,6 +88,12 @@ public class PuntoController implements Initializable {
         }else{
             tipLabel.setText("计分失败");
         }
+        System.out.println("----------------------------------");
+        System.out.println(idColumn.getWidth());
+        System.out.println(puntoColumn.getWidth());
+        System.out.println(reasonColumn.getWidth());
+        System.out.println(timeColumn.getWidth());
+        System.out.println("------------------------------------");
     }
 
     private void loadPunto() {

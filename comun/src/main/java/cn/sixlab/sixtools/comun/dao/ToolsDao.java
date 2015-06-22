@@ -39,6 +39,14 @@ public class ToolsDao extends Du {
         }
     }
 
+    public SeisTools getTool(String btnId) {
+        try (SqlSession ss = factory.openSession()) {
+            SeisToolsMapper seisToolsMapper = getMapper(ss);
+            SeisTools seisTools = seisToolsMapper.selectByBtnId(btnId);
+            return seisTools;
+        }
+    }
+
     @Override
     public SeisToolsMapper getMapper(SqlSession sqlSession) {
         return sqlSession.getMapper(SeisToolsMapper.class);

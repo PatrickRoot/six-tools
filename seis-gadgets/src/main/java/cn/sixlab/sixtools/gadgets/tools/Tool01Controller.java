@@ -5,7 +5,7 @@
  */
 package cn.sixlab.sixtools.gadgets.tools;
 
-import cn.sixlab.sixtools.gadgets.GadgetsController;
+import cn.sixlab.sixtools.comun.util.S;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.Button;
@@ -42,7 +42,7 @@ public class Tool01Controller {
 
     public void textChange(Event event) {
         TextArea textArea = (TextArea) event.getTarget();
-        GadgetsController.ctrl.tipsLabel.setText(textArea.getText().length()+" 个字符");
+        //GadgetsController.ctrl.tipsLabel.setText(textArea.getText().length()+" 个字符");
     }
 
     public void itemClick(ActionEvent event) {
@@ -146,18 +146,19 @@ public class Tool01Controller {
     public void i07(ActionEvent event) throws ScriptException {
         String text = leftText.getText();
         logger.info("left:" + text);
+        if(S.isNotEmpty(text)){
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine = manager.getEngineByName("nashorn");
 
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("nashorn");
+            String js;
+            js = "function calculate(){return " + text + "} \n calculate()";
 
-        String js;
-        js = "function calculate(){return " + text + "} \n calculate()";
-
-        String result = engine.eval(js).toString();
-        try{
-            rightText.setText(String.valueOf(Integer.parseInt(result)));
-        }catch (Exception e){
-            rightText.setText(String.valueOf(Double.parseDouble(result)));
+            String result = engine.eval(js).toString();
+            try {
+                rightText.setText(String.valueOf(Integer.parseInt(result)));
+            } catch (Exception e) {
+                rightText.setText(String.valueOf(Double.parseDouble(result)));
+            }
         }
     }
 

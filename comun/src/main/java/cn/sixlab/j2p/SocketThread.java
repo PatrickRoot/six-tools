@@ -5,7 +5,7 @@
  */
 package cn.sixlab.j2p;
 
-import cn.sixlab.StrUtil;
+import cn.sixlab.sixtools.comun.util.S;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -45,7 +45,7 @@ public class SocketThread extends Thread{
                 }else{
                     inDs.receive(inDp);
                     String message = new String(inDp.getData(),0,inDp.getData().length);
-                    if(StrUtil.isNotEmpty(message)){
+                    if(S.isNotEmpty(message)){
                         callBack.call(message);
                     }
                 }

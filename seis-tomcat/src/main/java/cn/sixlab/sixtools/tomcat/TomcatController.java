@@ -23,6 +23,8 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import cn.sixlab.sixtools.comun.bean.SeisTomcat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,6 +40,7 @@ import java.util.ResourceBundle;
  * @date 2015/6/14 17:00
  */
 public class TomcatController implements Initializable {
+    private Logger logger = LoggerFactory.getLogger(TomcatController.class);
     public TextField xmlPathField;
 
     public Label tipLabel;
@@ -62,9 +65,7 @@ public class TomcatController implements Initializable {
         docColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         pathColumn.setOnEditCommit(pathEdit());
-        pathColumn.setOnEditCancel(pathEdit());
         docColumn.setOnEditCommit(docEdit());
-        docColumn.setOnEditCancel(docEdit());
 
         tomcatTable.setItems(data);
         initData();
@@ -123,7 +124,7 @@ public class TomcatController implements Initializable {
             tipLabel.setText("更新成功:" + newPath);
             initData();
         } catch (DocumentException|IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
             tipLabel.setText("错误了");
             initData();
         }
@@ -150,7 +151,7 @@ public class TomcatController implements Initializable {
             data.add(seisTomcat);
 
         } catch (DocumentException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
             tipLabel.setText("错误了!");
         }
     }

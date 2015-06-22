@@ -14,37 +14,8 @@
 
 <VBox fx:id="buttonPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.gadgets.GroupController">
     <children>
-        <Button fx:id="btnG02t01" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Json格式化1"/>
-        <Button fx:id="btnG02t02" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t03" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t04" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t05" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t06" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t07" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t08" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t09" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t10" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t11" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t12" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t13" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t14" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t15" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t16" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t17" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t18" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t19" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t20" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t21" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t22" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t23" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t24" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t25" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t26" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t27" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t28" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t29" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t30" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t31" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
-        <Button fx:id="btnG02t32" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Button"/>
+        <Button fx:id="btnG02t01" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Pelicula"/>
+        <Button fx:id="btnG02t02" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Plan"/>
+        <Button fx:id="btnG02t03" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Punto"/>
     </children>
 </VBox>

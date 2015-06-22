@@ -18,12 +18,6 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-        <!-- Sixlab -->
-        <dependency>
-            <groupId>cn.sixlab</groupId>
-            <artifactId>sixutil</artifactId>
-        </dependency>
-
         <!-- 数据库 -->
         <dependency>
             <groupId>org.xerial</groupId>

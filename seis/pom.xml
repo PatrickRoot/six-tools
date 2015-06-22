@@ -13,16 +13,18 @@
 
     <dependencies>
 
-        <!-- Seis -->
+        <!-- cn.sixlab.sixtools.bandeja.Seis -->
+        <dependency>
+            <groupId>cn.sixlab</groupId>
+            <artifactId>comun</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sixlab</groupId>
+            <artifactId>seis-bandeja</artifactId>
+        </dependency>
         <dependency>
             <groupId>cn.sixlab</groupId>
             <artifactId>seis-gadgets</artifactId>
-        </dependency>
-
-        <!-- Sixlab -->
-        <dependency>
-            <groupId>cn.sixlab</groupId>
-            <artifactId>sixutil</artifactId>
         </dependency>
 
         <!-- 日志 -->

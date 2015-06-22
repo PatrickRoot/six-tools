@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: lib/slf4j-api-1.7.5.jar lib/slf4j-log4j12-1.7.5.jar lib/log4j-1.2.17.jar lib/dom4j-1.6.1.jar lib/mybatis-3.2.7.jar lib/sqlite-jdbc-3.8.7.jar comun-1.2.0-SNAPSHOT.jar lib/sixutil-1.0-SNAPSHOT.jar lib/j2p-1.0.0-SNAPSHOT.jar
+Class-Path: lib/slf4j-api-1.7.5.jar lib/slf4j-log4j12-1.7.5.jar lib/log4j-1.2.17.jar lib/dom4j-1.6.1.jar lib/mybatis-3.2.7.jar lib/sqlite-jdbc-3.8.7.jar comun-1.2.0-SNAPSHOT.jar
 Main-Class: cn.sixlab.sixtools.gadgets.Gadgets
 

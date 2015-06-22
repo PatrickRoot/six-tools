@@ -5,17 +5,11 @@ public class SeisBandeja {
 
     private String trayName;
 
-    private String path;
-
     private String command;
-
-    private String params;
 
     private String toolType;
 
     private String toolOrder;
-
-    private String trayType;
 
     private Integer parentId;
 
@@ -35,28 +29,12 @@ public class SeisBandeja {
         this.trayName = trayName;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public String getCommand() {
         return command;
     }
 
     public void setCommand(String command) {
         this.command = command;
-    }
-
-    public String getParams() {
-        return params;
-    }
-
-    public void setParams(String params) {
-        this.params = params;
     }
 
     public String getToolType() {
@@ -73,14 +51,6 @@ public class SeisBandeja {
 
     public void setToolOrder(String toolOrder) {
         this.toolOrder = toolOrder;
-    }
-
-    public String getTrayType() {
-        return trayType;
-    }
-
-    public void setTrayType(String trayType) {
-        this.trayType = trayType;
     }
 
     public Integer getParentId() {

@@ -7,6 +7,26 @@ public class SeisTools {
 
     private String enable;
 
+    private String btnId;
+
+    private String className;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getBtnId() {
+        return btnId;
+    }
+
+    public void setBtnId(String btnId) {
+        this.btnId = btnId;
+    }
+
     public Integer getId() {
         return id;
     }

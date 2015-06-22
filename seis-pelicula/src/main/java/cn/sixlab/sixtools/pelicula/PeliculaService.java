@@ -5,16 +5,18 @@
  */
 package cn.sixlab.sixtools.pelicula;
 
+import cn.sixlab.sixtools.comun.bean.SeisPelicula;
+import cn.sixlab.sixtools.comun.dao.MovieDao;
+import cn.sixlab.sixtools.comun.util.C;
+import cn.sixlab.sixtools.comun.util.S;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import cn.sixlab.sixtools.comun.bean.SeisPelicula;
-import cn.sixlab.sixtools.comun.dao.MovieDao;
-import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.StrUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -28,32 +30,41 @@ import java.util.List;
  * @date 2015/4/13 17:47
  */
 public class PeliculaService {
+    private Logger logger = LoggerFactory.getLogger(PeliculaService.class);
 
     private MovieDao dao = new MovieDao();
     public ObservableList<SeisPelicula> data = FXCollections.observableArrayList();
-    private PeliculaController controller;
+    private PeliculaController ctrl;
     private SeisPelicula thePelicula = null;
 
-    public PeliculaService(PeliculaController controller){
-        this.controller = controller;
+    public PeliculaService(PeliculaController ctrl){
+        this.ctrl = ctrl;
     }
 
     public void initTable() {
 
-        controller.tcNo.setCellValueFactory(new PropertyValueFactory("id"));
-        controller.tcName.setCellValueFactory(new PropertyValueFactory("movieName"));
-        controller.tcCountry.setCellValueFactory(new PropertyValueFactory("country"));
-        controller.tcYear.setCellValueFactory(new PropertyValueFactory("produceYear"));
-        controller.tcDirector.setCellValueFactory(new PropertyValueFactory("director"));
-        controller.tcDate.setCellValueFactory(new PropertyValueFactory("viewDate"));
-        controller.tcRemark.setCellValueFactory(new PropertyValueFactory("remark"));
+        ctrl.tcNo.setPrefWidth(39);
+        ctrl.tcYear.setPrefWidth(39);
+        ctrl.tcDate.setPrefWidth(67);
+        ctrl.tcCountry.setPrefWidth(100);
+        ctrl.tcDirector.setPrefWidth(100);
+        ctrl.tcName.setPrefWidth(140);
+        ctrl.tcRemark.setPrefWidth(295);
 
-        controller.tableView.setItems(data);
+        ctrl.tcNo.setCellValueFactory(new PropertyValueFactory("id"));
+        ctrl.tcName.setCellValueFactory(new PropertyValueFactory("movieName"));
+        ctrl.tcCountry.setCellValueFactory(new PropertyValueFactory("country"));
+        ctrl.tcYear.setCellValueFactory(new PropertyValueFactory("produceYear"));
+        ctrl.tcDirector.setCellValueFactory(new PropertyValueFactory("director"));
+        ctrl.tcDate.setCellValueFactory(new PropertyValueFactory("viewDate"));
+        ctrl.tcRemark.setCellValueFactory(new PropertyValueFactory("remark"));
 
-        controller.tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+        ctrl.tableView.setItems(data);
+
+        ctrl.tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
             if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2) {
                 //TODO (click count == 2)===( double click)?
-                SeisPelicula clickedPelicula = (SeisPelicula) controller.tableView.getSelectionModel().getSelectedItem();
+                SeisPelicula clickedPelicula = (SeisPelicula) ctrl.tableView.getSelectionModel().getSelectedItem();
                 if (null != clickedPelicula && e.getTarget().getClass() != TableColumnHeader.class) {
                     modifyPelicula(clickedPelicula);
                 }
@@ -62,30 +73,30 @@ public class PeliculaService {
     }
 
     private void modifyPelicula(SeisPelicula clickedPelicula) {
-        controller.titleLabel.setText("修改电影记录，ID : " + clickedPelicula.getId());
+        ctrl.titleLabel.setText("修改电影记录，ID : " + clickedPelicula.getId());
         thePelicula = clickedPelicula;
-        controller.addName.setText(clickedPelicula.getMovieName());
-        controller.addCountry.setText(clickedPelicula.getCountry());
-        controller.addDirector.setText(clickedPelicula.getDirector());
-        controller.addRemark.setText(clickedPelicula.getRemark());
-        if(StrUtil.isNotEmpty(clickedPelicula.getProduceYear())){
-            controller.addYear.setValue(LocalDate.of(Integer.valueOf(clickedPelicula.getProduceYear()),1,1));
+        ctrl.addName.setText(clickedPelicula.getMovieName());
+        ctrl.addCountry.setText(clickedPelicula.getCountry());
+        ctrl.addDirector.setText(clickedPelicula.getDirector());
+        ctrl.addRemark.setText(clickedPelicula.getRemark());
+        if(S.isNotEmpty(clickedPelicula.getProduceYear())){
+            ctrl.addYear.setValue(LocalDate.of(Integer.valueOf(clickedPelicula.getProduceYear()),1,1));
         }
-        controller.addDate.setValue(LocalDate.of(Integer.valueOf(clickedPelicula.getViewDate().substring(0, 4))
+        ctrl.addDate.setValue(LocalDate.of(Integer.valueOf(clickedPelicula.getViewDate().substring(0, 4))
                 , Integer.valueOf(clickedPelicula.getViewDate().substring(4, 6))
                 , Integer.valueOf(clickedPelicula.getViewDate().substring(6, 8))));
-        controller.tabPane.getSelectionModel().select(controller.operaTab);
+        ctrl.tabPane.getSelectionModel().select(ctrl.operaTab);
     }
 
     public void reset() {
-        controller.titleLabel.setText("添加电影记录");
+        ctrl.titleLabel.setText("添加电影记录");
         thePelicula = null;
-        controller.addName.setText("");
-        controller.addCountry.setText("");
-        controller.addDirector.setText("");
-        controller.addRemark.setText("");
-        controller.addYear.setValue(null);
-        controller.addDate.setValue(LocalDate.now());
+        ctrl.addName.setText("");
+        ctrl.addCountry.setText("");
+        ctrl.addDirector.setText("");
+        ctrl.addRemark.setText("");
+        ctrl.addYear.setValue(null);
+        ctrl.addDate.setValue(LocalDate.now());
     }
 
     public void loadMovies(String text) {
@@ -93,16 +104,16 @@ public class PeliculaService {
 
         if(null!=text){
             movieList = dao.getMoviesByMovieName(text);
-            controller.toolbarKeyword.setText(text);
-            controller.tipsLabel.setText(controller.tipsLabel.getText()+".共有 " + movieList.size() + " 部相似名字电影。");
+            ctrl.toolbarKeyword.setText(text);
+            ctrl.tipsLabel.setText(ctrl.tipsLabel.getText()+".共有 " + movieList.size() + " 部相似名字电影。");
         }else{
-            String keyword = controller.toolbarKeyword.getText();
+            String keyword = ctrl.toolbarKeyword.getText();
             if ("".equals(keyword)) {
                 movieList = dao.getAllMovies();
             } else {
                 movieList = dao.getMoviesByKeyword(keyword);
             }
-            controller.tipsLabel.setText("共有 " + movieList.size() + " 部电影。");
+            ctrl.tipsLabel.setText("共有 " + movieList.size() + " 部电影。");
 
             data.clear();
             data.addAll(movieList);
@@ -110,34 +121,34 @@ public class PeliculaService {
     }
 
     public void searchByNet(String url) {
-        String text = ((SeisPelicula)controller.tableView.getSelectionModel().getSelectedItem()).getMovieName();
+        String text = ((SeisPelicula) ctrl.tableView.getSelectionModel().getSelectedItem()).getMovieName();
 
         String path = url + text;
         try {
             Runtime.getRuntime().exec(C.WINDOWS_DEFAULT_IE_COMMAND+path);
         } catch (IOException e1) {
-            e1.printStackTrace();
+            logger.error(e1.getMessage(),e1);
         }
     }
 
     public void confirm() {
-        String text = controller.addName.getText();
-        if(StrUtil.isEmpty(text)){
-            controller.tipsLabel.setText("必需输入电影名称");
-            controller.addName.requestFocus();
+        String text = ctrl.addName.getText();
+        if(S.isEmpty(text)){
+            ctrl.tipsLabel.setText("必需输入电影名称");
+            ctrl.addName.requestFocus();
             return;
         }
 
-        String director = controller.addDirector.getText();
-        String country = controller.addCountry.getText();
-        String remark = controller.addRemark.getText();
+        String director = ctrl.addDirector.getText();
+        String country = ctrl.addCountry.getText();
+        String remark = ctrl.addRemark.getText();
 
-        LocalDate addYearDate = controller.addYear.getValue();
+        LocalDate addYearDate = ctrl.addYear.getValue();
         String year = "";
         if(null!=addYearDate){
             year = String.valueOf(addYearDate.getYear());
         }
-        LocalDate addDateDate = controller.addDate.getValue();
+        LocalDate addDateDate = ctrl.addDate.getValue();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String vewDate = addDateDate.format(formatter);
         if(null!=thePelicula){
@@ -148,7 +159,7 @@ public class PeliculaService {
             thePelicula.setRemark(remark);
             thePelicula.setProduceYear(year);
             dao.update(thePelicula);
-            controller.tipsLabel.setText("更新 " + text + "成功。");
+            ctrl.tipsLabel.setText("更新 " + text + "成功。");
         }else{
             SeisPelicula seisPelicula = new SeisPelicula();
             seisPelicula.setMovieName(text);
@@ -158,7 +169,7 @@ public class PeliculaService {
             seisPelicula.setRemark(remark);
             seisPelicula.setProduceYear(year);
             dao.insert(seisPelicula);
-            controller.tipsLabel.setText("添加 " + text + "成功。");
+            ctrl.tipsLabel.setText("添加 " + text + "成功。");
         }
 
         loadMovies(text);

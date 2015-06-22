@@ -22,12 +22,11 @@
         <module>seis-tomcat</module>
         <module>seis-gadgets</module>
         <module>seis-encode</module>
+        <module>seis-bandeja</module>
     </modules>
 
     <properties>
         <version.seis>${project.version}</version.seis>
-
-        <version.sixutil>1.0-SNAPSHOT</version.sixutil>
 
         <version.junit>4.11</version.junit>
 
@@ -55,11 +54,14 @@
         <version.dom4j>1.6.1</version.dom4j>
         <version.jsoup>1.8.1</version.jsoup>
         <version.guava>17.0</version.guava>
+
+        <version.plugin.antrun>1.8</version.plugin.antrun>
+        <version.plugin.compiler>3.3</version.plugin.compiler>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Seis -->
+            <!-- cn.sixlab.sixtools.bandeja.Seis -->
             <dependency>
                 <groupId>cn.sixlab</groupId>
                 <artifactId>comun</artifactId>
@@ -68,6 +70,11 @@
             <dependency>
                 <groupId>cn.sixlab</groupId>
                 <artifactId>seis</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
+                <artifactId>seis-bandeja</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>
@@ -109,13 +116,6 @@
                 <groupId>cn.sixlab</groupId>
                 <artifactId>seis-update</artifactId>
                 <version>${version.seis}</version>
-            </dependency>
-
-            <!-- SixUtil -->
-            <dependency>
-                <groupId>cn.sixlab</groupId>
-                <artifactId>sixutil</artifactId>
-                <version>${version.sixutil}</version>
             </dependency>
 
             <!-- junit -->
@@ -195,11 +195,6 @@
                 <version>${version.poiooxml}</version>
             </dependency>
             <dependency>
-                <groupId>org.jsoup</groupId>
-                <artifactId>jsoup</artifactId>
-                <version>${version.jsoup}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${version.fastjson}</version>
@@ -273,6 +268,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${version.plugin.antrun}</version>
                     <executions>
                         <execution>
                             <id>copy-jar-2-sixtools</id>
@@ -291,6 +287,24 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.plugin.compiler}</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                        <compilerId>eclipse</compilerId>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-compiler-eclipse</artifactId>
+                            <version>2.5</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
