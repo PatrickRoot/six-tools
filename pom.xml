@@ -15,7 +15,6 @@
         <module>comun</module>
         <module>seis-plan</module>
         <module>seis-pelicula</module>
-        <module>seis</module>
         <module>seis-update</module>
         <module>seis-punto</module>
         <module>seis-resolverpelicula</module>
@@ -230,22 +229,10 @@
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
-        <!--<resources>-->
-        <!--<resource>-->
-        <!--<directory>src/main/resources</directory>-->
-        <!--<targetPath>target/main/resources</targetPath>-->
-        <!--</resource>-->
-        <!--</resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -275,11 +262,10 @@
                             <phase>package</phase>
                             <configuration>
                                 <tasks>
-                                    <copy todir="D:/Program/Sixtools/gen">
-                                        <fileset dir="${project.basedir}/target/">
-                                            <include name="*.jar" />
-                                        </fileset>
-                                    </copy>
+                                    <copyfile
+                                            src="${project.basedir}/target/${project.artifactId}-${project.version}.jar"
+                                            dest="D:/Program/Sixtools/gen/${project.artifactId}.jar">
+                                    </copyfile>
                                 </tasks>
                             </configuration>
                             <goals>
@@ -296,15 +282,7 @@
                         <source>1.8</source>
                         <target>1.8</target>
                         <encoding>UTF-8</encoding>
-                        <compilerId>eclipse</compilerId>
                     </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.codehaus.plexus</groupId>
-                            <artifactId>plexus-compiler-eclipse</artifactId>
-                            <version>2.5</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>

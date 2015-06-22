@@ -14,15 +14,8 @@ import java.io.IOException;
 public class ToolLoader extends Application {
     private static Logger logger = LoggerFactory.getLogger(ToolLoader.class);
     public static String title = "";
-    public static ToolLoader loader;
-    public static Stage stage;
 
     public void show(Stage stage){
-        this.loader = this;
-        if (null == stage) {
-            stage = new Stage();
-        }
-        this.stage = stage;
         Platform.setImplicitExit(C.implicitExit);
         Parent parent;
         try {
@@ -37,12 +30,11 @@ public class ToolLoader extends Application {
     }
 
     public void load(){
-        show(null);
+        show(new Stage());
     }
 
-    public void load(ToolLoader loader) {
-        this.loader = loader;
-        show(null);
+    public Stage getStage(){
+        return null;
     }
 
     @Override

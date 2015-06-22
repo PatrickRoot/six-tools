@@ -11,6 +11,8 @@ import cn.sixlab.sixtools.comun.util.A;
 import cn.sixlab.sixtools.comun.util.C;
 import cn.sixlab.sixtools.comun.util.ToolLoader;
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -35,9 +37,10 @@ import java.util.List;
  * @date 2015/4/14 13:37
  */
 public class BandejaService {
+    private static Logger logger = LoggerFactory.getLogger(BandejaService.class);
     public static BandejaService self;
 
-    public BandejaService(){
+    public BandejaService() {
         self = this;
     }
 
@@ -52,25 +55,25 @@ public class BandejaService {
                 if (e.getModifiers() == MouseEvent.BUTTON1_MASK) {
                     Platform.setImplicitExit(false);
                     synchronized (this) {
-                        if (null == loader.stage) {
+                        if (null == loader.getStage()) {
                             LocalTime beginTime = LocalTime.now();
                             Platform.runLater(() -> {
                                 loader.load();
                             });
                             LocalTime nowTime = LocalTime.now();
-                            while (null == loader.stage) {
+                            while (null == loader.getStage()) {
                                 if (nowTime.compareTo(beginTime.plusMinutes(1)) < 0) {
                                     break;
                                 }
                             }
                         } else {
-                            if (loader.stage.isShowing()) {
+                            if (loader.getStage().isShowing()) {
                                 Platform.runLater(() -> {
-                                    loader.stage.hide();
+                                    loader.getStage().hide();
                                 });
                             } else {
                                 Platform.runLater(() -> {
-                                    loader.stage.show();
+                                    loader.getStage().show();
                                 });
                             }
                         }
@@ -81,7 +84,7 @@ public class BandejaService {
     }
 
     public void initTray(ToolLoader loader) {
-        if (SystemTray.isSupported()){
+        if (SystemTray.isSupported()) {
             SystemTray systemTray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().getImage("logo.png");
 
@@ -104,17 +107,17 @@ public class BandejaService {
 
         popupMenu.add(new MenuItem("-"));
         MenuItem trayItem3 = new MenuItem("百度一下");
-        trayItem3.addActionListener(e->{
+        trayItem3.addActionListener(e -> {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable t = clipboard.getContents(null);
 
             try {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-                    String text = (String)t.getTransferData(DataFlavor.stringFlavor);
-                    if( null!=text && !"".equals(text) ){
-                        String path = C.BAIDU_SEARCH_STRING+text;
+                    String text = (String) t.getTransferData(DataFlavor.stringFlavor);
+                    if (null != text && !"".equals(text)) {
+                        String path = C.BAIDU_SEARCH_STRING + text;
 
-                        Runtime.getRuntime().exec(C.WINDOWS_DEFAULT_IE_COMMAND+path);
+                        Runtime.getRuntime().exec(C.WINDOWS_DEFAULT_IE_COMMAND + path);
                     }
                 }
             } catch (Exception e1) {
@@ -124,17 +127,17 @@ public class BandejaService {
         popupMenu.add(trayItem3);
 
         MenuItem trayItem2 = new MenuItem("豆瓣电影");
-        trayItem2.addActionListener(e->{
+        trayItem2.addActionListener(e -> {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable t = clipboard.getContents(null);
 
             try {
                 if (null != t && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-                    String text = (String)t.getTransferData(DataFlavor.stringFlavor);
-                    if( null!=text && !"".equals(text) ){
-                        String path = C.DOUBAN_SEARCH_STRING+text;
+                    String text = (String) t.getTransferData(DataFlavor.stringFlavor);
+                    if (null != text && !"".equals(text)) {
+                        String path = C.DOUBAN_SEARCH_STRING + text;
 
-                        Runtime.getRuntime().exec(C.WINDOWS_DEFAULT_IE_COMMAND+path);
+                        Runtime.getRuntime().exec(C.WINDOWS_DEFAULT_IE_COMMAND + path);
                     }
                 }
             } catch (Exception e1) {
@@ -153,16 +156,16 @@ public class BandejaService {
         popupMenu.add(menuItem);
     }
 
-    public void initMenus(Menu popup, Integer parentId){
+    public void initMenus(Menu popup, Integer parentId) {
         List<SeisBandeja> seisBandejaList = dao.getSubTrays(parentId);
 
         for (SeisBandeja seisBandeja : seisBandejaList) {
             String trayName = seisBandeja.getTrayName();
-            if( C.TOOL_TYPE_TRAY_FOLDER.equals(seisBandeja.getToolType())){
-                Menu menu =  new Menu(trayName);
+            if (C.TOOL_TYPE_TRAY_FOLDER.equals(seisBandeja.getToolType())) {
+                Menu menu = new Menu(trayName);
                 initMenus(menu, seisBandeja.getId());
                 popup.add(menu);
-            }else{
+            } else {
                 MenuItem trayItem = new MenuItem(trayName);
                 addListener(seisBandeja, trayItem);
                 popup.add(trayItem);
@@ -173,16 +176,26 @@ public class BandejaService {
     private void addListener(SeisBandeja seisBandeja, MenuItem trayItem) {
         String toolType = seisBandeja.getToolType();
 
-        if( C.TOOL_TYPE_FOLDER.equals(toolType)){
-            trayItem.addActionListener(e->{folderToolAction(seisBandeja, e);});
-        }else if( C.TOOL_TYPE_FILE.equals(toolType)){
-            trayItem.addActionListener(e->{fileToolAction(seisBandeja, e);});
-        }else if( C.TOOL_TYPE_WEBSITE.equals(toolType)){
-            trayItem.addActionListener(e->{websiteToolAction(seisBandeja, e);});
-        }else if( C.TOOL_TYPE_COMMAND.equals(toolType)){
-            trayItem.addActionListener(e->{commandToolAction(seisBandeja, e);});
-        }else if( C.TOOL_TYPE_COPY_TOOL.equals(toolType)){
-            trayItem.addActionListener(e->{copyToolAction(seisBandeja, e);});
+        if (C.TOOL_TYPE_FOLDER.equals(toolType)) {
+            trayItem.addActionListener(e -> {
+                folderToolAction(seisBandeja, e);
+            });
+        } else if (C.TOOL_TYPE_FILE.equals(toolType)) {
+            trayItem.addActionListener(e -> {
+                fileToolAction(seisBandeja, e);
+            });
+        } else if (C.TOOL_TYPE_WEBSITE.equals(toolType)) {
+            trayItem.addActionListener(e -> {
+                websiteToolAction(seisBandeja, e);
+            });
+        } else if (C.TOOL_TYPE_COMMAND.equals(toolType)) {
+            trayItem.addActionListener(e -> {
+                commandToolAction(seisBandeja, e);
+            });
+        } else if (C.TOOL_TYPE_COPY_TOOL.equals(toolType)) {
+            trayItem.addActionListener(e -> {
+                copyToolAction(seisBandeja, e);
+            });
         }
     }
 
@@ -198,7 +211,7 @@ public class BandejaService {
     public void copyToolAction(SeisBandeja seisBandeja, ActionEvent e) {
         String command = seisBandeja.getCommand();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(new StringSelection(command),null);
+        clipboard.setContents(new StringSelection(command), null);
     }
 
     public void websiteToolAction(SeisBandeja seisBandeja, ActionEvent e) {
@@ -213,7 +226,7 @@ public class BandejaService {
     public void fileToolAction(SeisBandeja seisBandeja, ActionEvent e) {
         String command = seisBandeja.getCommand();
         try {
-            Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + command,null,new File(command).getParentFile());
+            Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + command, null, new File(command).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -222,7 +235,7 @@ public class BandejaService {
     public void folderToolAction(SeisBandeja seisBandeja, ActionEvent e) {
         String command = seisBandeja.getCommand();
         try {
-            Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + command,null,new File(command).getParentFile());
+            Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + command, null, new File(command).getParentFile());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
