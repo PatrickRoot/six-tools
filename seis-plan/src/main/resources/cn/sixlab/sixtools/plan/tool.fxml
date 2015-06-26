@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<BorderPane fx:id="toolRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="cn.sixlab.sixtools.plan.PlanController">
@@ -38,7 +38,7 @@
                                          BorderPane.alignment="CENTER">
                                     <items>
                                         <Label text="状态"/>
-                                        <ComboBox fx:id="yearStatusCombo" onAction="#searchYear"
+                                        <ComboBox fx:id="yearStatusCombo" onAction="#searchYearSer"
                                                   prefHeight="23.0" prefWidth="79.0"/>
                                     </items>
                                 </ToolBar>
@@ -104,7 +104,7 @@
                                          BorderPane.alignment="CENTER">
                                     <items>
                                         <Label text="状态"/>
-                                        <ComboBox fx:id="seasonStatusCombo" onAction="#searchSeason"
+                                        <ComboBox fx:id="seasonStatusCombo" onAction="#searchSeasonSer"
                                                   prefHeight="23.0" prefWidth="79.0"/>
                                     </items>
                                 </ToolBar>
@@ -145,7 +145,7 @@
                                          BorderPane.alignment="CENTER">
                                     <items>
                                         <Label text="状态"/>
-                                        <ComboBox fx:id="monthStatusCombo" onAction="#searchMonth"
+                                        <ComboBox fx:id="monthStatusCombo" onAction="#searchMonthSer"
                                                   prefHeight="23.0" prefWidth="79.0"/>
                                     </items>
                                 </ToolBar>
@@ -186,7 +186,7 @@
                                          BorderPane.alignment="CENTER">
                                     <items>
                                         <Label text="状态"/>
-                                        <ComboBox fx:id="weekStatusCombo" onAction="#searchWeek"
+                                        <ComboBox fx:id="weekStatusCombo" onAction="#searchWeekSer"
                                                   prefHeight="23.0" prefWidth="79.0"/>
                                     </items>
                                 </ToolBar>
@@ -340,7 +340,7 @@
                                         <Insets/>
                                     </GridPane.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#okPlan" text="确定"
+                                <Button mnemonicParsing="false" onAction="#okPlanSer" text="确定"
                                         GridPane.columnIndex="6" GridPane.columnSpan="2"
                                         GridPane.halignment="CENTER" GridPane.rowIndex="6"/>
                                 <Label fx:id="taskTitleLabel" GridPane.columnIndex="1"

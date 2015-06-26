@@ -5,9 +5,12 @@
  */
 package cn.sixlab.sixtools.encode;
 
+import cn.sixlab.sixtools.comun.base.BaseController;
+import cn.sixlab.sixtools.comun.util.C;
 import cn.sixlab.sixtools.comun.util.S;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,10 +26,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 /**
@@ -35,12 +40,18 @@ import java.util.UUID;
  * @author 六楼的雨/loki
  * @date 2015/6/22 19:30
  */
-public class EncodeController {
+public class EncodeController extends BaseController implements Initializable{
     private static Logger logger = LoggerFactory.getLogger(EncodeController.class);
+    public static EncodeController self;
 
     public TextArea leftText;
     public TextArea rightText;
     public Label tipsLabel;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        self = this;
+    }
 
     public void textChange(Event event) {
         TextArea textArea = (TextArea) event.getTarget();
@@ -203,7 +214,7 @@ public class EncodeController {
     }
 
     /**
-     * Unicode JS编码
+     * native2Ascii
      *
      * @param event
      */
@@ -212,26 +223,55 @@ public class EncodeController {
         logger.info("left:" + text);
         String result = "";
 
-        for (int i = 0; i < text.length(); i++) {
-            int point = text.codePointAt(i);
-            String temp = Integer.toHexString(point);
-            int length = 4 - temp.length();
-            if (length == 2) {
-                result += "\\u00" + temp;
-            } else if (length == 3) {
-                result += "\\u000" + temp;
-            } else if (length == 1) {
-                result += "\\u0" + temp;
+        char[] chars = text.toCharArray();
+        StringBuilder resultSb = new StringBuilder();
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            String temp="";
+            if (c > 255) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("\\u");
+                int code = (c >> 8);
+                String tmp = Integer.toHexString(code);
+                if (tmp.length() == 1) {
+                    sb.append("0");
+                }
+                sb.append(tmp);
+                code = (c & 0xFF);
+                tmp = Integer.toHexString(code);
+                if (tmp.length() == 1) {
+                    sb.append("0");
+                }
+                sb.append(tmp);
+                temp = sb.toString();
             } else {
-                result += "\\u" + temp;
+                temp = Character.toString(c);
             }
+            resultSb.append(temp);
         }
+
+        result = resultSb.toString();
+
+        //for (int i = 0; i < text.length(); i++) {
+        //    int point = text.codePointAt(i);
+        //    String temp = Integer.toHexString(point);
+        //    int length = 4 - temp.length();
+        //    if (length == 2) {
+        //        result += "\\u00" + temp;
+        //    } else if (length == 3) {
+        //        result += "\\u000" + temp;
+        //    } else if (length == 1) {
+        //        result += "\\u0" + temp;
+        //    } else {
+        //        result += "\\u" + temp;
+        //    }
+        //}
 
         rightText.setText(result);
     }
 
     /**
-     * Unicode JS解码
+     * ascii2Native
      *
      * @param event
      */
@@ -239,12 +279,42 @@ public class EncodeController {
         String text = leftText.getText();
         logger.info("left:" + text);
         String result = "";
-        String[] strings = text.split("\\\\u");
-        for (String string : strings) {
-            if (!"".equals(string)) {
-                result += (char) Integer.parseInt(string, 16);
+
+        int index = text.indexOf("\\b");
+        StringBuilder sb = new StringBuilder();
+        int begin = 0;
+
+        while (index != -1) {
+            sb.append(text.substring(begin, index));
+            String str = text.substring(index, index + 6);
+
+            if (str.length() != 6) {
+                throw new IllegalArgumentException(
+                        "Ascii string of a native character must be 6 character.");
             }
+            if (!"\\b".equals(str.substring(0, 2))) {
+                throw new IllegalArgumentException(
+                        "Ascii string of a native character must start with \"\\u\".");
+            }
+            String tmp = str.substring(2, 4);
+            int code = Integer.parseInt(tmp, 16) << 8;
+            tmp = str.substring(4, 6);
+            code += Integer.parseInt(tmp, 16);
+            sb.append(code);
+
+            begin = index + 6;
+            index = text.indexOf("\\b", begin);
         }
+        sb.append(text.substring(begin));
+
+
+        //String[] strings = text.split("\\\\u");
+        //for (String string : strings) {
+        //    if (!"".equals(string)) {
+        //        result += (char) Integer.parseInt(string, 16);
+        //    }
+        //}
+
         rightText.setText(result);
     }
 
@@ -277,5 +347,4 @@ public class EncodeController {
 
     public void i13(ActionEvent event) {}
     public void i14(ActionEvent event) {}
-    
 }

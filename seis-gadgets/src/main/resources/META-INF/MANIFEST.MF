@@ -1,8 +1,10 @@
 Manifest-Version: 1.0
 Class-Path: lib/slf4j-api-1.7.5.jar lib/slf4j-log4j12-1.7.5.jar lib/log4j-1.2.17.jar
-  lib/dom4j-1.6.1.jar lib/mybatis-3.2.7.jar lib/sqlite-jdbc-3.8.7.jar
-  comun.jar seis-bandeja.jar
+  lib/dom4j-1.6.1.jar
+  lib/nutz-1.b.52.jar lib/sqlite-jdbc-3.8.7.jar comun.jar
+  seis-bandeja.jar
   seis-encode.jar seis-tomcat.jar
   seis-pelicula.jar seis-plan.jar seis-punto.jar
+  seis-tarea.jar seis-bloc
 Main-Class: cn.sixlab.sixtools.gadgets.Gadgets
 

@@ -5,8 +5,9 @@
  */
 package cn.sixlab.sixtools.punto;
 
-import cn.sixlab.sixtools.comun.bean.SeisPunto;
-import cn.sixlab.sixtools.comun.dao.PuntoDao;
+import cn.sixlab.sixtools.comun.base.BaseController;
+import cn.sixlab.sixtools.comun.bean.db.SeisPunto;
+import cn.sixlab.sixtools.comun.util.D;
 import cn.sixlab.sixtools.comun.util.S;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
+import org.nutz.dao.Sqls;
+import org.nutz.dao.sql.Sql;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -30,7 +38,10 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/5/22 21:50
  */
-public class PuntoController implements Initializable {
+public class PuntoController extends BaseController implements Initializable {
+    private static Logger logger = LoggerFactory.getLogger(PuntoController.class);
+    public static PuntoController self;
+    private Dao dao = D.dao;
 
     public TextField reasonField;
     public TextField puntoField;
@@ -41,15 +52,24 @@ public class PuntoController implements Initializable {
     public TableView puntoTable;
     public Label tipLabel;
     public Label totalPunto;
-
-    private PuntoDao dao = new PuntoDao();
+    public BorderPane toolRoot;
 
     private final ObservableList<SeisPunto> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        self = this;
         initTable();
         loadPunto();
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try{
+            data.clear();
+        }finally {
+            super.finalize();
+        }
     }
 
     private void initTable() {
@@ -98,7 +118,7 @@ public class PuntoController implements Initializable {
 
     private void loadPunto() {
         data.clear();
-        List<SeisPunto> list = dao.queryAll();
+        List<SeisPunto> list = dao.query(SeisPunto.class, Cnd.orderBy().desc("id"));
         if(null!=list && list.size()>0){
             data.addAll(list);
             loadPuntoHis();
@@ -106,7 +126,10 @@ public class PuntoController implements Initializable {
     }
 
     private void loadPuntoHis() {
-        Double punto = dao.queryPunto();
+        Sql sql = Sqls.create(" select count(punto) from seis_punto ");
+        sql.setCallback(Sqls.callback.doubleValue());
+        dao.execute(sql);
+        Double punto = sql.getNumber().doubleValue();
         if(null!=punto){
             if(punto<=0){
                 totalPunto.setTextFill(Color.RED);

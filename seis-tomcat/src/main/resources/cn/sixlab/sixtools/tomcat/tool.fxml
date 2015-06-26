@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.tomcat.TomcatController">
+<BorderPane fx:id="toolRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.tomcat.TomcatController">
     <bottom>
         <Pane prefHeight="25.0" prefWidth="200.0" style="-fx-border-color: #DDDDDD;" BorderPane.alignment="CENTER">
             <children>
@@ -30,6 +30,7 @@
                 <TextField prefHeight="23.0" prefWidth="490.0" fx:id="xmlPathField" />
                 <Button mnemonicParsing="false" onAction="#chooseFile" text="选择文件" />
                 <Label fx:id="totalPunto" />
+            <Button mnemonicParsing="false" onAction="#openDir" text="打开文件夹" />
             </items>
         </ToolBar>
     </top>

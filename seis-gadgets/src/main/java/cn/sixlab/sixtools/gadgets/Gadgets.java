@@ -8,7 +8,7 @@ package cn.sixlab.sixtools.gadgets;
 import cn.sixlab.sixtools.bandeja.BandejaService;
 import cn.sixlab.sixtools.comun.util.A;
 import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.sixtools.comun.util.ToolLoader;
+import cn.sixlab.sixtools.comun.base.BaseMain;
 import cn.sixlab.sixtools.comun.util.UI;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,7 @@ import java.io.IOException;
  * @author 六楼的雨/loki
  * @date 2015/6/17 22:40
  */
-public class Gadgets extends ToolLoader {
+public class Gadgets extends BaseMain {
     private static Logger logger = LoggerFactory.getLogger(Gadgets.class);
     private static Stage stage;
 

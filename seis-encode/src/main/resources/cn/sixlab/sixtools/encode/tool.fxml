@@ -12,7 +12,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.encode.EncodeController">
+<VBox fx:id="toolRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.encode.EncodeController">
     <children>
         <SplitPane dividerPositions="0.5" prefHeight="360.0" prefWidth="200.0">
             <items>
@@ -44,8 +44,8 @@
                 <Button fx:id="tool01i06" mnemonicParsing="false" onAction="#itemClick" text="UUID/GUID" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
                 <Button fx:id="tool01i07" mnemonicParsing="false" onAction="#itemClick" text="计算表达式" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="tool01i08" mnemonicParsing="false" onAction="#itemClick" text="人民币大写" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Button fx:id="tool01i09" mnemonicParsing="false" onAction="#itemClick" text="Unicode JS编码" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Button fx:id="tool01i10" mnemonicParsing="false" onAction="#itemClick" text="Unicode JS解码" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i09" mnemonicParsing="false" onAction="#itemClick" text="native2Ascii" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i10" mnemonicParsing="false" onAction="#itemClick" text="ascii2Native" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="tool01i11" mnemonicParsing="false" onAction="#itemClick" text="Unicode HTML编码" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="tool01i12" mnemonicParsing="false" onAction="#itemClick" text="Unicode HTML解码" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="tool01i13" mnemonicParsing="false" onAction="#itemClick" text="Button" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />

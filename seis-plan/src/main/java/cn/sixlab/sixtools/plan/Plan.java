@@ -7,7 +7,7 @@ package cn.sixlab.sixtools.plan;
 
 import cn.sixlab.sixtools.comun.util.A;
 import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.sixtools.comun.util.ToolLoader;
+import cn.sixlab.sixtools.comun.base.BaseMain;
 
 /**
  * //TODO
@@ -15,7 +15,7 @@ import cn.sixlab.sixtools.comun.util.ToolLoader;
  * @author 六楼的雨/loki
  * @date 2015/4/5 9:30
  */
-public class Plan extends ToolLoader {
+public class Plan extends BaseMain {
 
     public static void main(String[] args) {
         title = "Six Plan : " + A.get();

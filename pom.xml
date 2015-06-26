@@ -6,7 +6,7 @@
 
     <groupId>cn.sixlab</groupId>
     <artifactId>sixtools</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SixTools</name>
     <url>http://maven.apache.org</url>
@@ -22,6 +22,8 @@
         <module>seis-gadgets</module>
         <module>seis-encode</module>
         <module>seis-bandeja</module>
+        <module>seia-tarea</module>
+        <module>seis-bloc</module>
     </modules>
 
     <properties>
@@ -41,7 +43,6 @@
         <version.slf4j.api>1.7.5</version.slf4j.api>
         <version.log4j>1.2.17</version.log4j>
 
-        <version.mybatis>3.2.7</version.mybatis>
         <version.sqlite>3.8.7</version.sqlite>
 
         <version.beanshell>2.0b5</version.beanshell>
@@ -53,6 +54,7 @@
         <version.dom4j>1.6.1</version.dom4j>
         <version.jsoup>1.8.1</version.jsoup>
         <version.guava>17.0</version.guava>
+        <version.nutz>1.b.52</version.nutz>
 
         <version.plugin.antrun>1.8</version.plugin.antrun>
         <version.plugin.compiler>3.3</version.plugin.compiler>
@@ -125,6 +127,7 @@
                 <scope>test</scope>
             </dependency>
 
+            <!-- 数据库 -->
             <!-- Sqlite -->
             <dependency>
                 <groupId>org.xerial</groupId>
@@ -132,11 +135,11 @@
                 <version>${version.sqlite}</version>
             </dependency>
 
-            <!-- Mybatis -->
+            <!-- nutz -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${version.mybatis}</version>
+                <groupId>org.nutz</groupId>
+                <artifactId>nutz</artifactId>
+                <version>${version.nutz}</version>
             </dependency>
 
             <!-- jsoup -->

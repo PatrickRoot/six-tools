@@ -5,12 +5,14 @@
  */
 package cn.sixlab.sixtools.bandeja;
 
-import cn.sixlab.sixtools.comun.bean.SeisBandeja;
-import cn.sixlab.sixtools.comun.dao.TrayDao;
+import cn.sixlab.sixtools.comun.bean.db.SeisBandeja;
 import cn.sixlab.sixtools.comun.util.A;
 import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.sixtools.comun.util.ToolLoader;
+import cn.sixlab.sixtools.comun.base.BaseMain;
+import cn.sixlab.sixtools.comun.util.D;
 import javafx.application.Platform;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,15 +41,15 @@ import java.util.List;
 public class BandejaService {
     private static Logger logger = LoggerFactory.getLogger(BandejaService.class);
     public static BandejaService self;
+    private Dao dao = D.dao;
 
     public BandejaService() {
         self = this;
     }
 
-    private TrayDao dao = new TrayDao();
     public PopupMenu popupMenu = new PopupMenu();
 
-    public MouseListener trayAction(ToolLoader loader) {
+    public MouseListener trayAction(BaseMain loader) {
         return new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -83,7 +85,7 @@ public class BandejaService {
         };
     }
 
-    public void initTray(ToolLoader loader) {
+    public void initTray(BaseMain loader) {
         if (SystemTray.isSupported()) {
             SystemTray systemTray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().getImage("logo.png");
@@ -157,7 +159,7 @@ public class BandejaService {
     }
 
     public void initMenus(Menu popup, Integer parentId) {
-        List<SeisBandeja> seisBandejaList = dao.getSubTrays(parentId);
+        List<SeisBandeja> seisBandejaList = dao.query(SeisBandeja.class, Cnd.where("parentId", "=", parentId));
 
         for (SeisBandeja seisBandeja : seisBandejaList) {
             String trayName = seisBandeja.getTrayName();

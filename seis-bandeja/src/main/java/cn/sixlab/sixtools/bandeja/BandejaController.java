@@ -7,10 +7,11 @@ package cn.sixlab.sixtools.bandeja;
 
 import cn.sixlab.sixfx.AlertDialog;
 import cn.sixlab.sixfx.ConfirmDialog;
-import cn.sixlab.sixtools.comun.bean.SeisBandeja;
-import cn.sixlab.sixtools.comun.bean.ext.ToolType;
-import cn.sixlab.sixtools.comun.dao.TrayDao;
+import cn.sixlab.sixtools.comun.base.BaseController;
+import cn.sixlab.sixtools.comun.bean.db.SeisBandeja;
+import cn.sixlab.sixtools.comun.bean.ToolType;
 import cn.sixlab.sixtools.comun.util.C;
+import cn.sixlab.sixtools.comun.util.D;
 import cn.sixlab.sixtools.comun.util.S;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.collections.FXCollections;
@@ -28,6 +29,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,13 +46,16 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/6/19 17:00
  */
-public class BandejaController implements Initializable{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class BandejaController extends BaseController implements Initializable{
+    private static Logger logger = LoggerFactory.getLogger(BandejaController.class);
+    public static BandejaController self;
+    private Dao dao = D.dao;
+
     private final ObservableList<SeisBandeja> tableData = FXCollections.observableArrayList();
     private final ObservableList<SeisBandeja> superData = FXCollections.observableArrayList();
     private final ObservableList<SeisBandeja> searchData = FXCollections.observableArrayList();
     private final ObservableList<ToolType> typeData = FXCollections.observableArrayList();
-    private TrayDao dao = new TrayDao();
+
     public ComboBox searchCombo;
     public TextField nameField;
     public TextField orderField;
@@ -68,9 +74,22 @@ public class BandejaController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        self = this;
         initData();
         initCombo();
         initTable();
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try{
+            tableData.clear();
+            superData.clear();
+            typeData.clear();
+            searchData.clear();
+        }finally {
+            super.finalize();
+        }
     }
 
     private void initCombo() {
@@ -142,7 +161,7 @@ public class BandejaController implements Initializable{
         typeData.clear();
         typeData.addAll(ToolType.allToolTypes());
 
-        List<SeisBandeja> bandejaList = dao.getToolFolders();
+        List<SeisBandeja> bandejaList = dao.query(SeisBandeja.class, Cnd.where("toolType","=",C.TOOL_TYPE_TRAY_FOLDER));
 
         superData.clear();
         SeisBandeja bandeja1 = new SeisBandeja();
@@ -159,7 +178,7 @@ public class BandejaController implements Initializable{
         searchData.addAll(bandejaList);
 
         tableData.clear();
-        tableData.addAll(dao.getAll());
+        tableData.addAll(dao.query(SeisBandeja.class, null));
     }
 
     public void search(ActionEvent event) {
@@ -167,9 +186,9 @@ public class BandejaController implements Initializable{
         SeisBandeja bandeja = (SeisBandeja) searchCombo.getSelectionModel().getSelectedItem();
         List<SeisBandeja> bandejaList;
         if(null==bandeja || null==bandeja.getId()){
-            bandejaList = dao.getAll();
+            bandejaList = dao.query(SeisBandeja.class, null);
         }else{
-            bandejaList = dao.getSubTrays(bandeja.getId());
+            bandejaList = dao.query(SeisBandeja.class, Cnd.where("parentId","=", bandeja.getId()));
         }
         tableData.clear();
         tableData.addAll(bandejaList);
@@ -181,7 +200,7 @@ public class BandejaController implements Initializable{
         if (null != bandeja && null!=bandeja.getId()) {
             ConfirmDialog dialog = new ConfirmDialog("提醒","确定删除:"+bandeja.getTrayName());
             dialog.setOnAction(e->{
-                dao.delete(bandeja.getId());
+                dao.delete(SeisBandeja.class, bandeja.getId());
                 refresh(null);
             });
             dialog.show();

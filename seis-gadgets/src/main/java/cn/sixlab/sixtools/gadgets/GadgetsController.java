@@ -5,8 +5,9 @@
  */
 package cn.sixlab.sixtools.gadgets;
 
-import cn.sixlab.sixtools.comun.bean.SeisTools;
-import cn.sixlab.sixtools.comun.dao.ToolsDao;
+import cn.sixlab.sixtools.comun.base.BaseController;
+import cn.sixlab.sixtools.comun.bean.db.SeisTools;
+import cn.sixlab.sixtools.comun.util.D;
 import cn.sixlab.sixtools.comun.util.UI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,6 +21,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +35,10 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/6/17 22:40
  */
-public class GadgetsController implements Initializable{
+public class GadgetsController extends BaseController implements Initializable{
     private static Logger logger = LoggerFactory.getLogger(GadgetsController.class);
     public static GadgetsController self;
-    private ToolsDao dao = new ToolsDao();
+    private Dao dao = D.dao;
 
     public BorderPane rootPane;
     public GridPane topPane;
@@ -48,7 +51,6 @@ public class GadgetsController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("init->"+this);
         self = this;
         Platform.runLater(() -> {
             Parent parent = null;
@@ -58,7 +60,7 @@ public class GadgetsController implements Initializable{
                 try {
                     Button btn = (Button) parent.getChildrenUnmodifiable().get(0);
                     String btnId = btn.getId();
-                    SeisTools seisTools = dao.getTool(btnId);
+                    SeisTools seisTools = dao.fetch(SeisTools.class, Cnd.where("btnId","=",btnId));
                     String className = seisTools.getClassName();
                     Class clz = Class.forName(className);
 
@@ -80,6 +82,7 @@ public class GadgetsController implements Initializable{
         System.out.println("groupBtnClick->" + this);
         String idStr = ((Button) event.getTarget()).getId();
         Platform.runLater(() -> {
+
             Parent parent = null;
             try {
                 parent = FXMLLoader.load(getClass().getResource("groups/" + idStr + ".fxml"));
@@ -88,7 +91,7 @@ public class GadgetsController implements Initializable{
                 try {
                     Button btn = (Button) parent.getChildrenUnmodifiable().get(0);
                     String btnId = btn.getId();
-                    SeisTools seisTools = dao.getTool(btnId);
+                    SeisTools seisTools = dao.fetch(SeisTools.class, Cnd.where("btnId", "=", btnId));
                     String className = seisTools.getClassName();
                     Class clz = Class.forName(className);
 

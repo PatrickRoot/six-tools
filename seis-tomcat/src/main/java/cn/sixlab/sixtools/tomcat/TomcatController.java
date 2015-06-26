@@ -5,8 +5,12 @@
  */
 package cn.sixlab.sixtools.tomcat;
 
+import cn.sixlab.sixtools.comun.base.BaseController;
+import cn.sixlab.sixtools.comun.bean.SeisTomcat;
+import cn.sixlab.sixtools.comun.util.C;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,7 +26,6 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import cn.sixlab.sixtools.comun.bean.SeisTomcat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,8 +42,10 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/6/14 17:00
  */
-public class TomcatController implements Initializable {
-    private Logger logger = LoggerFactory.getLogger(TomcatController.class);
+public class TomcatController extends BaseController implements Initializable {
+    private static Logger logger = LoggerFactory.getLogger(TomcatController.class);
+    public static TomcatController self;
+
     public TextField xmlPathField;
 
     public Label tipLabel;
@@ -53,8 +58,18 @@ public class TomcatController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        self = this;
         initTable();
         xmlPathField.setText(xmlPath);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            data.clear();
+        } finally {
+            super.finalize();
+        }
     }
 
     private void initTable() {
@@ -116,6 +131,7 @@ public class TomcatController implements Initializable {
                 Element element = host.addElement("Context");
                 element.addAttribute("path", "/" + newPath);
                 element.addAttribute("docBase", null==newDocBase?"": newDocBase.replaceAll("\\\\", "/"));
+                element.addAttribute("reloadable", "true" );
                 tipLabel.setText("新增成功:"+newPath);
             }
             OutputFormat format = new OutputFormat();
@@ -164,6 +180,16 @@ public class TomcatController implements Initializable {
             xmlPathField.setText(file.getPath());
             xmlPath = file.getPath();
             initData();
+        }
+    }
+
+    public void openDir(ActionEvent event) {
+        String file = xmlPathField.getText();
+        String command = new File(file).getParent();
+        try {
+            Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + command, null, new File(command).getParentFile());
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 }

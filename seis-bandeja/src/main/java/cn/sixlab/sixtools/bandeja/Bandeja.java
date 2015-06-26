@@ -6,7 +6,7 @@
 package cn.sixlab.sixtools.bandeja;
 
 import cn.sixlab.sixtools.comun.util.C;
-import cn.sixlab.sixtools.comun.util.ToolLoader;
+import cn.sixlab.sixtools.comun.base.BaseMain;
 import cn.sixlab.sixtools.comun.util.UI;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
  * @author 六楼的雨/loki
  * @date 2015/4/14 12:21
  */
-public class Bandeja extends ToolLoader {
+public class Bandeja extends BaseMain {
     private static Logger logger = LoggerFactory.getLogger(Bandeja.class);
     private Stage stage;
     
