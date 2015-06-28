@@ -5,11 +5,10 @@
  */
 package cn.sixlab.sixtools.bandeja;
 
-import cn.sixlab.sixfx.AlertDialog;
 import cn.sixlab.sixfx.ConfirmDialog;
 import cn.sixlab.sixtools.comun.base.BaseController;
-import cn.sixlab.sixtools.comun.bean.db.SeisBandeja;
 import cn.sixlab.sixtools.comun.bean.ToolType;
+import cn.sixlab.sixtools.comun.bean.db.SeisBandeja;
 import cn.sixlab.sixtools.comun.util.C;
 import cn.sixlab.sixtools.comun.util.D;
 import cn.sixlab.sixtools.comun.util.S;
@@ -19,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -49,6 +49,7 @@ import java.util.ResourceBundle;
 public class BandejaController extends BaseController implements Initializable{
     private static Logger logger = LoggerFactory.getLogger(BandejaController.class);
     public static BandejaController self;
+    public Label tipsLabel;
     private Dao dao = D.dao;
 
     private final ObservableList<SeisBandeja> tableData = FXCollections.observableArrayList();
@@ -151,6 +152,7 @@ public class BandejaController extends BaseController implements Initializable{
     }
 
     private void modifyPlan(SeisBandeja bandeja) {
+        tipsLabel.setText("修改任务中："+bandeja.getTrayName());
         id = bandeja.getId();
         nameField.setText(bandeja.getTrayName());
         commandText.setText(bandeja.getCommand());
@@ -198,9 +200,10 @@ public class BandejaController extends BaseController implements Initializable{
     public void delete(ActionEvent event) {
         SeisBandeja bandeja = (SeisBandeja) toolTable.getSelectionModel().getSelectedItem();
         if (null != bandeja && null!=bandeja.getId()) {
-            ConfirmDialog dialog = new ConfirmDialog("提醒","确定删除:"+bandeja.getTrayName());
+            ConfirmDialog dialog = new ConfirmDialog("提醒","确定删除："+bandeja.getTrayName());
             dialog.setOnAction(e->{
                 dao.delete(SeisBandeja.class, bandeja.getId());
+                tipsLabel.setText("删除成功："+bandeja.getTrayName());
                 refresh(null);
             });
             dialog.show();
@@ -231,7 +234,8 @@ public class BandejaController extends BaseController implements Initializable{
     public void confirm(ActionEvent event) {
         String name = nameField.getText();
         if(S.isEmpty(name)){
-            new AlertDialog("错误提示","工具名字不能为空!").show();
+            tipsLabel.setText("错误：工具名字不能为空!");
+            nameField.requestFocus();
             return;
         }
         String command = commandText.getText();
@@ -250,11 +254,11 @@ public class BandejaController extends BaseController implements Initializable{
         if(null==id){
             dao.insert(seisBandeja);
             id = seisBandeja.getId();
-            new AlertDialog("成功提示", "添加成功:" + name).show();
+            tipsLabel.setText("添加成功：" + name);
         }else{
             seisBandeja.setId(id);
             dao.update(seisBandeja);
-            new AlertDialog("成功提示", "更新成功:" + name).show();
+            tipsLabel.setText("更新成功：" + name);
         }
         refresh(null);
     }

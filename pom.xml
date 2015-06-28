@@ -13,17 +13,17 @@
 
     <modules>
         <module>comun</module>
-        <module>seis-plan</module>
+        <module>seis-bandeja</module>
+        <module>seis-bloc</module>
+        <module>seis-encode</module>
+        <module>seis-gadgets</module>
         <module>seis-pelicula</module>
-        <module>seis-update</module>
+        <module>seis-plan</module>
         <module>seis-punto</module>
         <module>seis-resolverpelicula</module>
         <module>seis-tomcat</module>
-        <module>seis-gadgets</module>
-        <module>seis-encode</module>
-        <module>seis-bandeja</module>
-        <module>seia-tarea</module>
-        <module>seis-bloc</module>
+        <module>seis-tarea</module>
+        <module>seis-update</module>
     </modules>
 
     <properties>
@@ -80,6 +80,11 @@
             </dependency>
             <dependency>
                 <groupId>cn.sixlab</groupId>
+                <artifactId>seis-bloc</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
                 <artifactId>seis-encode</artifactId>
                 <version>${version.seis}</version>
             </dependency>
@@ -106,6 +111,11 @@
             <dependency>
                 <groupId>cn.sixlab</groupId>
                 <artifactId>seis-resolverpelicula</artifactId>
+                <version>${version.seis}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.sixlab</groupId>
+                <artifactId>seis-tarea</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>

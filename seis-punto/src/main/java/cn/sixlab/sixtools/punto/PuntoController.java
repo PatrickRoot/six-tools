@@ -126,7 +126,7 @@ public class PuntoController extends BaseController implements Initializable {
     }
 
     private void loadPuntoHis() {
-        Sql sql = Sqls.create(" select count(punto) from seis_punto ");
+        Sql sql = Sqls.create(" select sum(punto) from seis_punto ");
         sql.setCallback(Sqls.callback.doubleValue());
         dao.execute(sql);
         Double punto = sql.getNumber().doubleValue();

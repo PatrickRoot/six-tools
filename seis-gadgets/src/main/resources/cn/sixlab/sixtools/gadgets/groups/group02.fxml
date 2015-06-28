@@ -17,5 +17,8 @@
         <Button fx:id="btnG02t01" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Pelicula"/>
         <Button fx:id="btnG02t02" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Plan"/>
         <Button fx:id="btnG02t03" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Punto"/>
+        <Button fx:id="btnG02t04" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Tarea"/>
+        <Button fx:id="btnG02t05" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="Bloc"/>
+        <Button fx:id="btnG02t06" onAction="#toolBtnClick" mnemonicParsing="false" prefHeight="23.0" prefWidth="197.0" text="待开发"/>
     </children>
 </VBox>

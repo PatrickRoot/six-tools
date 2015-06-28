@@ -42,6 +42,7 @@ public class BandejaService {
     private static Logger logger = LoggerFactory.getLogger(BandejaService.class);
     public static BandejaService self;
     private Dao dao = D.dao;
+    private Object object = new Object();
 
     public BandejaService() {
         self = this;
@@ -56,7 +57,7 @@ public class BandejaService {
                 super.mouseClicked(e);
                 if (e.getModifiers() == MouseEvent.BUTTON1_MASK) {
                     Platform.setImplicitExit(false);
-                    synchronized (this) {
+                    synchronized (object) {
                         if (null == loader.getStage()) {
                             LocalTime beginTime = LocalTime.now();
                             Platform.runLater(() -> {
@@ -148,6 +149,16 @@ public class BandejaService {
         });
         popupMenu.add(trayItem2);
 
+        MenuItem trayItem1 = new MenuItem("Bloc");
+        trayItem1.addActionListener(e -> {
+            try {
+                Runtime.getRuntime().exec(" D:\\dev\\env\\Java\\jdk1.8.0_25\\bin\\java.exe -jar seis-bloc.jar", null, new File("D:\\Program\\Sixtools\\"));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        popupMenu.add(trayItem1);
+
         MenuItem spaceMenuItem2 = new MenuItem("-");
         popupMenu.add(spaceMenuItem2);
 
@@ -159,7 +170,8 @@ public class BandejaService {
     }
 
     public void initMenus(Menu popup, Integer parentId) {
-        List<SeisBandeja> seisBandejaList = dao.query(SeisBandeja.class, Cnd.where("parentId", "=", parentId));
+        Cnd cnd = Cnd.where("parentId", "=", parentId);
+        List<SeisBandeja> seisBandejaList = dao.query(SeisBandeja.class, cnd.asc("toolOrder").asc("id"));
 
         for (SeisBandeja seisBandeja : seisBandejaList) {
             String trayName = seisBandeja.getTrayName();

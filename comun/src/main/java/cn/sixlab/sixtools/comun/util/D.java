@@ -22,14 +22,4 @@ public class D {
         ds.setJdbcUrl("jdbc:sqlite:sixtools.db");
         dao = new NutDao(ds);
     }
-
-    public void genBean(String table){
-
-    }
-
-    public static void main(String[] args) {
-
-        new D().genBean("");
-
-    }
 }

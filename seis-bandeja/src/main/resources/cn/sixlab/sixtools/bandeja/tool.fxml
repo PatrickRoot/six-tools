@@ -138,4 +138,11 @@
             </content>
         </ScrollPane>
     </center>
+   <bottom>
+      <Pane prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="tipsLabel" layoutX="15.0" prefHeight="20.0" textFill="RED" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

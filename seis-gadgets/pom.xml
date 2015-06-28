@@ -20,6 +20,10 @@
         </dependency>
         <dependency>
             <groupId>cn.sixlab</groupId>
+            <artifactId>seis-bloc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sixlab</groupId>
             <artifactId>seis-encode</artifactId>
         </dependency>
         <dependency>
@@ -37,6 +41,10 @@
         <dependency>
             <groupId>cn.sixlab</groupId>
             <artifactId>seis-resolverpelicula</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sixlab</groupId>
+            <artifactId>seis-tarea</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.sixlab</groupId>
