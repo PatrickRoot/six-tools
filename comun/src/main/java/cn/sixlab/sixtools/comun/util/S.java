@@ -146,4 +146,25 @@ public class S {
         }
         return new String(buffer);
     }
+
+    public static String getSubstring(String str, int length) {
+        //格式化字符串长度，超出部分显示省略号,区分汉字跟字母。汉字2个字节，字母数字一个字节
+        String temp = "";
+        if (str.length() < length) {//如果长度比需要的长度n小,返回原字符串
+            return str;
+        } else {
+            int t = 0;
+            char[] tempChar = str.toCharArray();
+            for (int i = 0; i < tempChar.length && t < length; i++) {
+                if ((int) tempChar[i] >= 0x4E00 && (int) tempChar[i] <= 0x9FA5) {//是否汉字
+                    temp += tempChar[i];
+                    t += 2;
+                } else {
+                    temp += tempChar[i];
+                    t++;
+                }
+            }
+            return (temp + "...");
+        }
+    }
 }

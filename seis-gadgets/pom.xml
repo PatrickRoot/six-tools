@@ -16,6 +16,10 @@
         <!-- cn.sixlab.sixtools.bandeja.Seis -->
         <dependency>
             <groupId>cn.sixlab</groupId>
+            <artifactId>seis-alerta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sixlab</groupId>
             <artifactId>seis-bandeja</artifactId>
         </dependency>
         <dependency>

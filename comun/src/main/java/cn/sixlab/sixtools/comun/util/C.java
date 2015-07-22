@@ -5,6 +5,14 @@
  */
 package cn.sixlab.sixtools.comun.util;
 
+import cn.sixlab.sixtools.comun.bean.db.SeisSeisValues;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
 /**
  * SixTools中的静态变量
  *
@@ -12,6 +20,7 @@ package cn.sixlab.sixtools.comun.util;
  * @date 2015/2/17 19:46
  */
 public class C {
+    private static Logger logger = LoggerFactory.getLogger(C.class);
 
     public static boolean implicitExit = false;
 
@@ -48,5 +57,16 @@ public class C {
 
     private C(){
         super();
+    }
+
+    public static String s(String code) {
+        Dao dao = D.dao;
+        List<SeisSeisValues> valueList = dao.query(SeisSeisValues.class, Cnd.where("", "=", code));
+        if (Collection.isNotEmpty(valueList)) {
+            return valueList.get(0).getValue();
+        } else {
+            logger.error(code + "没有发现值");
+            return "";
+        }
     }
 }

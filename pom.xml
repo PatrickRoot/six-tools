@@ -13,6 +13,7 @@
 
     <modules>
         <module>comun</module>
+        <module>seis-alerta</module>
         <module>seis-bandeja</module>
         <module>seis-bloc</module>
         <module>seis-encode</module>
@@ -70,7 +71,7 @@
             </dependency>
             <dependency>
                 <groupId>cn.sixlab</groupId>
-                <artifactId>seis</artifactId>
+                <artifactId>seis-alerta</artifactId>
                 <version>${version.seis}</version>
             </dependency>
             <dependency>

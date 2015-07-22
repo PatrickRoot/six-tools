@@ -25,7 +25,9 @@ import java.util.List;
  */
 public class DUtil {
 
-    private String tableName = "test_tests";
+    private static String[] tableNames = new String[]{
+            "seis_seis_values",
+    };
 
     private String drive = "org.sqlite.JDBC";
     private String url = "jdbc:sqlite:sixtools.db";
@@ -35,11 +37,22 @@ public class DUtil {
     private String email = "nianqinianyi@163.com";
 
     public static void main(String[] args) throws Exception {
-        DUtil d = new DUtil();
-        d.genBeanFile(d.getColumnType());
+        for (String tableName : tableNames) {
+            new Thread(()->{
+                try {
+                    DUtil d = new DUtil();
+                    List<TableColumn> columns = d.getColumnType(tableName);
+                    d.genBeanFile(columns, tableName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+        System.out.println("end");
     }
 
-    public List<TableColumn> getColumnType() throws Exception {
+    public List<TableColumn> getColumnType(String tableName) throws Exception {
+
         Class.forName(drive);
         Connection con = DriverManager.getConnection(url);
         DatabaseMetaData metaData = con.getMetaData();
@@ -54,7 +67,7 @@ public class DUtil {
         return columnList;
     }
 
-    private void genBeanFile(List<TableColumn> columnType) throws IOException {
+    private void genBeanFile(List<TableColumn> columnType, String tableName) throws IOException {
         StringBuffer javaFile = new StringBuffer();
         String className = S.getCamel(tableName, false);
 

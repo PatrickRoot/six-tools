@@ -54,7 +54,7 @@
             </ScrollPane>
          </left>
          <center>
-            <TextArea fx:id="textArea" onKeyReleased="#inputChange" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER">
+            <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
@@ -62,16 +62,23 @@
          </center>
          <top>
             <BorderPane prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <center>
-                  <TextField fx:id="textField" onKeyReleased="#changeSearch" prefHeight="24.0" prefWidth="168.0" BorderPane.alignment="CENTER">
+               <left>
+                  <TextField fx:id="textField" onKeyReleased="#changeSearch" onMouseClicked="#updateBloc" prefHeight="24.0" prefWidth="725.0" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="5.0" />
                      </BorderPane.margin></TextField>
-               </center>
-               <right>
+               </left>
+               <center>
                   <Button mnemonicParsing="false" onAction="#addBloc" text="+" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="5.0" right="5.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </center>
+               <right>
+                  <Button mnemonicParsing="false" onAction="#updateBloc" text="O" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="5.0" />
                      </BorderPane.margin>
                   </Button>
                </right>

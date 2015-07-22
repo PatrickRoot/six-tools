@@ -3,12 +3,11 @@
  * @author 六楼的雨/loki
  * @email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixtools.bloc;
+package cn.sixlab.sixtools.alerta;
 
 import cn.sixlab.sixtools.comun.base.BaseController;
 import cn.sixlab.sixtools.comun.bean.db.SeisBloc;
 import cn.sixlab.sixtools.comun.util.D;
-import cn.sixlab.sixtools.comun.util.S;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
@@ -38,9 +37,9 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/6/25 16:05
  */
-public class BlocController extends BaseController implements Initializable{
-    private static Logger logger = LoggerFactory.getLogger(BlocController.class);
-    public static BlocController self;
+public class AlertaController extends BaseController implements Initializable {
+    private static Logger logger = LoggerFactory.getLogger(AlertaController.class);
+    public static AlertaController self;
     public VBox vBox;
     public Label tipLabel;
     private Dao dao = D.dao;
@@ -55,32 +54,37 @@ public class BlocController extends BaseController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         self = this;
         loadList();
+        textAreaFocus();
+    }
+
+    private void textAreaFocus() {
+        textArea.hoverProperty().addListener(e -> {
+            if (!textArea.isHover()) {
+                String text = textArea.getText();
+                currBloc.setText(text);
+                Label label = (Label) currPane.getChildren().get(0);
+                label.setText(text);
+                dao.update(currBloc);
+                tipLabel.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu-yy-MM HH:mm:ss SSS")));
+            }
+        });
     }
 
     @Override
     protected void finalize() throws Throwable {
-        try{
+        try {
             vBox.getChildren().clear();
-        }finally {
+        } finally {
             super.finalize();
         }
     }
 
-    public void updateBloc() {
-        String text = textArea.getText();
-        currBloc.setText(text);
-        Label label = (Label) currPane.getChildren().get(0);
-        label.setText(trimText(text));
-        dao.update(currBloc);
-        tipLabel.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu-yy-MM HH:mm:ss SSS")));
-    }
-
-    private void loadList(){
+    private void loadList() {
         loadList(null);
     }
 
     private void loadList(List<SeisBloc> blocList) {
-        if(null==blocList){
+        if (null == blocList) {
             blocList = dao.query(SeisBloc.class, Cnd.orderBy().desc("date"));
         }
         vBox.getChildren().clear();
@@ -95,9 +99,9 @@ public class BlocController extends BaseController implements Initializable{
                 delete(event);
             });
 
-            Label label = new Label(trimText(seisBloc.getText()));
+            Label label = new Label(seisBloc.getText());
             Pane labelPane = new Pane(label);
-            labelPane.setId("lel_"+seisBloc.getId());
+            labelPane.setId("lel_" + seisBloc.getId());
             labelPane.setOnMouseClicked(event -> {
                 clickLabel(event);
             });
@@ -107,7 +111,7 @@ public class BlocController extends BaseController implements Initializable{
                 currPane = labelPane;
                 labelPane.setStyle("-fx-background-color: #de0;");
                 isFirst = false;
-            }else{
+            } else {
                 labelPane.setStyle("-fx-background-color: #deb;");
             }
 
@@ -119,29 +123,7 @@ public class BlocController extends BaseController implements Initializable{
             pane.setAlignment(labelPane, Pos.CENTER_LEFT);
             vBox.getChildren().add(pane);
         }
-    }
 
-    private String trimText(String str) {
-        String result = "";
-        int length = 20;
-        if(S.isNotEmpty(str)){
-            String[] texts = str.split("\n");
-            String text = texts[0];
-
-            int t = 0;
-            char[] tempChar = text.toCharArray();
-            for (int i = 0; i < tempChar.length && t < length; i++) {
-                if ((int) tempChar[i] >= 0x4E00 && (int) tempChar[i] <= 0x9FA5) {//是否汉字
-                    result += tempChar[i];
-                    t += 2;
-                } else {
-                    result += tempChar[i];
-                    t++;
-                }
-            }
-            return (result + "...");
-        }
-        return result;
     }
 
     public void delete(ActionEvent event) {
@@ -151,15 +133,13 @@ public class BlocController extends BaseController implements Initializable{
         loadList();
     }
 
-    //public void inputChange(Event event) {
-    //    System.out.println("-----------------------");
-    //    String text = textArea.getText();
-    //    if(text.length()<23){
-    //        System.out.println("+++++                           +++++++++++++++++++");
-    //        Label label = (Label) currPane.getChildren().get(0);
-    //        label.setText(text);
-    //    }
-    //}
+    public void inputChange(Event event) {
+        String text = textArea.getText();
+        if (text.length() < 23) {
+            Label label = (Label) currPane.getChildren().get(0);
+            label.setText(text);
+        }
+    }
 
     public void changeSearch(Event event) {
         String text = textField.getText();
@@ -175,13 +155,13 @@ public class BlocController extends BaseController implements Initializable{
     }
 
     public void clickLabel(Event event) {
-        Pane pane = (Pane)event.getSource();
-        Long id = Long.valueOf(pane.getId().substring(4));
+        Pane pane = (Pane) event.getSource();
+        Integer id = Integer.valueOf(pane.getId().substring(4));
 
         currPane.setStyle("-fx-background-color: #deb;");
         pane.setStyle("-fx-background-color: #de0;");
 
-        currBloc = dao.fetch(SeisBloc.class,id);
+        currBloc = dao.fetch(SeisBloc.class, id);
         currPane = pane;
         textArea.setText(currBloc.getText());
     }
