@@ -5,7 +5,7 @@
  */
 package cn.sixlab.sixtools.bandeja;
 
-import cn.sixlab.sixfx.ConfirmDialog;
+import cn.sixlab.sixutil.sixfx.ConfirmDialog;
 import cn.sixlab.sixtools.comun.base.BaseController;
 import cn.sixlab.sixtools.comun.bean.ToolType;
 import cn.sixlab.sixtools.comun.bean.db.SeisBandeja;

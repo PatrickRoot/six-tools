@@ -5,7 +5,7 @@
  */
 package cn.sixlab.sixtools.plan;
 
-import cn.sixlab.sixfx.ConfirmDialogExt;
+import cn.sixlab.sixutil.sixfx.ConfirmDialogExt;
 import cn.sixlab.sixtools.comun.base.BaseController;
 import cn.sixlab.sixtools.comun.bean.PlanStatus;
 import cn.sixlab.sixtools.comun.bean.PlanType;

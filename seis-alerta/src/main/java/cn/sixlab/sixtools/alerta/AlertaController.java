@@ -161,7 +161,8 @@ public class AlertaController extends BaseController implements Initializable {
         currPane.setStyle("-fx-background-color: #deb;");
         pane.setStyle("-fx-background-color: #de0;");
 
-        currBloc = dao.fetch(SeisBloc.class, id);
+        currBloc = dao.fetch(SeisBloc.class, Cnd.where("id","=",id));
+
         currPane = pane;
         textArea.setText(currBloc.getText());
     }

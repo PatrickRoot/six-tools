@@ -3,7 +3,7 @@
  * @author 六楼的雨/loki
  * @email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixfx;
+package cn.sixlab.sixutil.sixfx;
 
 /**
  * TODO
