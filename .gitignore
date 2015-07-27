@@ -13,3 +13,4 @@ temp/
 .*
 
 sonar-project.properties
+*.iml

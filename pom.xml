@@ -231,7 +231,7 @@
                                 <tasks>
                                     <copyfile
                                             src="${project.basedir}/target/${project.artifactId}-${project.version}.jar"
-                                            dest="D:/Program/Sixtools/gen/${project.artifactId}.jar">
+                                            dest="/j/SixTools/gen/${project.artifactId}.jar">
                                     </copyfile>
                                 </tasks>
                             </configuration>
@@ -260,7 +260,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.1</version>
+                <version>2.2</version>
                 <reportSets>
                     <reportSet>
                         <reports>

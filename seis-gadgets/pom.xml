@@ -91,7 +91,7 @@
                             <tasks>
                                 <copyfile
                                         src="${project.basedir}/target/${project.artifactId}-${project.version}.jar"
-                                        dest="D:/Program/Sixtools/gen/seis.jar">
+                                        dest="/j/SixTools/gen/seis.jar">
                                 </copyfile>
                             </tasks>
                         </configuration>

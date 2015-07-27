@@ -19,7 +19,8 @@ public class D {
     public static Dao dao = null;
     public static SimpleDataSource ds = new SimpleDataSource();
     static {
-        ds.setJdbcUrl("jdbc:sqlite:sixtools.db");
+        String url = "jdbc:sqlite:" + Prop.get("db_file");
+        ds.setJdbcUrl(url);
         dao = new NutDao(ds);
     }
 }

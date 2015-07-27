@@ -8,6 +8,7 @@ package cn.sixlab.sixtools.tomcat;
 import cn.sixlab.sixtools.comun.base.BaseController;
 import cn.sixlab.sixtools.comun.bean.SeisTomcat;
 import cn.sixlab.sixtools.comun.util.C;
+import cn.sixlab.sixtools.comun.util.Prop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,7 +54,7 @@ public class TomcatController extends BaseController implements Initializable {
     public TableColumn pathColumn;
     public TableColumn docColumn;
 
-    private String xmlPath = "D:\\ebs\\tomcat\\apache-tomcat-7.0.56\\conf\\server.xml";
+    private String xmlPath = "/j/tomcat/conf/server.xml";
     private final ObservableList<SeisTomcat> data = FXCollections.observableArrayList();
     
     @Override
