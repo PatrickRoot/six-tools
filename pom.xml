@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.sixlab</groupId>
-    <artifactId>sixtools</artifactId>
+    <artifactId>six-tools</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>SixTools</name>
+    <name>six-tools</name>
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>comun</module>
+        <module>seis-tools-comun</module>
         <module>seis-alerta</module>
         <module>seis-bandeja</module>
         <module>seis-bloc</module>
@@ -29,10 +29,16 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- cn.sixlab.sixtools.bandeja.Seis -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.9.6</version>
+            </dependency>
+
+            <!-- Seis -->
             <dependency>
                 <groupId>cn.sixlab</groupId>
-                <artifactId>comun</artifactId>
+                <artifactId>seis-tools-comun</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
