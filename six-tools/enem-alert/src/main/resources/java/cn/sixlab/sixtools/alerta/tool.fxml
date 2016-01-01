@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="toolRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.alerta.AlertaController">
+    <bottom>
+        <Pane prefHeight="25.0" prefWidth="200.0" style="-fx-border-color: #DDDDDD;" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="tipLabel" layoutY="5.0" textFill="#ff3700">
+                    <padding>
+                        <Insets left="10.0" right="10.0" />
+                    </padding>
+                </Label>
+            </children>
+        </Pane>
+    </bottom>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="提醒内容">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </BorderPane.margin>
+                           <content>
+                              <TableView prefHeight="200.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="名字" />
+                                    <TableColumn prefWidth="75.0" text="内容" />
+                                  <TableColumn prefWidth="75.0" text="循环类型" />
+                                    <TableColumn prefWidth="75.0" text="循任务数量" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <TextField fx:id="textField" onKeyReleased="#changeSearch" prefHeight="24.0" prefWidth="168.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" />
+                                 </BorderPane.margin>
+                              </TextField>
+                           </center>
+                           <right>
+                              <Button mnemonicParsing="false" onAction="#addBloc" text="+" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </BorderPane.margin>
+                              </Button>
+                           </right>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+          <Tab text="编辑">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

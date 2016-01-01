@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.gadgets.GadgetsController">
+    <bottom>
+        <Pane fx:id="bottomPane" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4499ee;" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="tipsLabel" layoutX="20.0" layoutY="5.0" prefHeight="30.0" style="-fx-font-size: 30px;" text="" />
+            <Button alignment="CENTER_RIGHT" layoutX="946.0" layoutY="9.0" mnemonicParsing="false" onAction="#exit" style="-fx-graphic: url(exit.png);" text="退出" />
+            </children>
+        </Pane>
+    </bottom>
+    <center>
+        <SplitPane fx:id="splitPane" dividerPositions="0.2" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #CCCCCC;" BorderPane.alignment="CENTER">
+            <items>
+                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                    </content>
+                </ScrollPane>
+                <ScrollPane fx:id="mainPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+            </items>
+        </SplitPane>
+    </center>
+    <stylesheets>
+
+    </stylesheets>
+    <top>
+        <GridPane fx:id="topPane" style="-fx-background-color: #4499ee;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button fx:id="group01" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="开发工具" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group02" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="个人管理" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group03" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group04" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group05" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group06" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group07" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group08" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group09" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="等待开发" textAlignment="CENTER" textFill="#a3a3a3" wrapText="true" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="group10" mnemonicParsing="false" onAction="#groupBtnClick" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4c4c4c;" styleClass="groupBtn" text="系统设置" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </GridPane>
+    </top>
+</BorderPane>

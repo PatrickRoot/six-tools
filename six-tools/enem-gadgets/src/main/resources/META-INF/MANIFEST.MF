@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Class-Path: lib/slf4j-api-1.7.5.jar lib/slf4j-log4j12-1.7.5.jar lib/log4j-1.2.17.jar
+  lib/dom4j-1.6.1.jar
+  lib/nutz-1.b.52.jar lib/sqlite-jdbc-3.8.7.jar comun.jar
+  enem-tray.jar
+  enem-encode.jar enem-tomcat.jar
+  enem-movie.jar enem-plan.jar enem-punto.jar
+  enem-task.jar enem-note.jar enem-alert.jar
+Main-Class: cn.sixlab.sixtools.gadgets.Gadgets
+
