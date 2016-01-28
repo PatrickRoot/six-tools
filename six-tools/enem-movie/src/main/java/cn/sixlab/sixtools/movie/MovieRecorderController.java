@@ -3,7 +3,7 @@
  * @author 六楼的雨/loki
  * @Email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixtools.pelicula;
+package cn.sixlab.sixtools.movie;
 
 import cn.sixlab.sixtools.comun.base.BaseController;
 import cn.sixlab.sixtools.comun.bean.db.SeisPelicula;
@@ -45,9 +45,9 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/3/21 19:46
  */
-public class PeliculaController extends BaseController implements Initializable{
-    private static Logger logger = LoggerFactory.getLogger(PeliculaController.class);
-    public static PeliculaController self;
+public class MovieRecorderController extends BaseController implements Initializable{
+    private static Logger logger = LoggerFactory.getLogger(MovieRecorderController.class);
+    public static MovieRecorderController self;
     private Dao dao = D.dao;
 
     public Label titleLabel;

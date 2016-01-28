@@ -3,7 +3,7 @@
  * @author 六楼的雨/loki
  * @email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixtools.pelicula;
+package cn.sixlab.sixtools.movie;
 
 import cn.sixlab.sixtools.comun.util.A;
 import cn.sixlab.sixtools.comun.util.C;
@@ -15,7 +15,7 @@ import cn.sixlab.sixtools.comun.base.BaseMain;
  * @author 六楼的雨/loki
  * @date 2015/4/13 17:48
  */
-public class Pelicula extends BaseMain {
+public class MovieRecorder extends BaseMain {
 
     public static void main(String[] args) {
         title = "Seis Pelicula : " + A.get();

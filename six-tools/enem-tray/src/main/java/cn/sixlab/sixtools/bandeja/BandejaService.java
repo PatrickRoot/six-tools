@@ -149,10 +149,11 @@ public class BandejaService {
         });
         popupMenu.add(trayItem2);
 
-        MenuItem trayItem1 = new MenuItem("Bloc");
+        MenuItem trayItem1 = new MenuItem("Note");
         trayItem1.addActionListener(e -> {
             try {
-                Runtime.getRuntime().exec(" D:\\dev\\env\\Java\\jdk1.8.0_25\\bin\\java.exe -jar enem-note.jar", null, new File("D:\\Program\\Sixtools\\"));
+                //Runtime.getRuntime().exec(" java -jar enem-note.jar", null);
+                Runtime.getRuntime().exec(C.WINDOWS_EXPLORER_COMMAND + "C:\\Program Files (x86)\\Youdao\\YoudaoNote\\RunYNote.exe", null);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
