@@ -1,4 +1,4 @@
-#最近发现了一款工具：[GEGeek Tech Toolkit](http://www.gegeek.com/documents/85BB69B2F05486B9332CEA18B8D6E4BE690ADA38.html "GEGeek Toolkit")，这个工具和其使用的[SyMenu](http://www.ugmfree.it/Default.aspx "SyMenu")让我觉得，SixTools的大部分工具我都不用开发了，所以我会归档大部分工具，只留下部分工具。
+#最近发现了一款工具：[GEGeek Tech Toolkit](http://www.gegeek.com/documents/85BB69B2F05486B9332CEA18B8D6E4BE690ADA38.html "GEGeek Toolkit")，这个工具和其使用的[SyMenu](http://www.ugmfree.it/Default.aspx "SyMenu")让我觉得，SixTools的大部分工具我都不用开发了，所以我会归档大部分工具，只留下部分工具。将转向 [six-tools2](https://github.com/nianqinianyi/six-tools2 'SixTools2')。
 
 Various kinds of tools
 

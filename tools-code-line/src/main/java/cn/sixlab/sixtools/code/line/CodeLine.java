@@ -35,6 +35,7 @@ public class CodeLine  {
 
     private static List<ToolMeta> dirs = new ArrayList<>();
     private static List<ToolMeta> fileTypes = new ArrayList<>();
+    private static List<ToolMeta> igDir = new ArrayList<>();
 
     public static void main(String[] args) {
         //title = "Six Plan : " + A.get();
@@ -44,6 +45,7 @@ public class CodeLine  {
         Dao dao = D.dao;
         dirs = dao.query(ToolMeta.class, Cnd.where("toolKey", "=", "code-line-dir").and("toolFlag","=","1"));
         fileTypes = dao.query(ToolMeta.class, Cnd.where("toolKey", "=", "code-line-file").and("toolFlag", "=", "1"));
+        igDir = dao.query(ToolMeta.class, Cnd.where("toolKey", "=", "code-line-ig-dir").and("toolFlag", "=", "1"));
 
         Map<String, ToolsCodeLine> result = new HashMap<>();
         Set<String> his = new HashSet<>();
@@ -73,10 +75,16 @@ public class CodeLine  {
         File[] files = dir.listFiles();
         for (File file : files) {
             if(file.isDirectory()){
-                if(file.getName().equalsIgnoreCase("target")){
-                    break;
+                boolean isIg = false;
+                for (ToolMeta toolMeta : igDir) {
+                    if (toolMeta.getToolValue().equalsIgnoreCase(file.getName())) {
+                        isIg = true;
+                        break;
+                    }
                 }
-                loop(file, his, result);
+                if (!isIg) {
+                    loop(file, his, result);
+                }
             }else{
                 if (his.add(file.getAbsolutePath())) {
                     String fileName = file.getName().toLowerCase();
