@@ -29,6 +29,7 @@
         <module>tools-dao</module>
         <module>tools-record</module>
         <module>tools-launcher</module>
+        <module>tools-site-update</module>
     </modules>
 
     <dependencyManagement>
@@ -122,6 +123,11 @@
                 <artifactId>tools-launcher</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.sixlab.six.tools</groupId>
+                <artifactId>tools-site-update</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.testng</groupId>
@@ -148,7 +154,7 @@
             <dependency>
                 <groupId>org.nutz</groupId>
                 <artifactId>nutz</artifactId>
-                <version>1.r.54</version>
+                <version>1.r.60</version>
             </dependency>
 
             <!-- jsoup -->
@@ -287,22 +293,22 @@
         </pluginManagement>
     </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.2</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
+    <!--<reporting>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>versions-maven-plugin</artifactId>-->
+                <!--<version>2.2</version>-->
+                <!--<reportSets>-->
+                    <!--<reportSet>-->
+                        <!--<reports>-->
+                            <!--<report>dependency-updates-report</report>-->
+                            <!--<report>plugin-updates-report</report>-->
+                            <!--<report>property-updates-report</report>-->
+                        <!--</reports>-->
+                    <!--</reportSet>-->
+                <!--</reportSets>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</reporting>-->
 </project>

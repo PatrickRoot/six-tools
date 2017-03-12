@@ -3,7 +3,7 @@
  * @author 六楼的雨/loki
  * @email <nianqinianyi@163.com>
  */
-package cn.sixlab.sixtools.encode;
+package cn.sixlab.sixtools.site.update;
 
 import cn.sixlab.sixtools.dao.base.BaseController;
 import cn.sixlab.sixtools.dao.util.S;

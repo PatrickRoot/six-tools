@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<VBox fx:id="toolRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.sixtools.site.update.SiteUpdateController">
+    <children>
+        <SplitPane dividerPositions="0.5" prefHeight="360.0" prefWidth="200.0">
+            <items>
+                <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                        <WebView fx:id="leftText"/>
+                    </content>
+                </ScrollPane>
+
+                <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                        <WebView fx:id="rightText"/>
+                    </content>
+                </ScrollPane>
+            </items>
+        </SplitPane>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button fx:id="waitSunCom" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="0" GridPane.rowIndex="0" text="爱情守望者" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="6vHaoNet01" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="1" GridPane.rowIndex="0" text="6 v 电影 " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i030" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="2" GridPane.rowIndex="0" text="66 ys   " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i040" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="3" GridPane.rowIndex="0" text="电影天堂  " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i050" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="4" GridPane.rowIndex="0" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i060" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="5" GridPane.rowIndex="0" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i070" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="0" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i080" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="1" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i090" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="2" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i100" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="3" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i110" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="4" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i120" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="5" GridPane.rowIndex="1" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i130" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="0" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i140" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="1" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i150" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="2" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i160" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="3" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i170" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="4" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i180" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="5" GridPane.rowIndex="2" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i190" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="0" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i200" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="1" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i210" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="2" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i220" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="3" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i230" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="4" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="tool01i240" mnemonicParsing="false" onAction="#itemClick" GridPane.columnIndex="5" GridPane.rowIndex="3" text="待定     " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            </children>
+        </GridPane>
+      <Pane prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="tipsLabel" layoutX="20.0" prefHeight="20.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+    </children>
+</VBox>
