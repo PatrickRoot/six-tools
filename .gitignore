@@ -10,7 +10,7 @@ hs_err_pid*
 .*/
 
 *.tmp
-.*/
+*.iml
 
 sonar-project.properties
 
