@@ -24,7 +24,7 @@
         <module>tools-tomcat</module>
         <module>tools-task</module>
         <module>tools-update</module>
-        <module>tools-gadgets</module>
+        <module>tools-launcher</module>
         <module>tools-code-line</module>
         <module>tools-dao</module>
         <module>tools-record</module>
