@@ -42,7 +42,7 @@ public class GroupController extends BaseController {
                 parent = UI.nullParent();
                 logger.error(e1.getMessage(), e1);
             }
-            GadgetsController.self.mainPane.setContent(parent);
+            LauncherController.self.mainPane.setContent(parent);
         });
     }
 }

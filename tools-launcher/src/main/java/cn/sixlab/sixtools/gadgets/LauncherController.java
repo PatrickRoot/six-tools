@@ -35,9 +35,9 @@ import java.util.ResourceBundle;
  * @author 六楼的雨/loki
  * @date 2015/6/17 22:40
  */
-public class GadgetsController extends BaseController implements Initializable{
-    private static Logger logger = LoggerFactory.getLogger(GadgetsController.class);
-    public static GadgetsController self;
+public class LauncherController extends BaseController implements Initializable{
+    private static Logger logger = LoggerFactory.getLogger(LauncherController.class);
+    public static LauncherController self;
     private Dao dao = D.dao;
 
     public BorderPane rootPane;

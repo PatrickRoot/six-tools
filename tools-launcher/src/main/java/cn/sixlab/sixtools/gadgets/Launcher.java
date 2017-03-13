@@ -26,8 +26,8 @@ import java.io.IOException;
  * @author 六楼的雨/loki
  * @date 2015/6/17 22:40
  */
-public class Gadgets extends BaseMain {
-    private static Logger logger = LoggerFactory.getLogger(Gadgets.class);
+public class Launcher extends BaseMain {
+    private static Logger logger = LoggerFactory.getLogger(Launcher.class);
     private static Stage stage;
 
     public static void main(String[] args) throws ClassNotFoundException {
@@ -50,14 +50,14 @@ public class Gadgets extends BaseMain {
         Platform.setImplicitExit(C.implicitExit);
         Parent parent;
         try {
-            parent = FXMLLoader.load(getClass().getResource("gadgets.fxml"));
+            parent = FXMLLoader.load(getClass().getResource("launcher.fxml"));
         } catch (IOException e1) {
             parent = UI.nullParent();
             logger.error(e1.getMessage(), e1);
         }
         Scene scene = new Scene(parent, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle("Seis Gadgets : " + A.get());
+        stage.setTitle("Tools Launcher : " + A.get());
         TrayService service = new TrayService();
         service.initTray(this);
     }
