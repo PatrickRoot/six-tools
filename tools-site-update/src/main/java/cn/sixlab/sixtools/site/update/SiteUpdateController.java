@@ -38,7 +38,7 @@ public class SiteUpdateController extends BaseController implements Initializabl
     
     public void itemClick(ActionEvent event) {
         Button btn = (Button) event.getTarget();
-        String id = btn.getId().substring(6);
+        String id = btn.getId();
         
         Crawler crawler = Crawler.init(id);
         
