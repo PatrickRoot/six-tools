@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.tray;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 /**
  * cn.sixlab.sixtools.bandeja.Seis main方法,启动所有定时器,初始化右下角界面.
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/4/14 12:21
  */
 public class Tray extends BaseMain {

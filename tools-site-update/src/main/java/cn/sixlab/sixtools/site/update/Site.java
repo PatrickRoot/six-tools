@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2017
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.site.update;
@@ -8,7 +8,7 @@ package cn.sixlab.sixtools.site.update;
 /**
  * TODO
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2017/03/12 22:09
  */
 public class Site {

@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.dao.util;
@@ -8,7 +8,7 @@ package cn.sixlab.sixtools.dao.util;
 /**
  * TODO
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/7/16 23:12
  */
 public class Collection {

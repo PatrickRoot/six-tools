@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.point;
@@ -13,7 +13,7 @@ import java.util.TimerTask;
 /**
  * TODO
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/6/12 9:34
  */
 public class PointTask extends TimerTask{

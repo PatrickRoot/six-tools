@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @Email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.dao.util;
@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * SixTools的util类
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/3/23 19:46
  */
 public class U {

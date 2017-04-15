@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.plan;
@@ -38,7 +38,7 @@ import java.util.ResourceBundle;
 /**
  * //TODO
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/4/5 9:31
  */
 public class PlanController extends BaseController implements Initializable {

@@ -5,15 +5,15 @@
  * see http://www.gnu.org/licenses/gpl-3.0-standalone.html
  *
  * For more information, please see
- * http://sixlab.cn/
+ * https://sixlab.cn/
  * 
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @since 1.0.0(2016/2/18)
  */
 package cn.sixlab.sixtools.dao.bean;
 
 /**
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @since 1.0.0(2016/2/18)
  */
 public class CodeLines {

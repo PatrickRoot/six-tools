@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.dao.util;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * TODO
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/6/28 13:38
  */
 public class DUtil {
@@ -33,7 +33,7 @@ public class DUtil {
     private String url = "jdbc:sqlite:sixtools.db";
 
     private String copyright = "Sixlab";
-    private String user = "六楼的雨/loki";
+    private String user = "六楼的雨/Patrick Root";
     private String email = "nianqinianyi@163.com";
 
     public static void main(String[] args) throws Exception {

@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @Email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.movie;
@@ -42,7 +42,7 @@ import java.util.ResourceBundle;
 /**
  * MovieRecorder对应的Controller
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/3/21 19:46
  */
 public class MovieRecorderController extends BaseController implements Initializable{

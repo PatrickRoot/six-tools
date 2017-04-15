@@ -1,6 +1,6 @@
 /**
  * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @Email <nianqinianyi@163.com>
  */
 package cn.sixlab.sixtools.dao.util;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * SixTools中的静态变量
  *
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @date 2015/2/17 19:46
  */
 public class C {

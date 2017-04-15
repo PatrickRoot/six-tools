@@ -5,9 +5,9 @@
  * see http://www.gnu.org/licenses/gpl-3.0-standalone.html
  *
  * For more information, please see
- * http://sixlab.cn/
+ * https://sixlab.cn/
  * 
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @since 1.0.0(2016/2/14)
  */
 package cn.sixlab.sixtools.dao;
@@ -34,7 +34,7 @@ import javafx.util.Pair;
 import java.util.Optional;
 
 /**
- * @author 六楼的雨/loki
+ * @author <a href="https://blog.sixlab.cn/">六楼的雨/Patrick Root</a>
  * @since 1.0.0(2016/2/14)
  */
 public class TestDialog extends Application {
