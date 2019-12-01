@@ -1,5 +1,7 @@
-在此基础上，将开发基于最新版本JDK的 [mine-tools](https://github.com/PatrickRoot/mine-tools 'Mine Tools')
-
+# 后续
+此版本是基于 JDK8 中的 JavaFx，JavaFx 在 Java 11 后已经被拆分，后续不再更新了。
+* 在此基础上，可能会开发基于 Java 的 Web 版【待定】。
+* 可能会选一个准备学习的语言，用来练手，做一个对应语言的版本。
 
 
 ~~最近发现了一款工具：[GEGeek Tech Toolkit](http://www.gegeek.com/documents/85BB69B2F05486B9332CEA18B8D6E4BE690ADA38.html "GEGeek Toolkit")，这个工具和其使用的[SyMenu](http://www.ugmfree.it/Default.aspx "SyMenu")让我觉得，SixTools的大部分工具我都不用开发了，所以我会归档大部分工具，只留下部分工具。~~
@@ -9,7 +11,7 @@ Various kinds of tools
 Sixlab Creation
 
 #six-tools#
-使用JavaFx开发，基于Maven。
+Java8，使用JavaFx开发，基于Maven。
 基础模块名为enem-alat-common。
 入口模块为enem-gadgets。
 其他子工具模块名为enem-*。
