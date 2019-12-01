@@ -1,4 +1,5 @@
-将转向 [mine-tools](https://github.com/PatrickRoot/mine-tools 'Mine Tools')。
+在此基础上，将开发 [mine-tools](https://github.com/PatrickRoot/mine-tools 'Mine Tools')
+
 
 
 #最近发现了一款工具：[GEGeek Tech Toolkit](http://www.gegeek.com/documents/85BB69B2F05486B9332CEA18B8D6E4BE690ADA38.html "GEGeek Toolkit")，这个工具和其使用的[SyMenu](http://www.ugmfree.it/Default.aspx "SyMenu")让我觉得，SixTools的大部分工具我都不用开发了，所以我会归档大部分工具，只留下部分工具。
