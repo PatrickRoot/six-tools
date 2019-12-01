@@ -1,4 +1,4 @@
-在此基础上，将开发 [mine-tools](https://github.com/PatrickRoot/mine-tools 'Mine Tools')
+在此基础上，将开发基于最新版本JDK的 [mine-tools](https://github.com/PatrickRoot/mine-tools 'Mine Tools')
 
 
 
